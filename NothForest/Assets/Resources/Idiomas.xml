@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Idiomas>
+	<Idioma>
+		<id>Español</id>
+		<Menu>Menú</Menu>
+		<Jugar>Jugar</Jugar>
+		<Opciones>Opciones</Opciones>
+		<Salir>Salir</Salir>
+		<Vibracion>Vibración</Vibracion>
+		<Sonido>Sonido</Sonido>
+		<VolverMenu>Volver al menú</VolverMenu>
+    <CambiarIdioma>Cambiar idioma</CambiarIdioma>
+    <ReiniciarConf>Reiniciar configuración</ReiniciarConf>
+    <Pausa>-Pausa-</Pausa>
+    <HasMuerto>Has muerto</HasMuerto>
+    <Reintentar>Reintentar</Reintentar>
+    <Creditos>Créditos</Creditos>
+    <Estadisticas>Estadísticas</Estadisticas>
+    <Ayuda>Ayuda</Ayuda>
+		<Continuar>Continuar</Continuar>
+    <HasGanado>Has ganado</HasGanado>
+    <VolverJugar>Volver a jugar</VolverJugar>
+    <EstadisticasAtaques>Máximo número de ataques realizados en una partida</EstadisticasAtaques>
+    <EstadisticasEnemigos>Máximo número de enemigos derrotados en una partida</EstadisticasEnemigos>
+    <EstadisticasMaxTiempo>Máxima duración de una partida</EstadisticasMaxTiempo>
+    <Volver>Volver</Volver>
+    <ObjetivoTitulo>Objetivo del juego</ObjetivoTitulo>
+    <ObjetivoDescripcion>Desde hace siete semanas en el bosque al norte de tu aldea han aparecido múltiples monstruos y criaturas que ponen en peligro la integridad de la misma. Preocupado por la situación has decidido emprender una aventura para eliminar la causa de la aparición de estas criaturas. Has oído rumores sobre que toda esta situación ha sido causada por una criatura que se encuentra ahora en lo más profundo del bosque y que si es derrotada todas las demás criaturas se irán.</ObjetivoDescripcion>
+    <ControlesTitulo>Controles del juego</ControlesTitulo>
+    <ControlesMovimiento>Son los botones de control de movimiento del personaje si pulsas el botón con la flecha hacia arriba el personaje se desplazará hacia arriba si pulsas el de abajo hacia abajo y así con todos.</ControlesMovimiento>
+    <ControlesAtaque>Botón de ataque que hará atacar a el personaje dando un corte con la espada en la dirección a la que este mirando si hay algún enemigo cerca el enemigo recibirá daño. Mientas estas atacando no podrás moverte y serás vulnerable en el resto de direcciones.</ControlesAtaque>
+    <ControlesPausa>Botón de pausa al accionar este botón el juego se pausara y se mostrá un menú con las opciones de volver al menú principal y de reanudar la partida.</ControlesPausa>
+    <ControlesIndicadorVida>Se trata del indicador de vida de personaje si el jugador pierde todos sus corazones el juego finalizara. La vida bajara cuando el jugador este en contacto con enemigos o sea golpeado por proyectiles y se recupera al coger objetos de curación.</ControlesIndicadorVida>
+    <MenuAyudaTitulo>Que quieres Consultar</MenuAyudaTitulo>
+    <Graficos>Gráficos</Graficos>
+    <Seleccionidioma>Seleccione un idioma</Seleccionidioma>
+    <ingles>Inglés</ingles>
+    <español>Español</español>
+  </Idioma>
+	<Idioma>
+		<id>Ingles</id>
+		<Menu>Menu</Menu>
+		<Jugar>Play</Jugar>
+		<Opciones>Options</Opciones>
+		<Salir>Exit</Salir>
+		<Vibracion>Vibration</Vibracion>
+		<Sonido>Sound</Sonido>
+		<VolverMenu>Return to menu</VolverMenu>
+    <CambiarIdioma>Change language</CambiarIdioma>
+    <ReiniciarConf>Reset Options</ReiniciarConf>
+    <Pausa>-Pause-</Pausa>
+    <HasMuerto>You have died</HasMuerto>
+    <Reintentar>Retry</Reintentar>
+    <Creditos>Credits</Creditos>
+    <Estadisticas>Statistics</Estadisticas>
+    <Ayuda>Help</Ayuda>
+		<Continuar>Continue</Continuar>
+    <HasGanado>You've won</HasGanado>
+    <VolverJugar>Play again</VolverJugar>
+    <EstadisticasAtaques>Maximum number of attacks made in a game</EstadisticasAtaques>
+    <EstadisticasEnemigos>Maximum number of enemies defeated in a game</EstadisticasEnemigos>
+    <EstadisticasMaxTiempo>Maximum duration of a game</EstadisticasMaxTiempo>
+    <Volver>Return</Volver>
+    <ObjetivoTitulo>Game objective</ObjetivoTitulo>
+    <ObjetivoDescripcion>For seven weeks in the forest to the north of your village, many monsters and creatures that are in danger have threatened the integrity of the same, worried about the situation, they have decided to undertake an adventure to eliminate the cause of the appearance of these creatures. He has heard rumors about this whole situation has been caused by a creature that is now deep in the forest and what is defeated all other creatures will leave.</ObjetivoDescripcion>
+    <ControlesTitulo>Game controls</ControlesTitulo>
+    <ControlesMovimiento>They are the movement control buttons of the character if you press the button with the arrow up the character will move up if you press the button from the bottom down and so on with everyone.</ControlesMovimiento>
+    <ControlesAtaque>Attack button that will attack the character by cutting with the sword in the direction he is looking at if there is any enemy nearby the enemy will take damage. While you are attacking you will not be able to move and you will be vulnerable in the other directions.</ControlesAtaque>
+    <ControlesPausa>Pause button when this button is pressed the game will pause and a menu will be displayed with the options to return to the main menu and resume the game.</ControlesPausa>
+    <ControlesIndicadorVida>This is the character life indicator if the player loses all their hearts the game will end. Life will come down when the player is in contact with enemies or is hit by projectiles and recovers by taking healing items.</ControlesIndicadorVida>
+    <MenuAyudaTitulo>What do you want to consult</MenuAyudaTitulo>
+    <Graficos>Graphics</Graficos>
+    <Seleccionidioma>Select a language</Seleccionidioma>
+    <ingles>English</ingles>
+    <español>Spanish</español>
+  </Idioma>
+</Idiomas>

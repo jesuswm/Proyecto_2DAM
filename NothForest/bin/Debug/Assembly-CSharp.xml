@@ -1,0 +1,1841 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Assembly-CSharp</name>
+    </assembly>
+    <members>
+        <member name="T:AnimarMuerteGenerica">
+            <summary>
+            Clase que se encarga de eliminar un objeto cuando termine la animación que este reproduciendo
+            </summary>
+            <remarks>
+             Para el funcionamiento de esta clase es necesario que el elemento también tenga asociado
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.Animator"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:AnimarMuerteGenerica.animator">
+            <summary>
+            Animator que gestiona las animaciones del elemento que contiene esta clase.
+            </summary>
+        </member>
+        <member name="M:AnimarMuerteGenerica.Start">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update
+            en ella se obtiene el <see cref="T:UnityEngine.Animation"/> que pose el elemento
+            </summary>
+        </member>
+        <member name="M:AnimarMuerteGenerica.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose esta clase esta habilitado
+            en ella se hacen las comprobaciones de si la animación termino y eliminar el elemento si es necesario.
+            </summary>
+        </member>
+        <member name="T:Arbusto">
+            <summary>
+            Clase que gestiona todas las variables y funciones del arbusto.
+            </summary>
+            <remarks>
+             Para el funcionamiento de esta clase es necesario que el elemento tambien tenga asociado
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.Rigidbody2D"/></item>
+            <item><see cref="T:UnityEngine.Animator"/></item>
+            <item><see cref="T:UnityEngine.SpriteRenderer"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:Arbusto.animator">
+            <summary>
+            Animator que gestiona las animaciones del elemento que contiene esta clase.
+            </summary>
+        </member>
+        <member name="F:Arbusto.botin">
+            <summary>
+            Lista de objetos que pueden aparecer cuando se destruye el arbusto 
+            </summary>
+        </member>
+        <member name="F:Arbusto.probBotin">
+            <summary>
+            Probabilidad de que aparezcan objetos de la lista <see cref="F:Arbusto.botin"/> al destruir el arbusto 0 es que nunca aparecen y 1 siempre aparece un objeto.
+            </summary>
+        </member>
+        <member name="M:Arbusto.Start">
+            <summary>
+            Funcion que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update
+            En ella se inicializan la variables
+            </summary>
+        </member>
+        <member name="M:Arbusto.Update">
+            <summary>
+            Funcion que comprueba si la animacion actual es "Arbusto_Cortar" en caso de que lo sea y terminara la animazion
+            se elemina el elemento con esta clase.
+            </summary>
+        </member>
+        <member name="M:Arbusto.OnCollisionEnter2D(UnityEngine.Collision2D)">
+            <summary>
+            Funcion que se lanza cuando el objeto entra colision
+            </summary>
+            <param name="collision">Objeto generado de por la colisión</param>
+        </member>
+        <member name="T:BarraVida">
+            <summary>
+            Clase que se encarga de gestionar la barra de vida de la interfaz
+            </summary>
+        </member>
+        <member name="F:BarraVida.jugador">
+            <summary>
+            Objeto que contenga la clase <see cref="T:Jugador"/> en la escena
+            </summary>
+        </member>
+        <member name="F:BarraVida.maxVida">
+            <summary>
+            Vida maxima del jugador
+            </summary>
+        </member>
+        <member name="F:BarraVida.vida">
+            <summary>
+            Vida actual del jugador
+            </summary>
+        </member>
+        <member name="M:BarraVida.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose esta clase esta habilitado
+            en ella se hacen las comprobaciones de la vida actual del jugador y se le asigna a la barra de vida la animación correspondiente
+            a su estado. 
+            </summary>
+        </member>
+        <member name="T:BloquearSalaJeje">
+            <summary>
+            Clase que se encarga de bloquear y hacer aparecer al jefe en la scena del juego.
+            </summary>
+        </member>
+        <member name="F:BloquearSalaJeje.jefe">
+            <summary>
+            Objeto que contenga la clase <see cref="T:OrcoInvocador"/> en la escena
+            </summary>
+        </member>
+        <member name="F:BloquearSalaJeje.musicaJefe">
+            <summary>
+            Archivo de audio que se repoducira al activar el jefe
+            </summary>
+        </member>
+        <member name="M:BloquearSalaJeje.Awake">
+            <summary>
+            Funcion que se llama antes del start en ella se inicializan las variables
+            </summary>
+        </member>
+        <member name="M:BloquearSalaJeje.OnCollisionEnter2D(UnityEngine.Collision2D)">
+            <summary>
+            Funcion que se lanza cuando el objeto entra en colision
+            </summary>
+            <param name="collision">Objeto generado de por la colisión</param>
+        </member>
+        <member name="T:BordeMenu">
+            <summary>
+            Clase que se encarga de ajustar el tamaño del BoxCollider2D asociado al objeto al alto de la pantalla actual
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que en la escena existan los elementos con los siguientes nombres
+            <list type="bullet">
+            <item>Canvas</item>
+            </list>
+            Ademas para el funcionamiento de esta clase es necesario que el elemento tambien tenga asociado un <see cref="T:UnityEngine.BoxCollider2D"/>
+            </remarks>
+        </member>
+        <member name="M:BordeMenu.Start">
+            <summary>
+            Funcion que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            En ella se inicializan la variables en funcion a los elementos en la escena y se ajusta el tamaño del boxColaider al tamaño del menu
+            </summary>
+        </member>
+        <member name="T:BotonPulsado">
+            <summary>
+            Clase que gestiona los controles de movimiento del personaje
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que el elemento tambien tenga asociado
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.UI.Image"/></item>
+            <item><see cref="T:UnityEngine.UI.Button"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:BotonPulsado.pressed">
+            <summary>
+            Booleana que indica si el botón se encuentra pulsado
+            </summary>
+        </member>
+        <member name="F:BotonPulsado.objtJugador">
+            <summary>
+            Objeto que contenga la clase <see cref="T:Jugador"/> en la escena
+            </summary>
+        </member>
+        <member name="F:BotonPulsado.image">
+            <summary>
+            Imagen del botón
+            </summary>
+        </member>
+        <member name="F:BotonPulsado.defaultColor">
+            <summary>
+            Color del botón cuando no esta pulsado
+            </summary>
+        </member>
+        <member name="F:BotonPulsado.SelecttColor">
+            <summary>
+            Color del botón cuando esta pulsado
+            </summary>
+        </member>
+        <member name="F:BotonPulsado.direccion">
+            <summary>
+            En funcion de su valor se selecciona la funcion que ejecutara el boton al ser pulsado
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item>Si su valor es <see cref="F:Direccion.abajo"/> ejecuta la función <see cref="M:Jugador.moverAbajo"/> del jugador <see cref="M:Jugador.moverAbajo"/></item>
+            <item>Si su valor es<see cref="F:Direccion.arriba"/> ejecuta la función <see cref="M:Jugador.moverArriba"/> del jugador <see cref="M:Jugador.moverArriba"/></item>
+            <item>Si su valor es<see cref="F:Direccion.derecha"/> ejecuta la función <see cref="M:Jugador.moverDerecha"/> del jugador <see cref="M:Jugador.moverDerecha"/></item>
+            <item>Si su valor es<see cref="F:Direccion.izquierda"/> ejecuta la función <see cref="M:Jugador.moverIzquierda"/> del jugador <see cref="M:Jugador.moverIzquierda"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:BotonPulsado.yaStart">
+            <summary>
+            Booleana que indica si es la primera vez que esta enable el botón
+            </summary>
+        </member>
+        <member name="M:BotonPulsado.Start">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            En ella se inicializan las variables  
+            </summary>
+        </member>
+        <member name="M:BotonPulsado.OnEnable">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase cambia al estado habilitado.
+            </summary>
+        </member>
+        <member name="M:BotonPulsado.OnPointerDown(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            Función que se llama en cuanto el elemento es pulsado.
+            </summary>
+        </member>
+        <member name="M:BotonPulsado.OnPointerUp(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            Función que se llama en cuanto el elemento es despulsado.
+            </summary>
+        </member>
+        <member name="M:BotonPulsado.OnPointerExit(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            Función que se llama en cuanto se deje de pulsar.
+            </summary>
+        </member>
+        <member name="M:BotonPulsado.OnPointerEnter(UnityEngine.EventSystems.PointerEventData)">
+            <summary>
+            Función que se llama en cuanto se empieza a pulsar.
+            </summary>
+        </member>
+        <member name="M:BotonPulsado.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose está clase esta habilitado
+            en ella se comprueba si se esta pulsado y ejecuta una funcón segun el valor de <see cref="F:BotonPulsado.direccion"/>. 
+            </summary>
+        </member>
+        <member name="T:CambiarTextoPorIdioma">
+            <summary>
+            Clase que se encarga de establecer los textos del elemento en funcion del idioma actual del juego
+            </summary>
+             <remarks>
+            Para el funcionamiento de esta clase es necesario que el elemento también tenga asociado
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.UI.Text"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:CambiarTextoPorIdioma.texto">
+            <summary>
+            Elemento donde se va ha establecer el texto
+            </summary>
+        </member>
+        <member name="F:CambiarTextoPorIdioma.idioma">
+            <summary>
+            Indice del idioma actual de juego
+            </summary>
+        </member>
+        <member name="F:CambiarTextoPorIdioma.palabra">
+            <summary>
+            Valor de enumerado asociado a la palabra que buscamos
+            </summary>
+        </member>
+        <member name="M:CambiarTextoPorIdioma.Start">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase está habilitado por primera vez antes de la función update 
+            en ella se obtiene el Text que posee el elemento y se le asigna a la variable palabra y establece el valor del texto al correspondiente a la configuración de idioma del juego. 
+            </summary>
+        </member>
+        <member name="M:CambiarTextoPorIdioma.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose está clase esta habilitado
+            en ella se comprueba si se ha cambiado el idioma de la aplicación en caso de que ocurriera cambiaria el texto por el correspondiente. 
+            </summary>
+        </member>
+        <member name="T:Configuracion">
+            <summary>
+            Clase que contiene todas las funcionas que gestionan la configuración del juego (idioma, sonido, vibración)
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que en la escena existan los elementos con los siguientes nombres:
+            <list type="bullet">
+            <item>Main Camera con un <see cref="T:UnityEngine.AudioSource"/></item>
+            <item>ToggleSonido con un <see cref="T:UnityEngine.UI.Toggle"/></item>
+            <item>ToggleVibracion con un <see cref="T:UnityEngine.UI.Toggle"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:Configuracion.vibracion">
+            <summary>
+            Booleana que indica si la opcion de vibración esta activa en el juego
+            </summary>
+        </member>
+        <member name="F:Configuracion.sonido">
+            <summary>
+            Booleana que indica si la opcion de sonido esta activa en el juego
+            </summary>
+        </member>
+        <member name="F:Configuracion.inicializado">
+            <summary>
+            Booleana que indica si el elemento ya se ha inicializado
+            </summary>
+        </member>
+        <member name="F:Configuracion.idioma">
+            <summary>
+            Valor de la id del idioma actual del juego
+            </summary>
+        </member>
+        <member name="F:Configuracion.checkSonido">
+            <summary>
+            Elemento en la escena con el checkBox de sonido
+            </summary>
+        </member>
+        <member name="F:Configuracion.checkVibracion">
+            <summary>
+            Elemento en la escena con el checkBox de vibración
+            </summary>
+        </member>
+        <member name="F:Configuracion.musica">
+            <summary>
+            Audio que se reproduce en el menu principal
+            </summary>
+        </member>
+        <member name="M:Configuracion.Start">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            En ella se inicializan las variables y se carga la configuración guardada.  
+            </summary>
+        </member>
+        <member name="M:Configuracion.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:Configuracion.pulsarSonido">
+            <summary>
+            Función que  desactivando el parámetro sonido de la configuración del juego
+            </summary>
+        </member>
+        <member name="M:Configuracion.pulsarVibracion">
+            <summary>
+            Función que  desactivando el parámetro vibración de la configuración del juego
+            </summary>
+        </member>
+        <member name="M:Configuracion.idiomaIngles">
+            <summary>
+            Función que cambia el idioma del juego a inglés
+            </summary>
+        </member>
+        <member name="M:Configuracion.idiomaEspañol">
+            <summary>
+            Función que cambia el idioma del juego a español
+            </summary>
+        </member>
+        <member name="M:Configuracion.reiniciarConfig">
+            <summary>
+            Función que borra la configuración actual del juego y reinicia la escena
+            </summary>
+        </member>
+        <member name="T:ControlAccelerometer">
+            <summary>
+            Clase que controla el movimiento horizontal mediante el acelerometro del dispositivo
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que el elemento tambien tenga asociado:
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.Rigidbody2D"/></item>
+            <item><see cref="T:UnityEngine.BoxCollider2D"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:ControlAccelerometer.obj">
+            <summary>
+            Objeto que deseamos que se desplace con el Accelerometer
+            </summary>
+        </member>
+        <member name="F:ControlAccelerometer.velocidad">
+            <summary>
+            Velocidad a la que se desplaza el objeto
+            </summary>
+        </member>
+        <member name="F:ControlAccelerometer.vector">
+            <summary>
+            Vector donde se establece el movimiento
+            </summary>
+        </member>
+        <member name="F:ControlAccelerometer.rbd">
+            <summary>
+            Rigidbody2D asociado al objeto(<see cref="F:ControlAccelerometer.obj"/>) que deseamos desplazar con el Accelerometer 
+            </summary>
+        </member>
+        <member name="M:ControlAccelerometer.Start">
+            <summary>
+            Funcion que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            En ella se inicializan la variables.
+            </summary>
+        </member>
+        <member name="M:ControlAccelerometer.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:ControlAccelerometer.FixedUpdate">
+            <summary>
+            Función que se llama cada cierto numero de frames mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="T:DamageJugador">
+            <summary>
+            Clase que gestiona objetos que causan daño a los enemigos(ejemplo la espada del jugador)
+            </summary>
+        </member>
+        <member name="F:DamageJugador.ataque">
+            <summary>
+            Daño que hace el objeto a los enemigos
+            </summary>
+        </member>
+        <member name="F:DamageJugador.duracion">
+            <summary>
+            Tiempo que dura el objeto en la escena
+            </summary>
+        </member>
+        <member name="F:DamageJugador.invocador">
+            <summary>
+            El objeto que hizo aparecer a este objeto
+            </summary>
+        </member>
+        <member name="F:DamageJugador.timer">
+            <summary>
+            Timer para controlar la duracion del objeto
+            </summary>
+        </member>
+        <member name="M:DamageJugador.establecerPropiedades(System.Single,System.Single,UnityEngine.GameObject)">
+            <summary>
+            Funcion que permite estableces todos los parametros del objeto
+            </summary>
+            <param name="ataque">Establece el valor de ataque del objeto</param>
+            <param name="duracion">Establece el valor de la duración objeto</param>
+            <param name="invocador">Establece el quie es el invocador del objeto</param>
+        </member>
+        <member name="M:DamageJugador.Start">
+            <summary>
+            Funcion que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            </summary>
+        </member>
+        <member name="M:DamageJugador.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:DamageJugador.OnCollisionEnter2D(UnityEngine.Collision2D)">
+            <summary>
+            Funcion que se lanza cuando el objeto entra en colisión
+            </summary>
+            <param name="col">Objeto generado por la colisión</param>
+        </member>
+        <member name="T:Comportamiento">
+            <summary>
+            Enumerado que contiene los diferentes patrones de comportamiento de los enemigos
+            </summary>
+        </member>
+        <member name="F:Comportamiento.Aleatorio">
+            <summary>
+            El enemigo hace una ruta aleatoria
+            </summary>
+        </member>
+        <member name="F:Comportamiento.SemiAleatorio">
+            <summary>
+            El enemigo hace una ruta aleatoria en la que da un numero de pasos fijos antes de cambiar de dirección
+            </summary>
+        </member>
+        <member name="F:Comportamiento.SeguirJugador">
+            <summary>
+            El enemigo hace una ruta aleatoria pero si el jugador esta cerca el enemigo lo comienza a seguir
+            </summary>
+        </member>
+        <member name="T:Enemigo">
+            <summary>
+            Clase que gestiona todas las variables y funciones que del enemigo.
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que el elemento tambien tenga asociado
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.Rigidbody2D"/></item>
+            <item><see cref="T:UnityEngine.Animator"/></item>
+            <item><see cref="T:UnityEngine.AudioSource"/></item>
+            <item><see cref="T:UnityEngine.SpriteRenderer"/></item>
+            </list>
+            Ademas en la escena en la que se use esta clase es necesario que exista un objeto denominado Estadisticas que contenga la clase <see cref="T:Estadisticas"/> y otro objeto denominado Jugador
+            </remarks>
+        </member>
+        <member name="F:Enemigo.direccion">
+            <summary>
+            Direccion en la que aparece el enemigo al comenzar la partida si se establece en undefine se selecciona una dirección aleatoria
+            </summary>
+        </member>
+        <member name="F:Enemigo.comportamiento">
+            <summary>
+            Define el comportamiento del enemigo(Seguir, movimiento aleatorio ...)
+            </summary>
+        </member>
+        <member name="F:Enemigo.rbd">
+            <summary>
+            Rigidbody del objeto que queramos que sea el enemigo
+            </summary>
+        </member>
+        <member name="F:Enemigo.avance">
+            <summary>
+            Distancia que avanza el enemigo cada vez que se ejecute <see cref="M:Enemigo.movimiento"/>
+            </summary>
+        </member>
+        <member name="F:Enemigo.frecuencia">
+            <summary>
+            Frecuencia con la que el enemigo realiza una acción (<see cref="M:Enemigo.movimiento"/>,<see cref="F:Enemigo.lanzaProyectiles"/>)
+            </summary>
+        </member>
+        <member name="F:Enemigo.daño">
+            <summary>
+            Daño que realiza el enemigo al golpear al jugador
+            </summary>
+        </member>
+        <member name="F:Enemigo.vida">
+            <summary>
+            Vida del enemigo
+            </summary>
+        </member>
+        <member name="F:Enemigo.vision">
+            <summary>
+            Distancia a la que el enemigo comienza a seguir al jugador si el <see cref="F:Enemigo.comportamiento"/> esta definido como <see cref="F:Comportamiento.SeguirJugador"/>
+            </summary>
+        </member>
+        <member name="F:Enemigo.tolerancia">
+            <summary>
+            Tolerancia para considerar que el enemigo se encuentra ya en la posicion del jugador
+            </summary>
+        </member>
+        <member name="F:Enemigo.reutilizacionProyectil">
+            <summary>
+            Tiempo que tiene que pasar para que el enemigo pueda volver a lanzar el proyectil
+            </summary>
+        </member>
+        <member name="F:Enemigo.retrocesoAlDañar">
+            <summary>
+            Si el enemigo es empujado al recibir un golpe del arma del jugador (<see cref="T:DamageJugador"/>)
+            </summary>
+        </member>
+        <member name="F:Enemigo.magnituRetroceso">
+            <summary>
+            Establece la fuerza del empujos que recibe el enemigo
+            </summary>
+        </member>
+        <member name="F:Enemigo.tiemerProyectil">
+            <summary>
+            Timer para el pryectil
+            </summary>
+        </member>
+        <member name="F:Enemigo.dañoProyectil">
+            <summary>
+            Daño que causan al jugador los proyectiles
+            </summary>
+        </member>
+        <member name="F:Enemigo.lanzaProyectiles">
+            <summary>
+            Establece si el enemigo lanza o no proyectiles
+            </summary>
+        </member>
+        <member name="F:Enemigo.animacionLanzar">
+            <summary>
+            Establece si el tiene animación al lanzar el proyectil o no
+            </summary>
+        </member>
+        <member name="F:Enemigo.proyectil">
+            <summary>
+            Objeto que invoca el enemigo al lanzar un proyectil este objeto deve poser el script <see cref="T:ProyectilEnemigo"/>
+            </summary>
+        </member>
+        <member name="F:Enemigo.jugador">
+            <summary>
+            Objeto que contenga la clase <see cref="T:Jugador"/> en la escena
+            </summary>
+        </member>
+        <member name="F:Enemigo.tiempo">
+            <summary>
+            Timer para la frecuencia
+            </summary>
+        </member>
+        <member name="F:Enemigo.lanzar">
+            <summary>
+            Boleana que indica si el enemigo esta lanzando un proyectil.
+            </summary>
+        </member>
+        <member name="F:Enemigo.normalColor">
+            <summary>
+            Color normal del enemigo
+            </summary>
+        </member>
+        <member name="F:Enemigo.botin">
+            <summary>
+            Lista de objetos que pueden aparecer cuando se destruye el arbusto 
+            </summary>
+        </member>
+        <member name="F:Enemigo.probBotin">
+            <summary>
+            Probabilidad de que aparezcan objetos de la lista <see cref="F:Enemigo.botin"/> al destruir el arbusto 0 es que nunca aparecen y 1 siempre aparece un objeto.
+            </summary>
+        </member>
+        <member name="F:Enemigo.count">
+            <summary>
+            Auxiliar para el movimiento semi aleatorio
+            </summary>
+        </member>
+        <member name="F:Enemigo.pasos">
+            <summary>
+            Define el numero de pasos que da el enemigo antes de cambiar de direccion en si su compartamiento es <see cref="F:Comportamiento.SemiAleatorio"/>
+            </summary>
+        </member>
+        <member name="F:Enemigo.vivo">
+            <summary>
+            Boleana que indica si el enemigo esta vivo.
+            </summary>
+        </member>
+        <member name="F:Enemigo.animator">
+            <summary>
+            Animator que gestiona las animaciones del elemento que contiene esta clase.
+            </summary>
+        </member>
+        <member name="F:Enemigo.muerte">
+            <summary>
+            Objeto que se invoca cuando la vida del enemigo es igual o inferior a cero (Efecto de muerte)
+            </summary>
+        </member>
+        <member name="F:Enemigo.estadisticas">
+            <summary>
+            Estadisticas de la partida actual
+            </summary>
+        </member>
+        <member name="M:Enemigo.Start">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            En ella se inicializan las variables.
+            </summary>
+        </member>
+        <member name="M:Enemigo.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:Enemigo.FixedUpdate">
+            <summary>
+            Función que se llama cada cierto numero de frames mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:Enemigo.lanzarProyectil">
+            <summary>
+            Función que gestiona el lanzamiento de un proyectil por parte del enemigo
+            </summary>
+        </member>
+        <member name="M:Enemigo.SeleccionarDireccionSemiAleatorio">
+            <summary>
+            Función que selecciona una nueva dirección de movimiento si se han dado ya tantos pasos en la dirección anterior
+            como se indica en la variable pasos
+            </summary>
+        </member>
+        <member name="M:Enemigo.SeleccionarDireccionAleatorio">
+            <summary>
+            Función que selecciona una nueva dirección de movimiento
+            </summary>
+        </member>
+        <member name="M:Enemigo.SeleccionarSeguirJugadorY(System.Single)">
+            <summary>
+            Función que establece la dirección en arriba o abajo en función de un parametro
+            </summary>
+            <param name="y">Parametro que se usa como referencia para la selección de dirección</param>
+        </member>
+        <member name="M:Enemigo.SeleccionarSeguirJugadorX(System.Single)">
+            <summary>
+            Función que establece la dirección en derecha o izquierda en funcion de un parametro
+            </summary>
+            <param name="x">Parametro que se usa como referencia para la selección de dirección</param>
+        </member>
+        <member name="M:Enemigo.SeleccionarSeguirJugador">
+            <summary>
+            Función que se encarga de seleccionar una dirección para aproximar al enemigo al jugador
+            </summary>
+        </member>
+        <member name="M:Enemigo.movimiento">
+            <summary>
+            Gestiona el movimiento del enemigo en función de su dirección
+            </summary>
+        </member>
+        <member name="M:Enemigo.damage(System.Single)">
+            <summary>
+            Función que se encarga de gestionar la perdida de vida del enemigo
+            </summary>
+            <param name="daño">Cantidad de vida que pierde el enemigo</param>
+        </member>
+        <member name="M:Enemigo.empujar(UnityEngine.Collision2D)">
+            <summary>
+            Agrega al objeto del enemigo una fueza equivalente al vector normalizado de la diferencia del vector del jugador con el vector de la colisión
+            </summary>
+            <param name="collision">Colision que se usa de referencia para calcular el vector del empuje</param>
+        </member>
+        <member name="M:Enemigo.OnCollisionEnter2D(UnityEngine.Collision2D)">
+            <summary>
+            Funcion que se lanza cuando el objeto entra colision
+            </summary>
+            <param name="collision">Objeto generado de por la colisión</param>
+        </member>
+        <member name="T:Estadisticas">
+            <summary>
+            Clase que se encarga de almacenar las estadisticas de la partida
+            </summary>
+        </member>
+        <member name="F:Estadisticas.enemigosDerrotados">
+            <summary>
+            Numero de enemigos derrotados
+            </summary>
+        </member>
+        <member name="F:Estadisticas.ataquesRealizados">
+            <summary>
+            Numero de ataques realizados
+            </summary>
+        </member>
+        <member name="F:Estadisticas.inicioDePartida">
+            <summary>
+            Tiempo en el que se inicio la partida actual
+            </summary>
+        </member>
+        <member name="M:Estadisticas.Start">
+            <summary>
+            Funcion que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            </summary>
+        </member>
+        <member name="M:Estadisticas.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose esta clase esta habilitado
+            </summary>
+        </member>
+        <member name="M:Estadisticas.actualizarEstadisticas">
+            <summary>
+            Funcion que intenta guardar las estadisticas actuales y se guardan en caso de que sean mejores que las actuales (<see cref="M:GuardarCargarConf.GuardarEstadisticas(Estadisticas)"/>)
+            </summary>
+        </member>
+        <member name="M:Estadisticas.OnDestroy">
+            <summary>
+            Función que se llama cuando el objeto se va ha destruir
+            </summary>
+        </member>
+        <member name="T:Follow">
+            <summary>
+            Clase que usa la cámara durante la partida para seguir al jugador y desactiva la musica en función de las opciones
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que el elemento tambien tenga asociado:
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.AudioSource"/></item>
+            <item><see cref="T:UnityEngine.Transform"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:Follow.pos">
+            <summary>
+            Posicion actual de la camara
+            </summary>
+        </member>
+        <member name="F:Follow.player">
+            <summary>
+            Rigidbody2D del objeto al que sigue la camara
+            </summary>
+        </member>
+        <member name="M:Follow.Start">
+            <summary>
+            Funcion que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            En ella se inicializan la variables y se mutea el AudioSource si el sonido esta desactivado.
+            </summary>
+        </member>
+        <member name="M:Follow.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose esta clase esta habilitado
+            en ella se iguala la posicion actual con la del objeto del parametro <see cref="F:Follow.player"/> 
+            </summary>
+        </member>
+        <member name="T:GestionPantallasPartida">
+            <summary>
+            Clase que se encarga de la gestion de las pantallas del juego (Pausa,Pantalla de muerte y Pantalla de victori)
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que en la escena existan los elementos con los siguientes nombres:
+            <list type="bullet">
+            <item>Controles</item>
+            <item>MenuPausa</item>
+            <item>MenuMuerte</item>
+            <item>MenuVictoria</item>
+            <item>Jugador</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:GestionPantallasPartida.controles">
+            <summary>
+            Objeto que contenga los controles
+            </summary>
+        </member>
+        <member name="F:GestionPantallasPartida.menuPausa">
+            <summary>
+            Objeto que contiene el menu de pausa
+            </summary>
+        </member>
+        <member name="F:GestionPantallasPartida.menuMuerte">
+            <summary>
+            Objeto que contiene el menu de muerte
+            </summary>
+        </member>
+        <member name="F:GestionPantallasPartida.objjugador">
+            <summary>
+            Objeto que contenga la clase <see cref="T:Jugador"/> en la escena
+            </summary>
+        </member>
+        <member name="F:GestionPantallasPartida.menuVictoria">
+            <summary>
+            Objeto que contiene el menu de victoria
+            </summary>
+        </member>
+        <member name="P:GestionPantallasPartida.Fin">
+            <summary>
+            Devuelve o establece el valor de la variable fin
+            </summary>
+        </member>
+        <member name="F:GestionPantallasPartida.jugador">
+            <summary>
+            Script <see cref="T:Jugador"/> contenido en <see cref="F:GestionPantallasPartida.objjugador"/>
+            </summary>
+        </member>
+        <member name="P:GestionPantallasPartida.Pausa">
+            <summary>
+            Devuelve el valor de la variable pausa
+            </summary>
+        </member>
+        <member name="M:GestionPantallasPartida.Start">
+             <summary>
+            Función que se llama en cuanto el elemento que pose esta clase está habilitado por primera vez antes de update
+            En ella se inicializan las variables.
+             </summary>
+        </member>
+        <member name="M:GestionPantallasPartida.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:GestionPantallasPartida.pausar">
+            <summary>
+            Función que para el juego activa el menú de pausa y desactiva los controles de juego
+            </summary>
+        </member>
+        <member name="M:GestionPantallasPartida.reiniciar">
+            <summary>
+            Función que restaura el juego en el estado anterior a la pausa y activa los controles de juego
+            </summary>
+        </member>
+        <member name="M:GestionPantallasPartida.menuPrincipal">
+            <summary>
+            Función que restaura el juego y carga el menú
+            </summary>
+        </member>
+        <member name="M:GestionPantallasPartida.abrirMenuMuerte">
+            <summary>
+            Función que para el juego activa el menú de muerte y desactiva los controles de juego
+            </summary>
+        </member>
+        <member name="M:GestionPantallasPartida.abrirMenuVictoria">
+            <summary>
+            Función que para el juego activa el menú de victoria y desactiva los controles de juego
+            </summary>
+        </member>
+        <member name="M:GestionPantallasPartida.reintentar">
+            <summary>
+            Función que restaura el juego y recarga la escena actual
+            </summary>
+        </member>
+        <member name="T:GuardarCargarConf">
+            <summary>
+            Clase estatica con las funciones de carga y guardado de la configuración y las estadisticas.
+            </summary>
+        </member>
+        <member name="M:GuardarCargarConf.GuardarConfiguracion(Configuracion)">
+            <summary>
+            Función que guarda la configuración en congi.dat
+            </summary>
+            <param name="configuracion">Configuración que queremos guardar</param>
+        </member>
+        <member name="M:GuardarCargarConf.GuardarEstadisticas(Estadisticas)">
+            <summary>
+            Función que guarda las estadísticas en estadisticas.dat si alguno de los valores es mejor que los actuales.
+            </summary>
+            <param name="estadisticas">estadísticas que queremos guardar</param>
+        </member>
+        <member name="M:GuardarCargarConf.cargarConfiguracion">
+            <summary>
+            Función que carga la configuración guardada en confi.dat
+            </summary>
+            <returns>Si existe nos devolvera un objeto de tipo RegistroConfiguracion con la configuración actual si no existe devuelve null</returns>
+        </member>
+        <member name="M:GuardarCargarConf.cargarEstadiscas">
+            <summary>
+            Función que carga las estadísticas guardadas en estadisticas.dat
+            </summary>
+            <returns>Si existe nos devolvera un objeto de tipo RegistroEstadisticas con las estadísticas actuales si no existe devuelve null</returns>
+        </member>
+        <member name="M:GuardarCargarConf.BorrarConfiguracion">
+            <summary>
+            Función que elimina el archivo de confi.dat donde se guarda la configuración
+            </summary>
+        </member>
+        <member name="M:GuardarCargarConf.BorrarEstadisticas">
+            <summary>
+            Función que elimina el archivo de confi.dat donde se guarda la estadísticas
+            </summary>
+        </member>
+        <member name="T:Idiomas">
+            <summary>
+            Enumerado que contiene todos los idiomas disponibles en el juego
+            </summary>
+        </member>
+        <member name="F:Idiomas.Español">
+            <summary>
+            Idioma español
+            </summary>
+        </member>
+        <member name="F:Idiomas.Ingles">
+            <summary>
+            Idioma ingles
+            </summary>
+        </member>
+        <member name="T:palabras">
+            <summary>
+            Enumerado que contiene todas las id de los string del juego
+            </summary>
+        </member>
+        <member name="T:Palabras">
+            <summary>
+            Clase estática que se encarga de generar un diccionario para cada idioma en función al contenido de Idiomas.xml que se encuenta en los recursos del proyecto
+            </summary>
+        </member>
+        <member name="F:Palabras.idiomaActual">
+            <summary>
+            Indice que se usa de referencia para identificar de que idioma se obtienen las palabras
+            </summary>
+        </member>
+        <member name="P:Palabras.IdiomaActual">
+            <summary>
+            Función que devuelve el valor del idioma actual
+            </summary>
+        </member>
+        <member name="M:Palabras.leerXml">
+            <summary>
+            Función que lee el archivo Idiomas.xml de los recursos del proyecto
+            </summary>
+            <returns>Devuelve una lista con un dictionary para cada uno de los idiomas definidos en el xml</returns>
+        </member>
+        <member name="M:Palabras.setIdioma(Idiomas)">
+            <summary>
+            Función que establece el valor del idioma actual en función de un enumerado en caso del que el enumerado no tenga una equivalencia el idioma actual se establecerá en -1
+            </summary>
+            <param name="idioma">Enumerado del idioma al que deseamos cambiar</param>
+        </member>
+        <member name="M:Palabras.setIdioma(System.Int32)">
+            <summary>
+            Función que establece el valor del idioma actual en función de su indice en caso del que el indice no exista el valor de idioma actual se establecerá en -1
+            </summary>
+            <param name="indice">Indice del idioma al que deseamos cambiar</param>
+        </member>
+        <member name="M:Palabras.getPalabra(System.String)">
+            <summary>
+            Función que obtiene la palabra asociada a un id pasado como parámetro en función al idioma actual. 
+            </summary>
+            <param name="nombre">Id de la palabra que buscamos</param>
+            <returns>palabra asociada al id pasado como parámetro en el idioma actual si no existe devuelve null</returns>
+        </member>
+        <member name="M:Palabras.getPalabra(palabras)">
+            <summary>
+            Función que obtiene la palabra asociada a un enumerado pasado como parámetro en función al idioma actual. 
+            </summary>
+            <param name="nombre">Enumerado asociado con la palabra que buscamos</param>
+            <returns>palabra asociada al enumerado pasado como parámetro en el idioma actual si no existe devuelve null</returns>
+        </member>
+        <member name="M:Palabras.getIndiceDeUnIdioma(System.String)">
+            <summary>
+            Función que nos devuelve el indice de un idioma pasado como parámetro
+            </summary>
+            <param name="idioma">nombre del idioma del que deseamos obtener su indice</param>
+            <returns>Devuelve el indice del idioma en caso de que no exista devuelve -1</returns>
+        </member>
+        <member name="T:InvocarEnemigo">
+            <summary>
+            Clase que tras reproducir la animación actual invoca uno de los objetos de la lista <see cref="F:InvocarEnemigo.invocaciones"/> y despues se destrulle.
+            </summary>
+            <remarks>
+             Para el funcionamiento de esta clase es necesario que el elemento también tenga asociado
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.Animator"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:InvocarEnemigo.invocaciones">
+            <summary>
+            Lista de objetos que pueden aparecer cuando se termine la animacion actual del objeto 
+            </summary>
+        </member>
+        <member name="F:InvocarEnemigo.animator">
+            <summary>
+            Animator que gestiona las animaciones del elemento que contiene esta clase.
+            </summary>
+        </member>
+        <member name="M:InvocarEnemigo.Start">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update
+            en ella se obtiene el <see cref="T:UnityEngine.Animation"/> que pose el elemento
+            </summary>
+        </member>
+        <member name="M:InvocarEnemigo.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose esta clase esta habilitado
+            en ella se hacen las comprobaciones de si la animación termino en caso afirmativo invoca un objeto de la listas y elimina el objeto.
+            </summary>
+        </member>
+        <member name="T:Direccion">
+            <summary>
+            Enumerado que contiene todas las posibilidades de direccion de los enemigos y el jugador
+            </summary>
+        </member>
+        <member name="F:Direccion.izquierda">
+            <summary>
+            Dirección izquierda
+            </summary>
+        </member>
+        <member name="F:Direccion.arriba">
+            <summary>
+            Dirección arriba
+            </summary>
+        </member>
+        <member name="F:Direccion.abajo">
+            <summary>
+            Dirección abajo
+            </summary>
+        </member>
+        <member name="F:Direccion.derecha">
+            <summary>
+            Dirección derecha
+            </summary>
+        </member>
+        <member name="F:Direccion.undefine">
+            <summary>
+            Dirección no especificada
+            </summary>
+        </member>
+        <member name="T:Jugador">
+            <summary>
+            Clase que gestiona todas las variables y funciones que del jugador.
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que el elemento tambien tenga asociado
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.Rigidbody2D"/></item>
+            <item><see cref="T:UnityEngine.Animator"/></item>
+            <item><see cref="T:UnityEngine.AudioSource"/></item>
+            <item><see cref="T:UnityEngine.SpriteRenderer"/></item>
+            <item>Algun tipo de colaider 2d por ejemplo <see cref="T:UnityEngine.CapsuleCollider2D"/></item>
+            </list>
+            Ademas en la escena en la que se use esta clase es necesario que exista un objeto denominado Estadisticas y que contenga la clase <see cref="T:Estadisticas"/>
+            </remarks>
+        </member>
+        <member name="F:Jugador.separacionDamageObject">
+            <summary>
+            Distancia a la que aparece el <see cref="F:Jugador.arma"/> del jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.rbd">
+            <summary>
+            Rigidbody2D del jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.velocidad">
+            <summary>
+            Velocidad del movimiento del jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.animator">
+            <summary>
+            Animator que gestiona las animaciones del elemento que contiene esta clase.
+            </summary>
+        </member>
+        <member name="F:Jugador.temporalImune">
+            <summary>
+            Tiempo que es imune al daño el jugador tras recibir daño
+            </summary>
+        </member>
+        <member name="F:Jugador.duracionAnimacionAtaque">
+            <summary>
+            Durancion de la animación de ataque del jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.magnituRetroceso">
+            <summary>
+            Fuerza del empuje que se aplica al jugador tras colisionar con un enemigo
+            </summary>
+        </member>
+        <member name="F:Jugador.tiempoRetroceso">
+            <summary>
+            Tiempo que el jugador en poder moverse y atacar mientras dure el empuje 
+            </summary>
+        </member>
+        <member name="F:Jugador.cdEntreRetrocesos">
+            <summary>
+            Tiempo que el jugador es inmune a recibir un empuje después de recibir uno
+            </summary>
+        </member>
+        <member name="F:Jugador.empuje">
+            <summary>
+            Boleana que indica si el jugador esta siendo empujado
+            </summary>
+        </member>
+        <member name="F:Jugador.direccion">
+            <summary>
+            Direccion a la que esta mirando el jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.temporizador">
+            <summary>
+            Temporizador auxiliar para el imune al daño
+            </summary>
+        </member>
+        <member name="F:Jugador.temporizadorretroceso">
+            <summary>
+            Temporizador auxiliar para la duración del retroceso
+            </summary>
+        </member>
+        <member name="F:Jugador.temporizadorcdretroceso">
+            <summary>
+            Temporizador auxiliar para el cdRetrocesos
+            </summary>
+        </member>
+        <member name="F:Jugador.vivo">
+            <summary>
+            Boooleana que indica que el jugador esta vivo
+            </summary>
+        </member>
+        <member name="F:Jugador.vida">
+            <summary>
+            Cantidad de vida actual del jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.normalColor">
+            <summary>
+            Color normal de jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.estadisticas">
+            <summary>
+            Estadisticas de la partida actual
+            </summary>
+        </member>
+        <member name="F:Jugador.audioSorce">
+            <summary>
+            AudioSource del objeto jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.sonidoAtaque">
+            <summary>
+            Sonido que se reproduce cuando el jugador ataca
+            </summary>
+        </member>
+        <member name="F:Jugador.sonidoCuracion">
+            <summary>
+            Sonido que se reproduce cuando el jugador recupera vida
+            </summary>
+        </member>
+        <member name="F:Jugador.sonidoDaño">
+            <summary>
+            Sonido que se reproduce cuando el jugador recibe daño
+            </summary>
+        </member>
+        <member name="P:Jugador.Vida">
+            <summary>
+            Devuelve el valor de la variable vida
+            </summary>
+        </member>
+        <member name="F:Jugador.fuerza">
+            <summary>
+            Daño que se estableza al <see cref="F:Jugador.arma"/> del jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.MaxVida">
+            <summary>
+            Vida maxima del jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.atacar">
+            <summary>
+            Boleana que indice si el jugador esta atacando
+            </summary>
+        </member>
+        <member name="F:Jugador.arma">
+            <summary>
+            Objeto que invoca el jugador al atacar que debe poseer <see cref="T:DamageJugador"/>
+            </summary>
+        </member>
+        <member name="F:Jugador.atacando">
+            <summary>
+            Temporizador auxiliar para la duración del ataque
+            </summary>
+        </member>
+        <member name="F:Jugador.vector">
+            <summary>
+            Vector para el movimiento del jugador
+            </summary>
+        </member>
+        <member name="F:Jugador.configuracion">
+            <summary>
+            Configuracion del juego actual
+            </summary>
+        </member>
+        <member name="M:Jugador.Start">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            En ella se inicializan las variables.
+            </summary>
+        </member>
+        <member name="M:Jugador.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:Jugador.ataque">
+            <summary>
+            Funcion que ejecuta el ataque del jugador
+            </summary>
+        </member>
+        <member name="M:Jugador.FixedUpdate">
+            <summary>
+            Función que se llama cada cierto numero de frames mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:Jugador.mover(UnityEngine.Vector2)">
+            <summary>
+            Desplaza al jugador en funcion de un vector
+            </summary>
+            <param name="vector">vector que dirige el movimiento</param>
+        </member>
+        <member name="M:Jugador.moverDerecha">
+            <summary>
+            Funcion que en caso de que  el jugador esta vivo desplaza al jugador hacia derecha
+            </summary>
+            <remarks>
+            Vease tambien:
+            <seealso cref="M:Jugador.mover(UnityEngine.Vector2)"/>
+            <seealso cref="M:Jugador.moverAbajo"/>
+            <seealso cref="M:Jugador.moverArriba"/>
+            <seealso cref="M:Jugador.moverIzquierda"/>
+            </remarks>
+        </member>
+        <member name="M:Jugador.moverIzquierda">
+            <summary>
+            Funcion que en caso de que  el jugador esta vivo desplaza al jugador hacia izquierda
+            </summary>
+            <remarks>
+            Vease tambien:
+            <seealso cref="M:Jugador.mover(UnityEngine.Vector2)"/>
+            <seealso cref="M:Jugador.moverAbajo"/>
+            <seealso cref="M:Jugador.moverArriba"/>
+            <seealso cref="M:Jugador.moverDerecha"/>
+            </remarks>
+        </member>
+        <member name="M:Jugador.moverArriba">
+            <summary>
+            Funcion que en caso de que  el jugador esta vivo desplaza al jugador hacia arriba
+            </summary>
+            <remarks>
+            Vease tambien:
+            <seealso cref="M:Jugador.mover(UnityEngine.Vector2)"/>
+            <seealso cref="M:Jugador.moverAbajo"/>
+            <seealso cref="M:Jugador.moverDerecha"/>
+            <seealso cref="M:Jugador.moverIzquierda"/>
+            </remarks>
+        </member>
+        <member name="M:Jugador.moverAbajo">
+            <summary>
+            Funcion que en caso de que  el jugador esta vivo desplaza al jugador hacia abajo
+            </summary>
+            <remarks>
+            Vease tambien:
+            <seealso cref="M:Jugador.mover(UnityEngine.Vector2)"/>
+            <seealso cref="M:Jugador.moverDerecha"/>
+            <seealso cref="M:Jugador.moverArriba"/>
+            <seealso cref="M:Jugador.moverIzquierda"/>
+            </remarks>
+        </member>
+        <member name="M:Jugador.damage(System.Single)">
+            <summary>
+            Funcion que se encarga de gestionar la perdida de vida del jugador y el acionamiento de la vibración del dispositivo
+            </summary>
+            <param name="damage">Cantidad de vida que pierde el jugador</param>
+        </member>
+        <member name="M:Jugador.damage(System.Single,UnityEngine.Collision2D)">
+            <summary>
+            Funcion que se encarga de gestionar la perdida de vida del jugador y lo empuja (<see cref="M:Jugador.empujar(UnityEngine.Collision2D)"/>).
+            Tambien gestiona la vibración del dispositivo.
+            </summary>
+            <param name="damage">Cantidad de vida que pierde el jugador</param>
+             <param name="col">Colisión que causo daño al jugador</param>
+        </member>
+        <member name="M:Jugador.heal(System.Single)">
+            <summary>
+            Funcion que se encarga de gestionar la recuperacion de vida del jugador
+            </summary>
+            <param name="heal">Valor de vida que recupera el jugador</param>
+        </member>
+        <member name="M:Jugador.empujar(UnityEngine.Collision2D)">
+            <summary>
+            Agrega al objeto del jugador una fueza equivalente al vector normalizado de la diferencia del vector del jugador con el vector de la colisión
+            </summary>
+            <param name="collision">Colision que se usa de referencia para calcular el vector del empuje</param>
+        </member>
+        <member name="M:Jugador.OnCollisionEnter2D(UnityEngine.Collision2D)">
+            <summary>
+            Funcion que se lanza cuando el objeto entra colision
+            </summary>
+            <param name="col">Objeto generado de por la colisión</param>
+        </member>
+        <member name="M:Jugador.OnCollisionStay2D(UnityEngine.Collision2D)">
+            <summary>
+            Funcion que se lanza mientras el objeto permanezca en colision
+            </summary>
+            <param name="col">Objeto generado de por la colisión</param>
+        </member>
+        <member name="T:MenuInicio">
+            <summary>
+            Clase que se encarga de la gestión del menu principal y establecer los valores del la pestaña de estadisticas
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que en la escena existan los elementos con los siguientes nombres
+            <list type="bullet">
+            <item>MenuPrincipal</item>
+            <item>MenuOpciones</item>
+            <item>MenuIdiomas</item>
+            <item>Estadisticas</item>
+            <item>Creditos</item>
+            <item>MenuAyuda</item>
+            <item>AyudaObjetivo</item>
+            <item>AyudaControles</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MenuInicio.menuInicio">
+            <summary>
+            Objeto que contenga el menu de inicio
+            </summary>
+        </member>
+        <member name="F:MenuInicio.menuOpciones">
+            <summary>
+            Objeto que contenga el menu de opciones
+            </summary>
+        </member>
+        <member name="F:MenuInicio.menuIdiomas">
+            <summary>
+            Objeto que contenga el menu de idiomas
+            </summary>
+        </member>
+        <member name="F:MenuInicio.menuEstadisticas">
+            <summary>
+            Objeto que contenga las estadisticas
+            </summary>
+        </member>
+        <member name="F:MenuInicio.estadisticasAtaque">
+            <summary>
+            Objeto en el que se establece el texto de la estadistica de ataques realizados
+            </summary>
+        </member>
+        <member name="F:MenuInicio.estadisticasEnemigo">
+            <summary>
+            Objeto en el que se establece el texto de la estadistica de enemigos derrotados
+            </summary>
+        </member>
+        <member name="F:MenuInicio.estadisticasTiempo">
+            <summary>
+            Objeto en el que se establece el texto de la estadistica de maxima duracion de una partida
+            </summary>
+        </member>
+        <member name="F:MenuInicio.menuCreditos">
+            <summary>
+            Objeto que contenga los creditos
+            </summary>
+        </member>
+        <member name="F:MenuInicio.menuAyudaObjetivo">
+            <summary>
+            Objeto que contenga la esplicacion de objetivo del juego
+            </summary>
+        </member>
+        <member name="F:MenuInicio.menuAyudaControles">
+            <summary>
+            Objeto que contenga la ayuda de los controles
+            </summary>
+        </member>
+        <member name="F:MenuInicio.menuAyuda">
+            <summary>
+            Objeto que contenga el menu de ayuda
+            </summary>
+        </member>
+        <member name="F:MenuInicio.estadisticas">
+            <summary>
+            Estadísticas guardadas actualmente
+            </summary>
+        </member>
+        <member name="M:MenuInicio.Start">
+             <summary>
+            Funcion que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            En ella se inicializan la variables en funcion a los elementos en la escena 
+             </summary>
+        </member>
+        <member name="M:MenuInicio.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose esta clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:MenuInicio.iniciarJuego">
+            <summary>
+            Función que carga la scena del juego.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.abrirOpciones">
+            <summary>
+            Función que muestra el menú de opciones y oculta los demas.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.VolverMenuPrincipal">
+            <summary>
+            Función que muestra el menú de pricipal y oculta los demas.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.salir">
+            <summary>
+            Función que cierra la aplicación.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.abrirIdiomas">
+            <summary>
+            Función que muestra el menú de idiomas y oculta los demas.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.abrirEstadisticas">
+            <summary>
+            Función que muestra el menu de estadísticas y oculta los demas.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.abrirCreditos">
+            <summary>
+            Función que muestra el menú de creditos y oculta los demas.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.abrirAyuda">
+            <summary>
+            Función que muestra el menú de ayuda y oculta los demas.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.abrirAyudaObjetivo">
+            <summary>
+            Función que muestra el menú de ayudaObjetivo y oculta los demas.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.abrirAyudaControles">
+            <summary>
+            Función que muestra el menú de ayudaControles y oculta los demas.
+            </summary>
+        </member>
+        <member name="M:MenuInicio.actualizarEstadisticas">
+            <summary>
+            Función que muestra el menú de estadisticas y oculta los demas.
+            </summary>
+        </member>
+        <member name="T:ObjetoCura">
+            <summary>
+            Clase que gestiona objetos que recuperan vida del jugador (corazones)
+            </summary>
+        </member>
+        <member name="F:ObjetoCura.curacion">
+            <summary>
+            Cantidad de vida que restaura al jugador
+            </summary>
+        </member>
+        <member name="F:ObjetoCura.duracion">
+            <summary>
+            Tiempo que dura en la escena el objeto
+            </summary>
+        </member>
+        <member name="F:ObjetoCura.timer">
+            <summary>
+            Timer para la duracion del objeto
+            </summary>
+        </member>
+        <member name="M:ObjetoCura.Start">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update
+            </summary>
+        </member>
+        <member name="M:ObjetoCura.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose esta clase esta habilitado
+            en ella se hacen las comprobaciones del tiempo que leva en escena el objeto si este supera al asignado en <see cref="F:ObjetoCura.duracion"/> el objeto se destrulle.
+            </summary>
+        </member>
+        <member name="M:ObjetoCura.OnCollisionEnter2D(UnityEngine.Collision2D)">
+            <summary>
+            Funcion que se lanza cuando el objeto entra colision
+            </summary>
+            <param name="col">Objeto generado de por la colisión</param>
+        </member>
+        <member name="T:OrcoInvocador">
+            <summary>
+            Clase que gestiona el funcionamiento del jefe
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.vidaMax">
+            <summary>
+            Vida maxima del orco invocador
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.vida">
+            <summary>
+            Vida actual del orco invocador
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.teletransportes">
+            <summary>
+            Coleccion de objetos en las posiciones a las que el orco invocador puede ir al teletransportarte
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.posicionesInvocacion">
+            <summary>
+            Coleccion de objetos en las posiciones en las que apareceran los enemigos al usar <see cref="M:OrcoInvocador.invocar"/>
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.invocacion">
+            <summary>
+            Objeto que se invoca al usar <see cref="M:OrcoInvocador.invocar"/>
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.cdInvocaciones">
+            <summary>
+            Tiempo que tiene que pasar despues de que se llame a <see cref="M:OrcoInvocador.invocar"/> para volver a llamarse
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.timerInvocaciones">
+            <summary>
+            Timer auxiliar para el cd de la invocación
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.tiempoCambioColor">
+            <summary>
+            Tiempo que dura el color de dañado tras recibir un golpe
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.estadisticas">
+            <summary>
+            Estadisticas de la partida actual
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.vivo">
+            <summary>
+            Boleana que indica si el orco invocador esta vivo
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.muerte">
+            <summary>
+            Objeto que se invoca cuando la vida del enemigo es igual o inferior a cero (Efecto de muerte)
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.objetosSalaJefe">
+            <summary>
+            Objeto que sea padre de todos los objetos de la sala del jefe
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.timerColorDañado">
+            <summary>
+            Timer auxiliar para el color del enemigo tras recibir un golpe
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.animator">
+            <summary>
+            Animator que gestiona las animaciones del elemento que contiene esta clase.
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.normalColor">
+            <summary>
+            Color del orco invocador en estado normal
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.enraged">
+            <summary>
+            Bolean que indica si el enemigo esta en enraged
+            </summary>
+        </member>
+        <member name="F:OrcoInvocador.terminaJuego">
+            <summary>
+            Bolean que especifica si al derrotar a este enemigo el juego termina
+            </summary>
+        </member>
+        <member name="M:OrcoInvocador.Start">
+            <summary>
+            Función que se llama en cuanto el elemento que pose esta clase está habilitado por primera vez antes de la función update.
+            En ella se inicializan la variables en funcion a los elementos en la escena
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que el elemento tambien tenga asociado
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.SpriteRenderer"/></item>
+            <item><see cref="T:UnityEngine.Rigidbody2D"/></item>
+            <item><see cref="T:UnityEngine.BoxCollider2D"/></item>
+            <item><see cref="T:UnityEngine.Animator"/></item>
+            </list>
+            Ademas en la escena en la que se use esta clase es necesario que exista un objeto denominado Estadisticas y que contenga la clase <see cref="T:Estadisticas"/>
+            </remarks>
+        </member>
+        <member name="M:OrcoInvocador.damage(System.Single)">
+            <summary>
+            Funcion que se encarga de gestionar la perdida de vida del orco invocador
+            </summary>
+            <param name="daño">Cantidad de vida que pierde el orco invocador</param>
+        </member>
+        <member name="M:OrcoInvocador.invocar">
+            <summary>
+            Función que hace aparecer un objeto <see cref="F:OrcoInvocador.invocacion"/> en uno de los puntos de la lista <see cref="F:OrcoInvocador.posicionesInvocacion"/>
+            </summary>
+        </member>
+        <member name="M:OrcoInvocador.Update">
+            <summary>
+            Función que se llama cada frame mientras que el elemento que pose está clase esta habilitado 
+            </summary>
+        </member>
+        <member name="M:OrcoInvocador.ObtenerTeletransporte">
+            <summary>
+            Calcula una posición de teletransporte
+            </summary>
+            <returns>Devuelve un objeto de la colección <see cref="F:OrcoInvocador.teletransportes"/> </returns>
+        </member>
+        <member name="M:OrcoInvocador.OnCollisionEnter2D(UnityEngine.Collision2D)">
+            <summary>
+            Funcion que se lanza cuando el objeto entra colision
+            </summary>
+            <param name="collision">Objeto generado de por la colisión</param>
+        </member>
+        <member name="T:Palanca">
+            <summary>
+            Clase que gestiona el funcionamiento de la palanca haciendo aparecer o desaparecer el objeto del parametro <see cref="F:Palanca.objetoAsociado"/> de la escena
+            </summary>
+            <remarks>
+            Para el funcionamiento de esta clase es necesario que el elemento tambien tenga asociado
+            <list type="bullet">
+            <item><see cref="T:UnityEngine.Rigidbody2D"/></item>
+            <item><see cref="T:UnityEngine.BoxCollider2D"/></item>
+            <item><see cref="T:UnityEngine.Animator"/></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:Palanca.objetoAsociado">
+            <summary>
+            Objeto que se hace aparecer o desaparecer de la escena
+            </summary>
+        </member>
+        <member name="F:Palanca.EfectoActivar">
+            <summary>
+            Objeto que aparece justo encima del objeto que se hace aparecer o desaparecer (Esta pensado para poner un objeto que reproduzca una animación)
+            </summary>
+        </member>
+        <member name="F:Palanca.reversibe">
+            <summary>
+            Se puede volver a usar la palanca tras el primer uso
+            </summary>
+        </member>
+        <member name="F:Palanca.animator">
+            <summary>
+            Animator que gestiona las animaciones del elemento que contiene esta clase.
+            </summary>
+        </member>
+        <member name="F:Palanca.activo">
+            <summary>
+            Boleana que indica el estado de la palanca
+            </summary>
+        </member>
+        <member name="M:Palanca.Start">
+            <summary>
+            Funcion que se llama en cuanto el elemento que pose esta clase esta habilitado por primera vez antes de update.
+            En ella se inicializan la variables en funcion a los elementos en la escena y se ajusta el tamaño del boxColaider al tamaño del menu
+            </summary>
+        </member>
+        <member name="M:Palanca.OnCollisionEnter2D(UnityEngine.Collision2D)">
+            <summary>
+            Función que se lanza cuando el objeto entra colisión
+            </summary>
+            <param name="collision">Objeto generado de por la colisión</param>
+        </member>
+        <member name="T:ProyectilEnemigo">
+            <summary>
+            Clase que gestiona los proyectiles que lanzan los enemigos
+            </summary>
+        </member>
+        <member name="F:ProyectilEnemigo.daño">
+            <summary>
+            Daño que realiza el proyectil al jugador
+            </summary>
+        </member>
+        <member name="F:ProyectilEnemigo.dir">
+            <summary>
+            Dirección hacia la que se desplaza el proyectil
+            </summary>
+        </member>
+        <member name="F:ProyectilEnemigo.invocador">
+            <summary>
+            El objeto que hizo aparecer a este objeto
+            </summary>
+        </member>
+        <member name="P:ProyectilEnemigo.Daño">
+            <summary>
+            Devuelve el valor de la variable <see cref="F:ProyectilEnemigo.daño"/>
+            </summary>
+        </member>
+        <member name="M:ProyectilEnemigo.mover">
+            <summary>
+            Función que desplaza al objeto en una dirección en funcion del parametro <see cref="T:Direccion"/>
+            </summary>
+        </member>
+        <member name="M:ProyectilEnemigo.FixedUpdate">
+            <summary>
+            Función que se llama cada cierto numero de frames mientras que el elemento que pose está clase esta habilitado. 
+            </summary>
+        </member>
+        <member name="M:ProyectilEnemigo.establecerValores(System.Single,Direccion,UnityEngine.GameObject)">
+            <summary>
+            Funcion que permite estableces todos los parametros del objeto
+            </summary>
+            <param name="daño">Establece el valor de daño del objeto</param>
+            <param name="dir">Establece el valor de dir del objeto</param>
+            <param name="invocador">Establece el valor del invocador del objeto</param>
+        </member>
+        <member name="M:ProyectilEnemigo.OnCollisionEnter2D(UnityEngine.Collision2D)">
+            <summary>
+            Función que se lanza cuando el objeto entra colisión
+            El objeto se destrulle si la colision se produce con algo que no sea su propio invocador
+            </summary>
+            <param name="collision">Objeto generado de por la colisión</param>
+        </member>
+        <member name="T:RegistroConfiguracion">
+            <summary>
+            Clase serializable que se usa para almacenar la configuración del juego
+            </summary>
+        </member>
+        <member name="F:RegistroConfiguracion.vibracion">
+            <summary>
+            Boleana que indica si esta activa la vibracion del juego
+            </summary>
+        </member>
+        <member name="F:RegistroConfiguracion.sonido">
+            <summary>
+            Boleana que indica si esta activo el sonido
+            </summary>
+        </member>
+        <member name="F:RegistroConfiguracion.idioma">
+            <summary>
+            Indice del idioma de la aplicación
+            </summary>
+        </member>
+        <member name="M:RegistroConfiguracion.#ctor(Configuracion)">
+            <summary>
+            Constructor que permite la creacion de un nuevo RegistroConfiguracion en base a un objeto de la clase <see cref="T:Configuracion"/>
+            </summary>
+            <param name="configuracion">Parámetro en base al cual se inicializan las variables del objeto</param>
+        </member>
+        <member name="T:RegistroEstadisticas">
+            <summary>
+            Clase serializable que se usa para almacenar los datos de estadisticas
+            </summary>
+        </member>
+        <member name="F:RegistroEstadisticas.enemigosDerrotados">
+            <summary>
+            Numero de enemigos derrotados
+            </summary>
+        </member>
+        <member name="P:RegistroEstadisticas.EnemigosDerrotados">
+            <summary>
+            Devuelve el valor de la variable enemigosDerrotados
+            </summary>
+        </member>
+        <member name="F:RegistroEstadisticas.ataquesRealizados">
+            <summary>
+            Numero de ataques realizados
+            </summary>
+        </member>
+        <member name="P:RegistroEstadisticas.AtaquesRealizados">
+            <summary>
+            Devuelve el valor de la variable ataquesRealizados
+            </summary>
+        </member>
+        <member name="F:RegistroEstadisticas.maximaDuracionDePartida">
+            <summary>
+            Tiempo de duración de la partida
+            </summary>
+        </member>
+        <member name="P:RegistroEstadisticas.MaximaDuracionDePartida">
+            <summary>
+            Devuelve el valor de la variable maximaDuracionDePartida
+            </summary>
+        </member>
+        <member name="M:RegistroEstadisticas.#ctor">
+            <summary>
+            Constructo que incializa todas las variables con valor 0
+            </summary>
+        </member>
+        <member name="M:RegistroEstadisticas.#ctor(System.Int32,System.Int32,System.Single)">
+            <summary>
+            Constructo que incializa las variables en función de los parametros
+            </summary>
+            <param name="enemigosDerrotados">Valor que se asignara a la variable enemigosDerrotados</param>
+            <param name="ataquesRealizados">Valor que se asignara a la variable ataquesRealizados</param>
+            <param name="maximaDuracionDePartida">Valor que se asignara a la variable maximaDuracionDePartida</param>
+        </member>
+        <member name="M:RegistroEstadisticas.#ctor(Estadisticas)">
+            <summary>
+            Constructor que permite la creacion de un nuevo RegistroConfiguracion en base a un objeto de la clase <see cref="T:Estadisticas"/>
+            </summary>
+            <param name="estadisticas">Parámetro en base al cual se inicializan las variables del objeto</param>
+        </member>
+        <member name="M:RegistroEstadisticas.tiempoFormateado">
+            <summary>
+            Función el valor de la variable tiempo en formato mm:ss
+            </summary>
+        </member>
+    </members>
+</doc>
