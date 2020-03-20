@@ -57,6 +57,10 @@ public class BotonPulsado : MonoBehaviour, IPointerDownHandler,
     /// </summary>
     void Start()
     {
+        if (objtJugador == null)
+        {
+            objtJugador = GameObject.Find("Jugador");
+        }
         image = GetComponent<Image>();
         defaultColor = image.color;
         SelecttColor = GetComponent<Button>().colors.pressedColor;

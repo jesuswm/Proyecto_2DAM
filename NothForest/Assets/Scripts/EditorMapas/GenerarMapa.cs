@@ -3,100 +3,97 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-
+/// <summary>
+/// Clase que genera un mapa en la escena en función de un archivo
+/// </summary>
 public class GenerarMapa : MonoBehaviour
 {
+    /// <summary>
+    /// GameObject con el tilemap sin colaider de la escena
+    /// </summary>
     public GameObject terrenoTraspasable;
+    /// <summary>
+    /// GameObject con el tilemap con colaider de la escena
+    /// </summary>
     public GameObject terrenoNoTraspasable;
+    /// <summary>
+    /// Tilemap de <see cref="terrenoTraspasable"/>
+    /// </summary>
     private Tilemap tilemapSuelo;
+    /// <summary>
+    /// Tilemap de <see cref="terrenoNoTraspasable"/>
+    /// </summary>
     private Tilemap tilemapMuro;
-    int ancho;
-    int alto;
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Booleana que indica si el mapa se genera en el momento en el que se carga la escena
+    /// </summary>
+    public bool auto=false;
+    /// <summary>
+    /// Función que genera el mapa de la escena en función de un archivo
+    /// </summary>
+    public void generarMapa()
     {
         tilemapSuelo = terrenoTraspasable.GetComponent<Tilemap>();
         tilemapMuro = terrenoNoTraspasable.GetComponent<Tilemap>();
-
-        //List<ObjetoMapa> objetos=new List<ObjetoMapa>();
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped,eTipo.TerrenoTras,0,0,0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 1, 0, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 2, 0, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 3, 0, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 4, 0, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 5, 0, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 6, 0, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 7, 0, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 8, 0, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 0, 1, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 1, 1, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 2, 1, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 3, 1, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 4, 1, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 5, 1, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 6, 1, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 7, 1, 0));
-        //objetos.Add(new ObjetoMapa((int)eTiles.Cesped, eTipo.TerrenoTras, 8, 1, 0));
-        //objetos.Add(new ObjetoMapa((int)eEnemigo.Tronquito, eTipo.Enemigo, 4, 1, 0));
-        CrearArchivo.GuardarObjetosMapa();
         List<ObjetoMapa> objetos = CrearArchivo.cargarObjetosMapa();
         Mapa map = new Mapa(objetos);
-        foreach (ObjetoMapa terreno in map.TerrenoTraspasable)
+        foreach (TileMapa terreno in map.TerrenoTraspasable)
         {
-            Debug.Log("Terreno traspasable");
-            tilemapSuelo.SetTile(new Vector3Int(terreno.X, terreno.Y, 0), Tiles.obtenerTile((eTiles)terreno.Id));
-        }
-        foreach (ObjetoMapa terreno in map.TerrenoNoTraspasable)
-        {
-            Debug.Log("Terreno No traspasable");
-            tilemapMuro.SetTile(new Vector3Int(terreno.X, terreno.Y, 0), Tiles.obtenerTile((eTiles)terreno.Id));
-        }
-        foreach (ObjetoMapa terreno in map.TerrenoNoTraspasable)
-        {
-            Debug.Log("Terreno No traspasable");
-            tilemapMuro.SetTile(new Vector3Int(terreno.X, terreno.Y, 0), Tiles.obtenerTile((eTiles)terreno.Id));
-        }
-        foreach (ObjetoMapa enemigos in map.Enemigo)
-        {
-            Debug.Log("Terreno No traspasable");
-            Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(enemigos.X, enemigos.Y, enemigos.Z));
-            vec = new Vector3(vec.x + 0.08f, vec.y + 0.08f, vec.z);
-            if (Enemigos.obtenerEnemigo((eEnemigo)enemigos.Id ) != null){
-                Instantiate(Enemigos.obtenerEnemigo((eEnemigo)enemigos.Id), vec, Quaternion.identity);
+            if (terreno.Traspasable)
+            {
+                tilemapSuelo.SetTile(new Vector3Int(terreno.X, terreno.Y, 0), Tiles.obtenerTile(terreno.Tile));
+            }
+            else
+            {
+                tilemapMuro.SetTile(new Vector3Int(terreno.X, terreno.Y, 0), Tiles.obtenerTile((eTiles)terreno.Tile));
             }
         }
+        foreach (JugadorMapa jugador in map.Jugador)
+        {
+            Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(jugador.X, jugador.Y, jugador.Z));
+            vec = new Vector3(vec.x + 0.08f, vec.y + 0.16f, vec.z);
+            Instantiate(Resources.Load<GameObject>("Jugador"), vec, Quaternion.identity).name="Jugador";
+            break;
+        }
+        foreach (ObjetoMapa arbusto in map.Arbusto)
+        {
+            Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(arbusto.X, arbusto.Y, arbusto.Z));
+            vec = new Vector3(vec.x + 0.08f, vec.y + 0.08f, vec.z);
+            Instantiate(Resources.Load<GameObject>("Arbusto"), vec, Quaternion.identity);
+        }
+        foreach (EnemigoMapa enemigos in map.Enemigo)
+        {
 
-        //int x = 0;
-        //int y = 0;
-        //ancho = 10;
-        //alto = 10;
-        //for (int j = 0; j < alto; j++)
-        //{
-        //    for (int i = 0; i < ancho; i++)
-        //    {
-        //        if (y != 0 && y != alto - 1)
-        //        {
-        //            if (x != 0 && x != ancho - 1)
-        //            {
-        //                tilemapSuelo.SetTile(new Vector3Int(x, y, 0), Tiles.obtenerTile(eTiles.Cesped));
-        //            }
-        //            else
-        //            {
-        //                tilemapMuro.SetTile(new Vector3Int(x, y, 0), Tiles.obtenerTile(eTiles.Agua));
-        //            }
-        //        }
-        //        else
-        //        {
-        //            tilemapMuro.SetTile(new Vector3Int(x, y, 0), Tiles.obtenerTile(eTiles.Agua));
-        //        }
-        //        x++;
-        //    }
-        //    x = 0;
-        //    y++;
-        //}
+            Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(enemigos.X, enemigos.Y, enemigos.Z));
+            vec = new Vector3(vec.x + 0.08f, vec.y + 0.16f, vec.z);
+            if (Enemigos.obtenerEnemigo(enemigos.TipoEnemigo) != null)
+            {
+                Instantiate(Enemigos.obtenerEnemigo((eEnemigo)enemigos.TipoEnemigo), vec, Quaternion.identity);
+            }
+        }
+        foreach (ObstaculosMapa obstaculo in map.Obstaculos)
+        {
+
+            Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(obstaculo.X, obstaculo.Y, obstaculo.Z));
+            vec = new Vector3(vec.x + 0.16f, vec.y + 0.16f, vec.z);
+            if (Obstaculos.obtenerObstaculo(obstaculo.TipoObstaculo) != null)
+            {
+                Instantiate(Obstaculos.obtenerObstaculo(obstaculo.TipoObstaculo), vec, Quaternion.identity);
+            }
+        }
+    }
+    void Start()
+    {
+        
+    }
+    void Awake()
+    {
+        if (auto)
+        {
+            generarMapa();
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         

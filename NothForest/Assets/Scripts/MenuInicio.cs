@@ -248,4 +248,12 @@ public class MenuInicio : MonoBehaviour
         //Debug.Log("Enemigos" + estadisticas.EnemigosDerrotados);
         //Debug.Log("Tiempo: " + estadisticas.tiempoFormateado());
     }
+    public void iniciarJuegoCustom()
+    {
+        SceneManager.LoadScene(3);
+    }
+    public void abrirEditor()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

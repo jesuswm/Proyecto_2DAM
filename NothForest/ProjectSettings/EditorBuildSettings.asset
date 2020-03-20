@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bosque.unity
     guid: f9642d2e194940e489200008c9fc35d9
+  - enabled: 1
+    path: Assets/Scenes/EditorMapa.unity
+    guid: db2911d17dd55134ebdbb95027066316
+  - enabled: 1
+    path: Assets/Scenes/AutoGenerado.unity
+    guid: e3e3117b0fa90cb4189fca0ce9720a36
   m_configObjects: {}

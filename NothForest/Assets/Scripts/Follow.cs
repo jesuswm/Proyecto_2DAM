@@ -28,6 +28,10 @@ public class Follow : MonoBehaviour
     /// </summary>
     void Start()
     {
+        if (player == null)
+        {
+            player=GameObject.Find("Jugador").GetComponent<Rigidbody2D>();
+        }
         RegistroConfiguracion conf = GuardarCargarConf.cargarConfiguracion();
         if(conf != null)
         {

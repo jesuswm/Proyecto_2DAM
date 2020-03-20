@@ -19,6 +19,13 @@ public class BarraVida : MonoBehaviour
     /// </summary>
     float vida;
 
+    void Start()
+    {
+        if (jugador == null)
+        {
+            jugador = GameObject.Find("Jugador");
+        }
+    }
 
     /// <summary>
     /// Función que se llama cada frame mientras que el elemento que posee esta clase esté habilitado

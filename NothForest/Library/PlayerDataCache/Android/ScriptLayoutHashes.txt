@@ -1,9 +1,11 @@
 Android
 PlayerPath?
-C:/Users/Jesús/Desktop/Clase info/2 año/Prog movil/Proyecto/Martínez Martínez Jesús - North forest Proyecto - APK.apk
+C:/Users/Jesús/Desktop/Clase info/2 año/Proyecto2DAM/Martínez Martínez Jesús - North forest Proyecto - APK.apk
 SceneListBegin?
 Assets/Scenes/MenuInicio.unity
 Assets/Scenes/Bosque.unity
+Assets/Scenes/EditorMapa.unity
+Assets/Scenes/AutoGenerado.unity
 SceneListEnd?
 3c08375166df118bd1801438fc36b92f Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MenuInicio
@@ -56,8 +58,6 @@ aa165095bcf0f4d99594ea33df01c81b UnityEngine.UI.dll:UnityEngine.UI.Slider
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 d3c76b14a25eebd3a3323dd43297919c Unity.TextMeshPro.dll:TMPro.TMP_InputField
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 507174d46dacbc5fe45e28485db5dd1e UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -129,6 +129,7 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 7b0d656aa05b4c8bb619381d067a2e3d Assembly-CSharp.dll:.Jugador
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ActualizarImagenPincel
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
 3c7c42b96d86b5cf8f8a25dac7504730 Assembly-CSharp.dll:.Palanca
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -166,17 +167,22 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 b369b34178c28ad66cd88d0721020d63 Assembly-CSharp.dll:.InvocarEnemigo
+36dc81fa5ba5a8fbd41dd9311d9b78c0 Assembly-CSharp.dll:.MoverCamara
 083877682271b33a0bc61930b6577a59 Assembly-CSharp.dll:.ProyectilEnemigo
 364c9654f3fb4fdcc1c649a6777259fa Assembly-CSharp.dll:.CambiarTextoPorIdioma
 ebe5a4d293dfe87ab8f8028df02c3a14 Assembly-CSharp.dll:.BarraVida
 3b760e6526e13f7504f59e210145899a Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 507174d46dacbc5fe45e28485db5dd1e Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
+9ec3ef4e92d09d9bb72c454cbe289228 Assembly-CSharp.dll:.GenerarMapa
 eca1ec414d96495e700d1576e776f467 Assembly-CSharp.dll:.BloquearSalaJeje
+e9a11f7682d9cbade71f64cee31aae8a Assembly-CSharp.dll:.CreadorDeCuadriculas
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 4a9fdfa392da5c6a64fdd7c587972f58 Assembly-CSharp.dll:.Arbusto
 c35a062e4a79f780a554e10fd40c7c43 Assembly-CSharp.dll:.OrcoInvocador
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 df434544c9f7b33d1cc7e635b180d279 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SeleccionDeHerramienta
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
+8d4e9c7543235fea1aa065806f78c4de Assembly-CSharp.dll:.PulsarCuadricula
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GestionPantallasPartida

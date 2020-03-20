@@ -65,12 +65,23 @@
     <Compile Include="Assets\Scripts\Configuracion.cs" />
     <Compile Include="Assets\Scripts\ControlAccelerometer.cs" />
     <Compile Include="Assets\Scripts\DamageJugador.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\ActualizarImagenPincel.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\CreadorDeCuadriculas.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\CrearArchivo.cs" />
-    <Compile Include="Assets\Scripts\EditorMapas\Enemigos.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Estaticas\Enemigos.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Estaticas\Obstaculos.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Estaticas\Tiles.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\GenerarMapa.cs" />
-    <Compile Include="Assets\Scripts\EditorMapas\Mapa.cs" />
-    <Compile Include="Assets\Scripts\EditorMapas\ObjetoMapa.cs" />
-    <Compile Include="Assets\Scripts\EditorMapas\Tiles.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\MoverCamara.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\PulsarCuadricula.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\SeleccionDeHerramienta.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Serializables\ArbustoMapa.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Serializables\EnemigoMapa.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Serializables\JugadorMapa.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Serializables\Mapa.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Serializables\ObjetoMapa.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Serializables\ObstaculosMapa.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\Serializables\TileMapa.cs" />
     <Compile Include="Assets\Scripts\Enemigo.cs" />
     <Compile Include="Assets\Scripts\Estadisticas.cs" />
     <Compile Include="Assets\Scripts\Follow.cs" />
@@ -88,19 +99,19 @@
     <Compile Include="Assets\Scripts\RegistroEstadisticas.cs" />
     <None Include="Assets\Resources\Idiomas.xml" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Proyecto/NothForest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Proyecto/Proyecto 2DAM/Proyecto_2DAM/NothForest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/Proyecto/NothForest/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>D:/Proyecto/Proyecto 2DAM/Proyecto_2DAM/NothForest/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Proyecto/NothForest/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/Proyecto/Proyecto 2DAM/Proyecto_2DAM/NothForest/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Proyecto/NothForest/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Proyecto/Proyecto 2DAM/Proyecto_2DAM/NothForest/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/Proyecto/NothForest/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>D:/Proyecto/Proyecto 2DAM/Proyecto_2DAM/NothForest/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -301,13 +312,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.14f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/Proyecto/NothForest/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>D:/Proyecto/Proyecto 2DAM/Proyecto_2DAM/NothForest/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/Proyecto/NothForest/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>D:/Proyecto/Proyecto 2DAM/Proyecto_2DAM/NothForest/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/Proyecto/NothForest/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>D:/Proyecto/Proyecto 2DAM/Proyecto_2DAM/NothForest/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.14f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
