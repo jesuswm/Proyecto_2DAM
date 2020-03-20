@@ -1,5 +1,6 @@
 Proyecto_2DAM
-#12/03/2020
+
+# 12/03/2020
 1. Subido el proyecto de unity
 2. Se han agregado los siguientes scripts para la generación del mapa en tiempo de ejecución:
 * CrearArchivo: Clase que permite guardar y cargar un mapa
@@ -8,7 +9,8 @@ Proyecto_2DAM
 * Mapa: Clase que se genera a partir de una Lista de ObjetoMapa y los clasifica en funcion de su tipo.
 * ObjetoMapa: Clase serializable que contiene las variables comunes de cualquier objeto del mapa
 * Tiles: Clase estática que asocia el enumerado eTiles con un tile de los recursos del proyecto
-#20/03/2020
+
+# 20/03/2020
 1. Restructuración de las clases: ObjetoMapa, Mapa , GenerarMapa
 2. Agregadas más clases para el guardado de la información del mapa en un archivo:
 * ArbustoMapa, EnemigoMapa, JugadorMapa, ObstaculosMapa, TileMapa
