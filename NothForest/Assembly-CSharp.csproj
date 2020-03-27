@@ -65,7 +65,7 @@
     <Compile Include="Assets\Scripts\Configuracion.cs" />
     <Compile Include="Assets\Scripts\ControlAccelerometer.cs" />
     <Compile Include="Assets\Scripts\DamageJugador.cs" />
-    <Compile Include="Assets\Scripts\EditorMapas\ActualizarImagenPincel.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\BotonAtacarAutoGenerado.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\CreadorDeCuadriculas.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\CrearArchivo.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\Estaticas\Enemigos.cs" />

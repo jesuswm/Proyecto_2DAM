@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Threading;
 /// <summary>
 /// Enumerado que contiene los diferentes elementos que pueden situarse sobre las casillas
 /// </summary>
@@ -52,7 +53,7 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     /// <summary>
     /// Posicion de la <see cref="imagenEvento"/>
     /// </summary>
-    Vector3 posicionInicialImagen;
+    Vector3 posicionInicialImagen=new Vector3(43.2f,75.2f,13.25063f);
     /// <summary>
     /// Evento asociado a la casilla 
     /// </summary>
@@ -81,7 +82,11 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     /// Pemite obtener o establecer el valor de la variable <see cref="tile"/>
     /// </summary>
     public eTiles Tile { get => tile; set => tile = value; }
-
+    /// <summary>
+    /// AudioSource asociado a la casilla
+    /// </summary>
+    AudioSource audioSource;
+     
     void Start()
     {
         cuadriculas= GameObject.Find("Celdas").GetComponent<CreadorDeCuadriculas>();
@@ -91,7 +96,10 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
         selectorHerramienta = GameObject.Find("Herramienta").GetComponent<Dropdown>();
         imagenEvento=transform.GetChild(0).GetComponent<SpriteRenderer>();
         imagenEvento.sprite = null;
-        posicionInicialImagen=imagenEvento.transform.localPosition;
+        audioSource = GetComponent<AudioSource>();
+        //audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        //posicionInicialImagen=imagenEvento.transform.localPosition;
+        //Debug.Log("X:"+ posicionInicialImagen.x + "y:"+ posicionInicialImagen.y + "Z:"+ posicionInicialImagen.z);
     }
     /// <summary>
     /// Función con todos los comportamientos al pulsar una casilla en función de la herramienta y el pincel
@@ -101,23 +109,19 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
         switch (selectorHerramienta.value)
         {
             case 0:
-               
-                    image.sprite = Tiles.obtenerTile((eTiles)pincel.value).sprite;
-                    Tile = (eTiles)(pincel.value);
-                    Traspasable = togleTraspasable.isOn;
-                    activo = true;
+                pintarSuelo((eTiles)(pincel.value), togleTraspasable.isOn);
                 break;
             case 1:
                 switch (pincel.value)
                 {
                     case 0:
-                        actualizarEvento(eventosMapa.moco);
+                        actualizarEvento(eventosMapa.moco,false);
                         break;
                     case 1:
-                        actualizarEvento(eventosMapa.tronquito);
+                        actualizarEvento(eventosMapa.tronquito,false);
                         break;
                     case 2:
-                        actualizarEvento(eventosMapa.orco);
+                        actualizarEvento(eventosMapa.orco,false);
                         break;
                 }
                 break;
@@ -126,27 +130,43 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
                 {
                     cuadriculas.borrarJugadorDelMapa();
                 }
-                actualizarEvento(eventosMapa.jugador);
+                actualizarEvento(eventosMapa.jugador,false);
                 break;
             case 3:
-                actualizarEvento(eventosMapa.arbusto);
+                actualizarEvento(eventosMapa.arbusto,false);
                 break;
             case 4:
                 //if (!bloqueoEvento)
                 //{
                 //cuadriculas.bloquearEventosAlrrededor(transform.gameObject.GetComponent<RectTransform>(),true);
-                actualizarEvento(eventosMapa.arbol);
+                actualizarEvento(eventosMapa.arbol,false);
                 //}
                 break;
             case 5:
                 image.sprite = Resources.Load<Sprite>("CuadriculaImg");
-                actualizarEvento(eventosMapa.ninguno);
+                actualizarEvento(eventosMapa.ninguno,true);
                 activo = false;
                 break;
             case 6:
                 
                 break;
         }
+    }
+    /// <summary>
+    /// Función que establece el suelo de una casilla y si es traspasable
+    /// </summary>
+    /// <param name="tile">Tile del suelo que queremos establecer en la casilla</param>
+    /// <param name="traspasable">Booleana que indica si la casilla es traspasable o no</param>
+    public void pintarSuelo(eTiles tile,bool traspasable)
+    {
+        if (image == null)
+        {
+            image = GetComponent<Image>();
+        }
+        image.sprite = Tiles.obtenerTile(tile).sprite;
+        Tile = tile;
+        Traspasable = traspasable;
+        activo = true;
     }
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -165,15 +185,21 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     /// si el evento que se pasa como parámetro ya es el mismo que tiene en ese momento se establecera <see cref="eventosMapa.ninguno"/>
     /// </summary>
     /// <param name="e">Evento que queremos situar en la casilla</param>
-    public void actualizarEvento(eventosMapa e)
+    /// <param name="silenciado">Indica si emite sonido de error al intentar colocar un evento en una casilla no valida</param>
+    public void actualizarEvento(eventosMapa e, bool silenciado)
     {
-        if (!bloqueoEvento)
+        if (cuadriculas == null)
+        {
+            cuadriculas = GameObject.Find("Celdas").GetComponent<CreadorDeCuadriculas>();
+        }
+        if (!bloqueoEvento && Activo)
         {
             if (e == Evento)
             {
                 if(e== eventosMapa.arbol)
                 {
                     cuadriculas.bloquearEventosAlrrededor(transform.gameObject.GetComponent<RectTransform>(),false);
+                    //cuadriculas.bloquearEventosAlrrededor(rectTransform, false);
                 }
                 Evento = eventosMapa.ninguno;
             }
@@ -182,21 +208,37 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
                 if (e == eventosMapa.arbol)
                 {
                     cuadriculas.bloquearEventosAlrrededor(transform.gameObject.GetComponent<RectTransform>(), true);
+                    //cuadriculas.bloquearEventosAlrrededor(rectTransform, true);
                 }
                 else if(Evento == eventosMapa.arbol)
                 {
                     cuadriculas.bloquearEventosAlrrededor(transform.gameObject.GetComponent<RectTransform>(), false);
+                    //cuadriculas.bloquearEventosAlrrededor(rectTransform, false);
                 }
                 Evento = e;
             }
+            //Debug.Log(Evento.ToString());
             actualizarImagenEvento();
         }
+        else
+        {
+            if (!silenciado)
+            {
+                GetComponent<AudioSource>().Play();
+            }
+        }
+        //GetComponent<AudioSource>().mute=false;
     }
+
     /// <summary>
     /// Función que actualiza la imagen de la casilla en el editor
     /// </summary>
     private void actualizarImagenEvento()
     {
+        if(imagenEvento == null){
+            imagenEvento = transform.GetChild(0).GetComponent<SpriteRenderer>();
+            posicionInicialImagen = new Vector3(43.2f, 75.2f, 13.25063f);
+        }
         switch (Evento)
         {
             case eventosMapa.ninguno:
@@ -248,6 +290,9 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     
     void Update()
     {
-        
+        if(imagenEvento.sprite==null && Evento != eventosMapa.ninguno)
+        {
+            actualizarImagenEvento();
+        }
     } 
 }

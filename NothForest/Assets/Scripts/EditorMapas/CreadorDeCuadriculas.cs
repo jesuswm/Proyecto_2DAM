@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 /// <summary>
 /// Clase que gestiona el conjunto de celdas que permiten la edición del mapa
 /// </summary>
@@ -80,7 +81,7 @@ public class CreadorDeCuadriculas : MonoBehaviour
     /// <summary>
     /// Función que carga la scena donde se generan loa mapas apartir de un archivo.
     /// </summary>
-    public void CargarMapa()
+    public void JugarMapa()
     {
         SceneManager.LoadScene(3);
         //guardarMapa();
@@ -98,7 +99,7 @@ public class CreadorDeCuadriculas : MonoBehaviour
         foreach (GameObject gameObject in cuadriculas)
         {
             if(gameObject.GetComponent<PulsarCuadricula>().Evento == eventosMapa.jugador){
-                gameObject.GetComponent<PulsarCuadricula>().actualizarEvento(eventosMapa.ninguno);
+                gameObject.GetComponent<PulsarCuadricula>().actualizarEvento(eventosMapa.ninguno,false);
             }
         }
     }
@@ -136,11 +137,11 @@ public class CreadorDeCuadriculas : MonoBehaviour
                         if (posiblesPosicionesPadre.Contains(tilemap.WorldToCell(gameO.GetComponent<RectTransform>().position)) 
                             && gameO.GetComponent<PulsarCuadricula>().Evento==eventosMapa.arbol)
                         {
-                            gameO.GetComponent<PulsarCuadricula>().actualizarEvento(eventosMapa.ninguno);
+                            gameO.GetComponent<PulsarCuadricula>().actualizarEvento(eventosMapa.ninguno,true);
                         }
                     }
                 }
-                gameObject.GetComponent<PulsarCuadricula>().actualizarEvento(eventosMapa.ninguno);
+                gameObject.GetComponent<PulsarCuadricula>().actualizarEvento(eventosMapa.ninguno, true);
                 gameObject.GetComponent<PulsarCuadricula>().bloqueoEvento = bloquear; 
             }
         }
@@ -167,6 +168,153 @@ public class CreadorDeCuadriculas : MonoBehaviour
             }
             y++;
             x = 0;
+        }
+    }
+    /// <summary>
+    /// Función que carga el mapa guardado en el archivo mapa.dat y lo carga en el editor
+    /// </summary>
+    public void CargarMapaAlEditor()
+    {
+        BorrarCuadriculas();
+        GenerarCuadriculas();
+        Dropdown selectorHerramienta= GameObject.Find("Herramienta").GetComponent<Dropdown>();
+        selectorHerramienta.value = 0;
+        Mapa mapa = new Mapa(CrearArchivo.cargarObjetosMapa());
+        ObjetoMapa evento=null;
+        List<TileMapa> suelos = new List<TileMapa>();
+        suelos.AddRange(mapa.TerrenoTraspasable);
+        suelos.AddRange(mapa.TerrenoNoTraspasable);
+        foreach (TileMapa suelotras in suelos)
+        {
+            evento = null;
+            foreach (JugadorMapa jugador in mapa.Jugador)
+            {
+                if(jugador.X==suelotras.X && jugador.Y == suelotras.Y && jugador.Z == suelotras.Z)
+                {
+                    //Debug.Log("Entro aqui siempre ????");
+                    evento = jugador;
+                    break;
+                }
+            }
+            if (evento == null)
+            {
+                foreach (EnemigoMapa enemigo in mapa.Enemigo)
+                {
+                    if (enemigo.X == suelotras.X && enemigo.Y == suelotras.Y && enemigo.Z == suelotras.Z)
+                    {
+                        evento = enemigo;
+                        break;
+                    }
+                }
+            }
+            if (evento == null)
+            {
+                foreach (ArbustoMapa arbusto in mapa.Arbusto)
+                {
+                    if (arbusto.X == suelotras.X && arbusto.Y == suelotras.Y && arbusto.Z == suelotras.Z)
+                    {
+                        evento = arbusto;
+                        break;
+                    }
+                }
+            }
+            if (evento == null)
+            {
+                foreach (ObstaculosMapa obstaculo in mapa.Obstaculos)
+                {
+                    if (obstaculo.X == suelotras.X && obstaculo.Y == suelotras.Y && obstaculo.Z == suelotras.Z)
+                    {
+                        evento = obstaculo;
+                        break;
+                    }
+                }
+            }
+            //Debug.Log("buscando pos x: " + suelotras.X + " pos y: " + suelotras.Y);
+            foreach (GameObject celda in cuadriculas)
+            {
+                PulsarCuadricula pulsar = celda.GetComponent<PulsarCuadricula>();
+                RectTransform rectTrans = celda.GetComponent<RectTransform>();
+                //Debug.Log("pos x: " + tilemap.WorldToCell(rectTrans.position).x + " pos y: " + tilemap.WorldToCell(rectTrans.position).y);
+                if (tilemap.WorldToCell(rectTrans.position).x == suelotras.X &&
+                        tilemap.WorldToCell(rectTrans.position).y == suelotras.Y)
+                {
+                    //Debug.Log("encontrado");
+                    
+                    pulsar.pintarSuelo(suelotras.Tile, suelotras.Traspasable);
+                    if (evento != null)
+                    {
+                        //Debug.Log("Clase: " + evento.GetType().Name);
+                        if (evento is JugadorMapa)
+                        {
+                            //Debug.Log("Jugador");
+                            if (pulsar.Evento != eventosMapa.jugador)
+                            {
+                                pulsar.actualizarEvento(eventosMapa.jugador,true);
+                            }
+                        }
+                        else if (evento is EnemigoMapa)
+                        {
+                            switch (((EnemigoMapa)evento).TipoEnemigo)
+                            {
+                                case eEnemigo.Moco:
+                                    //Debug.Log("Moco");
+                                    if (pulsar.Evento != eventosMapa.moco)
+                                    {
+                                        pulsar.actualizarEvento(eventosMapa.moco, true);
+                                    }
+                                    break;
+                                case eEnemigo.Orco:
+                                    //Debug.Log("Orco");
+                                    if (pulsar.Evento != eventosMapa.orco)
+                                    {
+                                        pulsar.actualizarEvento(eventosMapa.orco, true);
+                                    }
+                                    break;
+                                case eEnemigo.Tronquito:
+                                    //Debug.Log("Tronquito");
+                                    if (pulsar.Evento!=eventosMapa.tronquito)
+                                    {
+                                        pulsar.actualizarEvento(eventosMapa.tronquito, true);
+                                    }
+                                    break;
+                            }
+                        }
+                        else if(evento is ArbustoMapa)
+                        {
+                            //Debug.Log("arbusto");
+                            if (pulsar.Evento != eventosMapa.arbusto)
+                            {
+                                pulsar.actualizarEvento(eventosMapa.arbusto, true);
+                            }
+                        }
+                        else if(evento is ObstaculosMapa)
+                        {
+                            switch (((ObstaculosMapa)evento).TipoObstaculo)
+                            {
+                                case eObstaculos.Arbol :
+                                    //Debug.Log("arbol");
+                                    if (pulsar.Evento != eventosMapa.arbol)
+                                    {
+                                        pulsar.actualizarEvento(eventosMapa.arbol, true);
+                                    }
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// Función que borra todas las cuadriculas del editor y vacía la lista de  <see cref="cuadriculas"/>
+    /// </summary>
+    void BorrarCuadriculas()
+    {
+        cuadriculas.Clear();
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
         }
     }
     void Start()

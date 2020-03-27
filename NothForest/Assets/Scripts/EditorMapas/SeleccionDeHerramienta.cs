@@ -42,12 +42,27 @@ public class SeleccionDeHerramienta : MonoBehaviour
         spriteRendererHerramienta = GameObject.Find("ImageHerramienta").GetComponent<SpriteRenderer>();
         pincel = GameObject.Find("Pincel");
         togleTraspasable = GameObject.Find("TogleTraspasable");
-        listsSuelos.Add(new Dropdown.OptionData("Cesped"));
-        listsSuelos.Add(new Dropdown.OptionData("Agua"));
-        listsEnemigos.Add(new Dropdown.OptionData("Moco"));
-        listsEnemigos.Add(new Dropdown.OptionData("Tronquito"));
-        listsEnemigos.Add(new Dropdown.OptionData("Orco"));
-        listsObstaculos.Add(new Dropdown.OptionData("Arbol"));
+        /// u21D0 u21D1 u21D2 u21D3 u2196 u2197 u2198 u2199
+        listsSuelos.Add(new Dropdown.OptionData("Cesped", Tiles.obtenerTile(eTiles.Cesped).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2196Cesped Curva", Tiles.obtenerTile(eTiles.Cesped_CurvaNO).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2197Cesped Curva", Tiles.obtenerTile(eTiles.Cesped_CurvaNE).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2199Cesped Curva", Tiles.obtenerTile(eTiles.Cesped_CurvaSO).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2198Cesped Curva", Tiles.obtenerTile(eTiles.Cesped_CurvaSE).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("Agua", Tiles.obtenerTile(eTiles.Agua).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2190Agua Borde", Tiles.obtenerTile(eTiles.Agua_BordeO).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2191Agua Borde", Tiles.obtenerTile(eTiles.Agua_BordeN).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2192Agua Borde", Tiles.obtenerTile(eTiles.Agua_BordeE).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2193Agua Borde", Tiles.obtenerTile(eTiles.Agua_BordeS).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2196Agua Esquina", Tiles.obtenerTile(eTiles.Agua_EsquinaNO).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2197Agua Esquina", Tiles.obtenerTile(eTiles.Agua_EsquinaNE).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2199Agua Esquina", Tiles.obtenerTile(eTiles.Agua_EsquinaSO).sprite));
+        listsSuelos.Add(new Dropdown.OptionData("\u2198Agua Esquina", Tiles.obtenerTile(eTiles.Agua_EsquinaSE).sprite));
+        listsEnemigos.Add(new Dropdown.OptionData("Moco", Resources.Load<Sprite>("MocoImg")));
+        listsEnemigos.Add(new Dropdown.OptionData("Tronquito", Resources.Load<Sprite>("TronquitoImg")));
+        listsEnemigos.Add(new Dropdown.OptionData("Orco", Resources.Load<Sprite>("OrcoImg")));
+        listsObstaculos.Add(new Dropdown.OptionData("Arbol", Resources.Load<Sprite>("ArbolImg")));
+        pincel.GetComponent<Dropdown>().value = 0;
+        pincel.GetComponent<Dropdown>().options = listsSuelos;
     }
 
     /// <summary>
@@ -63,7 +78,7 @@ public class SeleccionDeHerramienta : MonoBehaviour
                 togleTraspasable.SetActive(true);
                 pincel.GetComponent<Dropdown>().value = 0;
                 pincel.GetComponent<Dropdown>().options = listsSuelos;
-                pincel.GetComponent<ActualizarImagenPincel>().ColocarImagenActual();
+                //pincel.GetComponent<ActualizarImagenPincel>().ColocarImagenActual();
                 break;
             case 1:
                 spriteRendererHerramienta.sprite = null;
@@ -71,7 +86,7 @@ public class SeleccionDeHerramienta : MonoBehaviour
                 pincel.SetActive(true);
                 pincel.GetComponent<Dropdown>().value = 0;
                 pincel.GetComponent<Dropdown>().options = listsEnemigos;
-                pincel.GetComponent<ActualizarImagenPincel>().ColocarImagenActual();
+                //pincel.GetComponent<ActualizarImagenPincel>().ColocarImagenActual();
                 break;
             case 2:
                 spriteRendererHerramienta.sprite = Resources.Load<Sprite>("PersonajeImg");
@@ -92,7 +107,7 @@ public class SeleccionDeHerramienta : MonoBehaviour
                 pincel.SetActive(true);
                 pincel.GetComponent<Dropdown>().value = 0;
                 pincel.GetComponent<Dropdown>().options = listsObstaculos;
-                pincel.GetComponent<ActualizarImagenPincel>().ColocarImagenActual();
+                //pincel.GetComponent<ActualizarImagenPincel>().ColocarImagenActual();
                 break;
             case 5:
                 spriteRendererHerramienta.sprite = null;

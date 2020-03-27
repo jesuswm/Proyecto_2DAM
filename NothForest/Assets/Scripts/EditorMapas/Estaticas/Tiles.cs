@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 [System.Serializable]
 public enum eTiles
 {
-    Cesped, Agua
+    Cesped, Cesped_CurvaNO, Cesped_CurvaNE, Cesped_CurvaSO, Cesped_CurvaSE, Agua, Agua_BordeO, Agua_BordeN, Agua_BordeE, Agua_BordeS, Agua_EsquinaNO, Agua_EsquinaNE, Agua_EsquinaSO, Agua_EsquinaSE
 }
 /// <summary>
 /// Clase estática que asocia el enumerado <see cref="eTiles"/> con un tile de los recursos del proyecto

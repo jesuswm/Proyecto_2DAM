@@ -55,7 +55,6 @@ public class Mapa
             {
                 Obstaculos.Add((ObstaculosMapa)objeto);
             }
-
         }
     }
     /// <summary>
