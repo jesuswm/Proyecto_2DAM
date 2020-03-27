@@ -25,7 +25,7 @@ Proyecto_2DAM
 6. Se han modificado algunos scripts antiguos para que sean funcionales con los mapas generados en tiempo de ejecución.
 
 
-#27/03/2020
+# 27/03/2020
 
 1. Cambios en el funcionamiento del editor:
 	* Ahora no se pueden colocar objetos (enemigos, arbustos, obstáculos …) sobre casillas en las que no se haya asignado ningún suelo previamente.
