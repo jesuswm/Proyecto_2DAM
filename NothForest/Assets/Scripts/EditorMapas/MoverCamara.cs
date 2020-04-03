@@ -30,7 +30,7 @@ public class MoverCamara : MonoBehaviour
     {
         if (Application.platform != RuntimePlatform.Android)
         {
-            if (!PanelHerramientas.activeSelf || GameObject.Find("Herramienta").GetComponent<Dropdown>().value == 6)
+            if (!PanelHerramientas.activeSelf || GameObject.Find("TogleHerramientas").GetComponent<SeleccionDeHerramienta>().herramientaActual == eHerramientas.mover)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -55,7 +55,7 @@ public class MoverCamara : MonoBehaviour
         }
         else
         {
-            if (!PanelHerramientas.activeSelf || GameObject.Find("Herramienta").GetComponent<Dropdown>().value == 6)
+            if (!PanelHerramientas.activeSelf || GameObject.Find("TogleHerramientas").GetComponent<SeleccionDeHerramienta>().herramientaActual == eHerramientas.mover)
             {
                 if (Input.touchCount == 0 && zoom)
                 {

@@ -29,12 +29,50 @@ public class GenerarMapa : MonoBehaviour
     /// </summary>
     public bool auto=false;
     /// <summary>
+    /// Tamaño del mapa en cuadriculas del eje x
+    /// </summary>
+    public int anchoMapa=50;
+    /// <summary>
+    /// Tamaño del mapa en cuadriculas del eje y
+    /// </summary>
+    public int altoMapa=50;
+    /// <summary>
+    /// Tile que se usara para generar el limite máximo del mapa
+    /// </summary>
+    public Tile tileLimete;
+    /// <summary>
+    /// Función que genera los límites máximos del mapa
+    /// </summary>
+    public void generarLimitesMapa()
+    {
+        if (tileLimete != null)
+        {
+            for (int i = 0; i < anchoMapa; i++)
+            {
+                tilemapMuro.SetTile(new Vector3Int(i, -1, 0), tileLimete);
+            }
+            for (int i = 0; i < anchoMapa; i++)
+            {
+                tilemapMuro.SetTile(new Vector3Int(i, altoMapa, 0), tileLimete);
+            }
+            for (int i = 0; i < altoMapa; i++)
+            {
+                tilemapMuro.SetTile(new Vector3Int(-1, i, 0), tileLimete);
+            }
+            for (int i = 0; i < altoMapa; i++)
+            {
+                tilemapMuro.SetTile(new Vector3Int(anchoMapa, i, 0), tileLimete);
+            }
+        }
+    }
+    /// <summary>
     /// Función que genera el mapa de la escena en función de un archivo
     /// </summary>
     public void generarMapa()
     {
         tilemapSuelo = terrenoTraspasable.GetComponent<Tilemap>();
         tilemapMuro = terrenoNoTraspasable.GetComponent<Tilemap>();
+        generarLimitesMapa();
         List<ObjetoMapa> objetos = CrearArchivo.cargarObjetosMapa();
         Mapa map = new Mapa(objetos);
         foreach (TileMapa terreno in map.TerrenoTraspasable)

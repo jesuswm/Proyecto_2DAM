@@ -72,6 +72,14 @@ public class CreadorDeCuadriculas : MonoBehaviour
                     objetos.Add(new ObstaculosMapa(tilemap.WorldToCell(rectTrans.position).x,
                         tilemap.WorldToCell(rectTrans.position).y, 0, eObstaculos.Arbol));
                     break;
+                case eventosMapa.tocon:
+                    objetos.Add(new ObstaculosMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0, eObstaculos.Tocon));
+                    break;
+                case eventosMapa.rocaGrande:
+                    objetos.Add(new ObstaculosMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0, eObstaculos.RocaGrande));
+                    break;
             }
         }
         formatter.Serialize(stream, objetos);
@@ -135,7 +143,7 @@ public class CreadorDeCuadriculas : MonoBehaviour
                     foreach (GameObject gameO in cuadriculas)
                     {
                         if (posiblesPosicionesPadre.Contains(tilemap.WorldToCell(gameO.GetComponent<RectTransform>().position)) 
-                            && gameO.GetComponent<PulsarCuadricula>().Evento==eventosMapa.arbol)
+                            && (gameO.GetComponent<PulsarCuadricula>().Evento==eventosMapa.arbol || gameO.GetComponent<PulsarCuadricula>().Evento == eventosMapa.tocon || gameO.GetComponent<PulsarCuadricula>().Evento == eventosMapa.rocaGrande))
                         {
                             gameO.GetComponent<PulsarCuadricula>().actualizarEvento(eventosMapa.ninguno,true);
                         }
@@ -177,8 +185,8 @@ public class CreadorDeCuadriculas : MonoBehaviour
     {
         BorrarCuadriculas();
         GenerarCuadriculas();
-        Dropdown selectorHerramienta= GameObject.Find("Herramienta").GetComponent<Dropdown>();
-        selectorHerramienta.value = 0;
+        Toggle tsuelo= GameObject.Find("Hsuelo").GetComponent<Toggle>();
+        tsuelo.isOn = true;
         Mapa mapa = new Mapa(CrearArchivo.cargarObjetosMapa());
         ObjetoMapa evento=null;
         List<TileMapa> suelos = new List<TileMapa>();
@@ -238,15 +246,11 @@ public class CreadorDeCuadriculas : MonoBehaviour
                 if (tilemap.WorldToCell(rectTrans.position).x == suelotras.X &&
                         tilemap.WorldToCell(rectTrans.position).y == suelotras.Y)
                 {
-                    //Debug.Log("encontrado");
-                    
                     pulsar.pintarSuelo(suelotras.Tile, suelotras.Traspasable);
                     if (evento != null)
                     {
-                        //Debug.Log("Clase: " + evento.GetType().Name);
                         if (evento is JugadorMapa)
                         {
-                            //Debug.Log("Jugador");
                             if (pulsar.Evento != eventosMapa.jugador)
                             {
                                 pulsar.actualizarEvento(eventosMapa.jugador,true);
@@ -257,21 +261,18 @@ public class CreadorDeCuadriculas : MonoBehaviour
                             switch (((EnemigoMapa)evento).TipoEnemigo)
                             {
                                 case eEnemigo.Moco:
-                                    //Debug.Log("Moco");
                                     if (pulsar.Evento != eventosMapa.moco)
                                     {
                                         pulsar.actualizarEvento(eventosMapa.moco, true);
                                     }
                                     break;
                                 case eEnemigo.Orco:
-                                    //Debug.Log("Orco");
                                     if (pulsar.Evento != eventosMapa.orco)
                                     {
                                         pulsar.actualizarEvento(eventosMapa.orco, true);
                                     }
                                     break;
                                 case eEnemigo.Tronquito:
-                                    //Debug.Log("Tronquito");
                                     if (pulsar.Evento!=eventosMapa.tronquito)
                                     {
                                         pulsar.actualizarEvento(eventosMapa.tronquito, true);
@@ -281,7 +282,6 @@ public class CreadorDeCuadriculas : MonoBehaviour
                         }
                         else if(evento is ArbustoMapa)
                         {
-                            //Debug.Log("arbusto");
                             if (pulsar.Evento != eventosMapa.arbusto)
                             {
                                 pulsar.actualizarEvento(eventosMapa.arbusto, true);
@@ -292,12 +292,23 @@ public class CreadorDeCuadriculas : MonoBehaviour
                             switch (((ObstaculosMapa)evento).TipoObstaculo)
                             {
                                 case eObstaculos.Arbol :
-                                    //Debug.Log("arbol");
                                     if (pulsar.Evento != eventosMapa.arbol)
                                     {
                                         pulsar.actualizarEvento(eventosMapa.arbol, true);
                                     }
                                 break;
+                                case eObstaculos.Tocon:
+                                    if (pulsar.Evento != eventosMapa.tocon)
+                                    {
+                                        pulsar.actualizarEvento(eventosMapa.tocon, true);
+                                    }
+                                break;
+                                case eObstaculos.RocaGrande:
+                                    if (pulsar.Evento != eventosMapa.rocaGrande)
+                                    {
+                                        pulsar.actualizarEvento(eventosMapa.rocaGrande, true);
+                                    }
+                                    break;
                             }
                         }
                     }

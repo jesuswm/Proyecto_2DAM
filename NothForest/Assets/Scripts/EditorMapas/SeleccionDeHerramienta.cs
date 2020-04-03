@@ -1,28 +1,60 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+/// <summary>
+/// Enumerado de las herramientas que usa el editor
+/// </summary>
+public enum eHerramientas
+{
+    suelo,enemigo,jugador,arbusto,obstaculo,borrar,mover
+}
 /// <summary>
 /// Clase que gestiona la selección de herramientas
 /// </summary>
 public class SeleccionDeHerramienta : MonoBehaviour
 {
     /// <summary>
-    /// Dropdown de la escena con la lista de herramientas
+    /// Herramienta que se encuentra activa en el editor
     /// </summary>
-    Dropdown selectorHerramienta;
+    public eHerramientas herramientaActual=eHerramientas.suelo;
     /// <summary>
-    /// Imagen de la herramienta seleccionada
+    /// Array en el que se almacena el pincel actual de cada herramienta
     /// </summary>
-    SpriteRenderer spriteRendererHerramienta;
+    int[] pincelActual;
+    /// <summary>
+    /// Toggle asociado a la herramienta suelo
+    /// </summary>
+    public Toggle tsuelo;
+    /// <summary>
+    /// Toggle asociado a la herramienta enemigo
+    /// </summary>
+    public Toggle tenemigo;
+    /// <summary>
+    /// Toggle asociado a la herramienta jugador
+    /// </summary>
+    public Toggle tjugador;
+    /// <summary>
+    /// Toggle asociado a la herramienta arbusto
+    /// </summary>
+    public Toggle tarbusto;
+    /// <summary>
+    /// Toggle asociado a la herramienta obstaculo
+    /// </summary>
+    public Toggle tobstaculo;
+    /// <summary>
+    /// Toggle asociado a la herramienta borrar
+    /// </summary>
+    public Toggle tborrar;
+    /// <summary>
+    /// Toggle asociado a la herramienta mover
+    /// </summary>
+    public Toggle tmover;
     /// <summary>
     /// GameObject que contiene el Dropdown de pinceles
     /// </summary>
     GameObject pincel;
-    /// <summary>
-    /// Toggle de la escena con la que se establece si estraspasable o no la celda
-    /// </summary>
-    GameObject togleTraspasable;
     /// <summary>
     /// Lista de pinceles de la herramienta suelos
     /// </summary>
@@ -38,10 +70,33 @@ public class SeleccionDeHerramienta : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectorHerramienta= GameObject.Find("Herramienta").GetComponent<Dropdown>();
-        spriteRendererHerramienta = GameObject.Find("ImageHerramienta").GetComponent<SpriteRenderer>();
+        pincelActual = new int[Enum.GetNames(typeof(eHerramientas)).Length];
+        for(int i=0;i< pincelActual.Length; i++)
+        {
+            pincelActual[i] = 0;
+        }
+        tsuelo.onValueChanged.AddListener(delegate {
+            OnCambioHerramienta(eHerramientas.suelo,tsuelo);
+        });
+        tenemigo.onValueChanged.AddListener(delegate {
+            OnCambioHerramienta(eHerramientas.enemigo, tenemigo);
+        });
+        tjugador.onValueChanged.AddListener(delegate {
+            OnCambioHerramienta(eHerramientas.jugador, tjugador);
+        });
+        tarbusto.onValueChanged.AddListener(delegate {
+            OnCambioHerramienta(eHerramientas.arbusto, tarbusto);
+        });
+        tobstaculo.onValueChanged.AddListener(delegate {
+            OnCambioHerramienta(eHerramientas.obstaculo, tobstaculo);
+        });
+        tborrar.onValueChanged.AddListener(delegate {
+            OnCambioHerramienta(eHerramientas.borrar, tborrar);
+        });
+        tmover.onValueChanged.AddListener(delegate {
+            OnCambioHerramienta(eHerramientas.mover, tmover);
+        });
         pincel = GameObject.Find("Pincel");
-        togleTraspasable = GameObject.Find("TogleTraspasable");
         /// u21D0 u21D1 u21D2 u21D3 u2196 u2197 u2198 u2199
         listsSuelos.Add(new Dropdown.OptionData("Cesped", Tiles.obtenerTile(eTiles.Cesped).sprite));
         listsSuelos.Add(new Dropdown.OptionData("\u2196Cesped Curva", Tiles.obtenerTile(eTiles.Cesped_CurvaNO).sprite));
@@ -61,6 +116,8 @@ public class SeleccionDeHerramienta : MonoBehaviour
         listsEnemigos.Add(new Dropdown.OptionData("Tronquito", Resources.Load<Sprite>("TronquitoImg")));
         listsEnemigos.Add(new Dropdown.OptionData("Orco", Resources.Load<Sprite>("OrcoImg")));
         listsObstaculos.Add(new Dropdown.OptionData("Arbol", Resources.Load<Sprite>("ArbolImg")));
+        listsObstaculos.Add(new Dropdown.OptionData("Tocón", Resources.Load<Sprite>("ToconImg")));
+        listsObstaculos.Add(new Dropdown.OptionData("Roca grande", Resources.Load<Sprite>("RocaGrandeImg")));
         pincel.GetComponent<Dropdown>().value = 0;
         pincel.GetComponent<Dropdown>().options = listsSuelos;
     }
@@ -68,58 +125,38 @@ public class SeleccionDeHerramienta : MonoBehaviour
     /// <summary>
     /// Función que actualiza la barra de herramientas en función de la herramienta seleccionada
     /// </summary>
-    public void OnCambioHerramienta()
+    
+    public void OnCambioHerramienta(eHerramientas herramienta,Toggle actual)
     {
-        switch (selectorHerramienta.value)
+        if (actual.isOn)
         {
-            case 0:
-                spriteRendererHerramienta.sprite = null;
-                pincel.SetActive(true);
-                togleTraspasable.SetActive(true);
-                pincel.GetComponent<Dropdown>().value = 0;
-                pincel.GetComponent<Dropdown>().options = listsSuelos;
-                //pincel.GetComponent<ActualizarImagenPincel>().ColocarImagenActual();
-                break;
-            case 1:
-                spriteRendererHerramienta.sprite = null;
-                togleTraspasable.SetActive(false);
-                pincel.SetActive(true);
-                pincel.GetComponent<Dropdown>().value = 0;
-                pincel.GetComponent<Dropdown>().options = listsEnemigos;
-                //pincel.GetComponent<ActualizarImagenPincel>().ColocarImagenActual();
-                break;
-            case 2:
-                spriteRendererHerramienta.sprite = Resources.Load<Sprite>("PersonajeImg");
-                pincel.SetActive(false);
-                togleTraspasable.SetActive(false);
-                break;
-            case 3:
-                spriteRendererHerramienta.sprite = Resources.Load<Sprite>("ArbustoImg");
-                pincel.SetActive(false);
-                togleTraspasable.SetActive(false);
-                break;
-            case 4:
-                //spriteRendererHerramienta.sprite = null;
-                //pincel.SetActive(false);
-                //togleTraspasable.SetActive(false);
-                spriteRendererHerramienta.sprite = null;
-                togleTraspasable.SetActive(false);
-                pincel.SetActive(true);
-                pincel.GetComponent<Dropdown>().value = 0;
-                pincel.GetComponent<Dropdown>().options = listsObstaculos;
-                //pincel.GetComponent<ActualizarImagenPincel>().ColocarImagenActual();
-                break;
-            case 5:
-                spriteRendererHerramienta.sprite = null;
-                pincel.SetActive(false);
-                togleTraspasable.SetActive(false);
-                break;
-            case 6:
-                spriteRendererHerramienta.sprite = null;
-                pincel.SetActive(false);
-                togleTraspasable.SetActive(false);
-                break;
+            pincelActual[(int)herramientaActual] = pincel.GetComponent<Dropdown>().value;
+            switch (herramienta)
+            {
+                case eHerramientas.suelo:
+                    pincel.SetActive(true);
+                    pincel.GetComponent<Dropdown>().value = 0;
+                    pincel.GetComponent<Dropdown>().options = listsSuelos;
+                    pincel.GetComponent<Dropdown>().value = pincelActual[(int)herramienta];
+                    break;
+                case eHerramientas.enemigo:
+                    pincel.SetActive(true);
+                    pincel.GetComponent<Dropdown>().value = 0;
+                    pincel.GetComponent<Dropdown>().options = listsEnemigos;
+                    pincel.GetComponent<Dropdown>().value = pincelActual[(int)herramienta];
+                    break;
+                case eHerramientas.obstaculo:
+                    pincel.SetActive(true);
+                    pincel.GetComponent<Dropdown>().value = 0;
+                    pincel.GetComponent<Dropdown>().options = listsObstaculos;
+                    pincel.GetComponent<Dropdown>().value = pincelActual[(int)herramienta];
+                    break;
+                default:
+                    pincel.SetActive(false);
+                    break;
+            }
+            herramientaActual = herramienta;
         }
-        
+
     }
 }

@@ -9,7 +9,7 @@ using System.Threading;
 /// </summary>
 public enum eventosMapa
 {
-    jugador,arbusto,moco,orco,tronquito,arbol,ninguno
+    jugador,arbusto,moco,orco,tronquito,arbol,tocon,rocaGrande, ninguno
 }
 /// <summary>
 /// Clase que se encarga de gestionar la pulsación de una cuadricula
@@ -19,9 +19,13 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
 {
     static bool pulsado=false;
     /// <summary>
-    /// Dropdown de la escena con la lista de herramientas
+    /// Lista de tiles que son traspasables por el jugador
     /// </summary>
-    Dropdown selectorHerramienta;
+    List<eTiles> traspasables = new List<eTiles>();
+    /// <summary>
+    /// SeleccionDeHerramienta de la escena que almacena la herramienta actual
+    /// </summary>
+    SeleccionDeHerramienta selectorHerramienta;
     /// <summary>
     /// Dropdown de la escena con la lista de pinceles
     /// </summary>
@@ -42,10 +46,6 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     /// Bolean que indica si la celda es traspasable para el jugador
     /// </summary>
     bool traspasable =true;
-    /// <summary>
-    /// Toggle de la escena con la que se establece si estraspasable o no la celda
-    /// </summary>
-    Toggle togleTraspasable;
     /// <summary>
     /// Tile asociado a la casilla
     /// </summary>
@@ -86,17 +86,23 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     /// AudioSource asociado a la casilla
     /// </summary>
     AudioSource audioSource;
-     
+    /// <summary>
+    /// Color de la casilla en estado normal
+    /// </summary>
+    Color colorNormal;
+
+
     void Start()
     {
         cuadriculas= GameObject.Find("Celdas").GetComponent<CreadorDeCuadriculas>();
         image = GetComponent<Image>();
+        colorNormal = image.color;
         pincel = GameObject.Find("Pincel").GetComponent<Dropdown>();
-        togleTraspasable= GameObject.Find("TogleTraspasable").GetComponent<Toggle>();
-        selectorHerramienta = GameObject.Find("Herramienta").GetComponent<Dropdown>();
-        imagenEvento=transform.GetChild(0).GetComponent<SpriteRenderer>();
+        selectorHerramienta = GameObject.Find("TogleHerramientas").GetComponent<SeleccionDeHerramienta>();
+        imagenEvento =transform.GetChild(0).GetComponent<SpriteRenderer>();
         imagenEvento.sprite = null;
         audioSource = GetComponent<AudioSource>();
+        traspasables.Add(eTiles.Cesped);
         //audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         //posicionInicialImagen=imagenEvento.transform.localPosition;
         //Debug.Log("X:"+ posicionInicialImagen.x + "y:"+ posicionInicialImagen.y + "Z:"+ posicionInicialImagen.z);
@@ -106,48 +112,63 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     /// </summary>
     public void pulsar()
     {
-        switch (selectorHerramienta.value)
+        switch (selectorHerramienta.herramientaActual)
         {
-            case 0:
-                pintarSuelo((eTiles)(pincel.value), togleTraspasable.isOn);
+            case eHerramientas.suelo:
+                if (traspasables.Contains((eTiles)(pincel.value)))
+                {
+                    pintarSuelo((eTiles)(pincel.value), true);
+                }
+                else
+                {
+                    actualizarEvento(eventosMapa.ninguno, true);
+                    pintarSuelo((eTiles)(pincel.value), false);
+                }
                 break;
-            case 1:
+            case eHerramientas.enemigo:
                 switch (pincel.value)
                 {
                     case 0:
-                        actualizarEvento(eventosMapa.moco,false);
+                        actualizarEvento(eventosMapa.moco, false);
                         break;
                     case 1:
-                        actualizarEvento(eventosMapa.tronquito,false);
+                        actualizarEvento(eventosMapa.tronquito, false);
                         break;
                     case 2:
-                        actualizarEvento(eventosMapa.orco,false);
+                        actualizarEvento(eventosMapa.orco, false);
                         break;
                 }
                 break;
-            case 2:
+            case eHerramientas.jugador:
                 if (Evento != eventosMapa.jugador)
                 {
                     cuadriculas.borrarJugadorDelMapa();
                 }
-                actualizarEvento(eventosMapa.jugador,false);
+                actualizarEvento(eventosMapa.jugador, false);
                 break;
-            case 3:
-                actualizarEvento(eventosMapa.arbusto,false);
+            case eHerramientas.arbusto:
+                actualizarEvento(eventosMapa.arbusto, false);
                 break;
-            case 4:
-                //if (!bloqueoEvento)
-                //{
-                //cuadriculas.bloquearEventosAlrrededor(transform.gameObject.GetComponent<RectTransform>(),true);
-                actualizarEvento(eventosMapa.arbol,false);
-                //}
+            case eHerramientas.obstaculo:
+                switch (pincel.value)
+                {
+                    case 0:
+                        actualizarEvento(eventosMapa.arbol, false);
+                        break;
+                    case 1:
+                        actualizarEvento(eventosMapa.tocon, false);
+                        break;
+                    case 2:
+                        actualizarEvento(eventosMapa.rocaGrande, false);
+                        break;
+                }
                 break;
-            case 5:
+            case eHerramientas.borrar:
                 image.sprite = Resources.Load<Sprite>("CuadriculaImg");
                 actualizarEvento(eventosMapa.ninguno,true);
                 activo = false;
                 break;
-            case 6:
+            case eHerramientas.mover:
                 
                 break;
         }
@@ -171,11 +192,11 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     public void OnPointerDown(PointerEventData eventData)
     {
         pulsar();
-        List<int> herramientasMantenerPulsado=new List<int>();
-        herramientasMantenerPulsado.Add(0);
-        herramientasMantenerPulsado.Add(5);
-        herramientasMantenerPulsado.Add(3);
-        if (herramientasMantenerPulsado.Contains(selectorHerramienta.value))
+        List<eHerramientas> herramientasMantenerPulsado=new List<eHerramientas>();
+        herramientasMantenerPulsado.Add(eHerramientas.suelo);
+        herramientasMantenerPulsado.Add(eHerramientas.arbusto);
+        herramientasMantenerPulsado.Add(eHerramientas.borrar);
+        if (herramientasMantenerPulsado.Contains(selectorHerramienta.herramientaActual))
         {
             pulsado = true;
         }
@@ -192,11 +213,11 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
         {
             cuadriculas = GameObject.Find("Celdas").GetComponent<CreadorDeCuadriculas>();
         }
-        if (!bloqueoEvento && Activo)
+        if (!bloqueoEvento && Activo && traspasable)
         {
             if (e == Evento)
             {
-                if(e== eventosMapa.arbol)
+                if(e== eventosMapa.arbol || e== eventosMapa.tocon || e == eventosMapa.rocaGrande)
                 {
                     cuadriculas.bloquearEventosAlrrededor(transform.gameObject.GetComponent<RectTransform>(),false);
                     //cuadriculas.bloquearEventosAlrrededor(rectTransform, false);
@@ -205,12 +226,12 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
             }
             else
             {
-                if (e == eventosMapa.arbol)
+                if (e == eventosMapa.arbol || e == eventosMapa.tocon || e == eventosMapa.rocaGrande)
                 {
                     cuadriculas.bloquearEventosAlrrededor(transform.gameObject.GetComponent<RectTransform>(), true);
                     //cuadriculas.bloquearEventosAlrrededor(rectTransform, true);
                 }
-                else if(Evento == eventosMapa.arbol)
+                else if(Evento == eventosMapa.arbol || Evento == eventosMapa.tocon || Evento == eventosMapa.rocaGrande)
                 {
                     cuadriculas.bloquearEventosAlrrededor(transform.gameObject.GetComponent<RectTransform>(), false);
                     //cuadriculas.bloquearEventosAlrrededor(rectTransform, false);
@@ -268,6 +289,14 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
                 imagenEvento.transform.localPosition = new Vector3(posicionInicialImagen.x*2, posicionInicialImagen.y, posicionInicialImagen.z);
                 imagenEvento.sprite = Resources.Load<Sprite>("ArbolImg");
                 break;
+            case eventosMapa.tocon:
+                imagenEvento.transform.localPosition = new Vector3(posicionInicialImagen.x * 2, posicionInicialImagen.y, posicionInicialImagen.z);
+                imagenEvento.sprite = Resources.Load<Sprite>("ToconImg");
+                break;
+            case eventosMapa.rocaGrande:
+                imagenEvento.transform.localPosition = new Vector3(posicionInicialImagen.x * 2, posicionInicialImagen.y, posicionInicialImagen.z);
+                imagenEvento.sprite = Resources.Load<Sprite>("RocaGrandeImg");
+                break;
         }
     }
     public void OnPointerUp(PointerEventData eventData)
@@ -293,6 +322,25 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
         if(imagenEvento.sprite==null && Evento != eventosMapa.ninguno)
         {
             actualizarImagenEvento();
+        }
+        if ((bloqueoEvento || !Activo || !traspasable) && 
+            (selectorHerramienta.herramientaActual!=eHerramientas.suelo &&
+            selectorHerramienta.herramientaActual != eHerramientas.borrar &&
+            selectorHerramienta.herramientaActual != eHerramientas.mover))
+        {
+            if (image.color == colorNormal)
+            {
+                Color noValido = colorNormal;
+                noValido.a = 0.5f;
+                image.color = noValido;
+            }
+        }
+        else
+        {
+            if (image.color != colorNormal)
+            {
+                image.color = colorNormal;
+            }
         }
     } 
 }

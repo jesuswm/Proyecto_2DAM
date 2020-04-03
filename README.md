@@ -36,3 +36,14 @@ Proyecto_2DAM
 4. Agregados nuevos pinceles a la herramienta suelo (se han agregado al enumerado eTiles y se han añadido sus respectivos tiles a la carpeta Resources del proyecto).
 5. Se ha arreglado un error que provocaba que cuando jugaras un mapa generado con el editor el botón de ataque de la interfaz no funcionara.
 	* Para solucionarlo se ha agregado la clase BotonAtacarAutoGenerado
+	
+# 3/04/2020
+
+1. Cambios en la interfaz del editor:
+	* Ahora la selección de herramienta se realiza mediante la gestión de un Toggle Grop en lugar de usar un Dropdown (La mayor parte de las modificaciones se han realizado en el script SeleccionDeHerramienta anqué también se han realizado cambios menores en los scripts PulsarCuadricula y MoverCamara)
+	* Ahora los pinceles de la herramienta suelo ya tienen definido si son traspasables o no mediante código por lo que se ha eliminado el Toggle de traspasable de la interfaz del editor.
+2. Cambios en el funcionamiento del editor:
+	* Ahora no se pueden colocar objetos (enemigos, arbustos, obstáculos …) en suelos no traspasables (modificaciones en la función actualizarEvento() de la clase PulsarCuadricula)
+	* Ahora cuando tenemos seleccionada una herramienta las casillas en las que no se pueda usar esa herramienta aumentaran su transparencia, por ejemplo, si tenemos seleccionada la herramienta enemigos todas las casillas en las que no podamos colocar un enemigo (Casillas asociadas a un obstáculo, suelo no traspasable o sin suelo asociado) aumentaran su transparencia (La comprobación se realiza en el Update() de PulsarCuadricula).
+	* Ahora al cambiar de una herramienta a otra se almacena el pincel actual de la herramienta que se estaba usando de esta forma al volver a la herramienta anterior se mantiene en ese pincel.
+3. Agregados nuevos pinceles a la herramienta obstaculos (se han agregado al enumerado eObstaculos, se han añadido sus respectivos GameObject a la carpeta Resources del proyecto y se ha actualizado las funciones bloquearEventosAlrrededor, guardarMapa y CargarMapaAlEditor de la clase CreadorDeCuadriculas para añadirlos).

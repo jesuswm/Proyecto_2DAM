@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public enum eObstaculos
 {
-    Arbol
+    Arbol, Tocon, RocaGrande
 }
 /// <summary>
 /// Clase estática que asocia el enumerado <see cref="eObstaculos"/> con el GameObject correspondiente al Obstáculo.
