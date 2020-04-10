@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -64,6 +65,10 @@ public class GestionPantallasPartida : MonoBehaviour
     /// </summary>
     bool pausa;
     /// <summary>
+    /// Booleana que indica si es necesario la realización de las comprobaciones en el update
+    /// </summary>
+    bool realizarUpdate =true;
+    /// <summary>
     /// Devuelve el valor de la variable pausa
     /// </summary>
     public bool Pausa
@@ -84,7 +89,13 @@ public class GestionPantallasPartida : MonoBehaviour
         menuMuerte = GameObject.Find("MenuMuerte");
         menuVictoria = GameObject.Find("MenuVictoria");
         objjugador = GameObject.Find("Jugador");
-        jugador = objjugador.GetComponent<Jugador>();
+        try { 
+            jugador = objjugador.GetComponent<Jugador>();
+        }
+        catch (NullReferenceException)
+        {
+            Debug.Log("Script GestionPantallasPartida: No se encontro el componente \"Jugador\" de objjugador");
+        }
         menuPausa.gameObject.SetActive(false);
         menuMuerte.gameObject.SetActive(false);
         menuVictoria.gameObject.SetActive(false);
@@ -97,26 +108,37 @@ public class GestionPantallasPartida : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (fin && !menuVictoria.activeSelf)
+        if (realizarUpdate)
         {
-            abrirMenuVictoria();
-        }
-        else
-        {
-            if (jugador.Vida <= 0 && !menuMuerte.activeSelf)
+            try
             {
-                abrirMenuMuerte();
-            }
-            if (Input.GetKeyDown(KeyCode.Escape) && !menuMuerte.activeSelf)
-            {
-                if (!pausa)
+                if (fin && !menuVictoria.activeSelf)
                 {
-                    pausar();
+                    abrirMenuVictoria();
                 }
                 else
                 {
-                    reiniciar();
+                    if (jugador.Vida <= 0 && !menuMuerte.activeSelf)
+                    {
+                        abrirMenuMuerte();
+                    }
+                    if (Input.GetKeyDown(KeyCode.Escape) && !menuMuerte.activeSelf)
+                    {
+                        if (!pausa)
+                        {
+                            pausar();
+                        }
+                        else
+                        {
+                            reiniciar();
+                        }
+                    }
                 }
+            }
+            catch (NullReferenceException)
+            {
+                realizarUpdate = false;
+                Debug.Log("Script GestionPantallasPartida: NullReferenceException en el update se procede a desactivar el update");
             }
         }
     }
@@ -136,8 +158,15 @@ public class GestionPantallasPartida : MonoBehaviour
     /// </summary>
     public void reiniciar()
     {
-        menuPausa.SetActive(false);
-        controles.SetActive(true);
+        try
+        {
+            menuPausa.SetActive(false);
+            controles.SetActive(true);
+        }
+        catch (NullReferenceException)
+        {
+
+        }
         Time.timeScale = 1f;
         pausa = false;
     }

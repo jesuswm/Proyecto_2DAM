@@ -47,3 +47,15 @@ Proyecto_2DAM
 	* Ahora cuando tenemos seleccionada una herramienta las casillas en las que no se pueda usar esa herramienta aumentaran su transparencia, por ejemplo, si tenemos seleccionada la herramienta enemigos todas las casillas en las que no podamos colocar un enemigo (Casillas asociadas a un obstáculo, suelo no traspasable o sin suelo asociado) aumentaran su transparencia (La comprobación se realiza en el Update() de PulsarCuadricula).
 	* Ahora al cambiar de una herramienta a otra se almacena el pincel actual de la herramienta que se estaba usando de esta forma al volver a la herramienta anterior se mantiene en ese pincel.
 3. Agregados nuevos pinceles a la herramienta obstaculos (se han agregado al enumerado eObstaculos, se han añadido sus respectivos GameObject a la carpeta Resources del proyecto y se ha actualizado las funciones bloquearEventosAlrrededor, guardarMapa y CargarMapaAlEditor de la clase CreadorDeCuadriculas para añadirlos).
+
+# 10/04/2020
+
+1. Se ha establecido la condición de victoria de los mapas personalizados.
+	* La condición de victoria para completar un mapa personalizado es eliminar a todos los enemigos del mapa.
+2. Mensaje de error al generar mapa
+	* Ahora si el mapa que intentamos cargar no cumple los requisitos para ser jugable se nos mostrara un mensaje explicando que el mapa no es jugable y por lo cual debe ser editado y especificando cuales son los requisitos para que un mapa sea jugable.
+	* Los requisitos para que el mapa sea jugable son los siguiente:
+		* En el mapa debe establecerse la posición de inicio del jugador.
+		* El mapa debe tener como mínimo un enemigo.
+3. Se han modificado algunos scripts antiguos (GestionPantallasPartida, Follow) para controlar posibles excepciones que podrían suceder al intentar generar mapas no jugables.
+4. Se ha añadido la traducción ha inglés de todos los textos del editor y los mensajes de error de forma que si la configuración del juego está en ingles todos los textos se mostrarán en inglés.

@@ -36,6 +36,22 @@
     <Seleccionidioma>Seleccione un idioma</Seleccionidioma>
     <ingles>Inglés</ingles>
     <español>Español</español>
+    <Cesped>Césped</Cesped>
+    <CespedCurva>Césped curva</CespedCurva>
+    <Agua>Agua</Agua>
+    <AguaBorde>Agua borde</AguaBorde>
+    <AguaEsquina>Agua esquina</AguaEsquina>
+    <Arbol>Árbol</Arbol>
+    <Tocon>Tocón</Tocon>
+    <RocaGrande>Roca grande</RocaGrande>
+    <Herramienta>Herramienta</Herramienta>
+    <GuardarMapa>Guardar</GuardarMapa>
+    <CargarMapa>Cargar</CargarMapa>
+    <EditarMapa>Editar mapa</EditarMapa>
+    <JugarMapa>Jugar mapa</JugarMapa>
+    <ErrorCargar>El mapa cargado no cumple alguna de las siguientes condiciones por lo cual no es juegable, para poder jugar en este mapa debe editarlo y hacer que cumpla las siguientes especificaciones :</ErrorCargar>
+    <CondicionMapa1>1. El mapa debe tener asignado el punto de aparición del jugador</CondicionMapa1>
+    <CondicionMapa2>2. El mapa debe tener al menos un enemigo puesto que la condición de victoria de un mapa personalizado es eliminar a todos los enemigos del mismo</CondicionMapa2>
   </Idioma>
 	<Idioma>
 		<id>Ingles</id>
@@ -73,5 +89,21 @@
     <Seleccionidioma>Select a language</Seleccionidioma>
     <ingles>English</ingles>
     <español>Spanish</español>
+    <Cesped>Grass</Cesped>
+    <CespedCurva>Curved grass</CespedCurva>
+    <Agua>Water</Agua>
+    <AguaBorde>Water edge</AguaBorde>
+    <AguaEsquina>Water corner</AguaEsquina>
+    <Arbol>Tree</Arbol>
+    <Tocon>Stump</Tocon>
+    <RocaGrande>Big rock</RocaGrande>
+    <Herramienta>Tool</Herramienta>
+    <GuardarMapa>Save</GuardarMapa>
+    <CargarMapa>Load</CargarMapa>
+    <EditarMapa>Edit map</EditarMapa>
+    <JugarMapa>Play map</JugarMapa>
+    <ErrorCargar>The loaded map does not meet any of the following conditions, so it is not playable, in order to play on this map you must edit it and make it meet the following specifications:</ErrorCargar>
+    <CondicionMapa1>1. The map must have the player's spawn point assigned</CondicionMapa1>
+    <CondicionMapa2>2. The map must have at least one enemy since the victory condition of a custom map is to eliminate all the enemies from it</CondicionMapa2>
   </Idioma>
 </Idiomas>

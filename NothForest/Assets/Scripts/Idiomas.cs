@@ -23,7 +23,7 @@ public enum Idiomas
 /// </summary>
 public enum palabras
 {
-    id, Menu,Jugar, Opciones, Salir, Vibracion, Sonido, VolverMenu, Continuar, CambiarIdioma, ReiniciarConf, Pausa, HasMuerto, Reintentar, Creditos, Estadisticas, Ayuda, EstadisticasAtaques, EstadisticasEnemigos, EstadisticasMaxTiempo, HasGanado, VolverJugar, Volver, ObjetivoTitulo, ObjetivoDescripcion, ControlesTitulo, ControlesMovimiento, ControlesAtaque, ControlesPausa, ControlesIndicadorVida, MenuAyudaTitulo, Graficos, Seleccionidioma, ingles, español
+    id, Menu,Jugar, Opciones, Salir, Vibracion, Sonido, VolverMenu, Continuar, CambiarIdioma, ReiniciarConf, Pausa, HasMuerto, Reintentar, Creditos, Estadisticas, Ayuda, EstadisticasAtaques, EstadisticasEnemigos, EstadisticasMaxTiempo, HasGanado, VolverJugar, Volver, ObjetivoTitulo, ObjetivoDescripcion, ControlesTitulo, ControlesMovimiento, ControlesAtaque, ControlesPausa, ControlesIndicadorVida, MenuAyudaTitulo, Graficos, Seleccionidioma, ingles, español, Cesped, CespedCurva, Agua, AguaBorde, AguaEsquina, Arbol, Tocon, RocaGrande, Herramienta, GuardarMapa, CargarMapa, EditarMapa, JugarMapa, ErrorCargar, CondicionMapa1, CondicionMapa2
 }
 /// <summary>
 /// Clase estática que se encarga de generar un diccionario para cada idioma en función al contenido de Idiomas.xml que se encuenta en los recursos del proyecto

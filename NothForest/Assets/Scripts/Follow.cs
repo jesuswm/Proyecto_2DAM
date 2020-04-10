@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -30,7 +31,14 @@ public class Follow : MonoBehaviour
     {
         if (player == null)
         {
-            player=GameObject.Find("Jugador").GetComponent<Rigidbody2D>();
+            try
+            {
+                player = GameObject.Find("Jugador").GetComponent<Rigidbody2D>();
+            }
+            catch (NullReferenceException)
+            {
+                Debug.Log("Script follow: No se encontro el gameObject \"Jugador\"");
+            }
         }
         RegistroConfiguracion conf = GuardarCargarConf.cargarConfiguracion();
         if(conf != null)
@@ -53,6 +61,9 @@ public class Follow : MonoBehaviour
     /// </summary>
     void Update()
     {
-        pos.position = new Vector3(player.position.x, player.position.y, pos.position.z);
+        if (player != null)
+        {
+            pos.position = new Vector3(player.position.x, player.position.y, pos.position.z);
+        }
     }
 }

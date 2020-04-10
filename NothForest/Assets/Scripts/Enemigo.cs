@@ -464,7 +464,11 @@ public class Enemigo : MonoBehaviour
                 {
                     if (Random.Range(0f, 1f) <= probBotin)
                     {
-                        Instantiate(botin[Random.Range(0, botin.Count)], new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                        GameObject enemig= Instantiate(botin[Random.Range(0, botin.Count)], new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                        if (enemig.GetComponent<Enemigo>() != null)
+                        {
+                            enemig.transform.parent = this.transform.parent;
+                        }
                     }
                 }
                 Instantiate(muerte, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
