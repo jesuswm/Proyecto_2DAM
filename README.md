@@ -59,3 +59,26 @@ Proyecto_2DAM
 		* El mapa debe tener como mínimo un enemigo.
 3. Se han modificado algunos scripts antiguos (GestionPantallasPartida, Follow) para controlar posibles excepciones que podrían suceder al intentar generar mapas no jugables.
 4. Se ha añadido la traducción ha inglés de todos los textos del editor y los mensajes de error de forma que si la configuración del juego está en ingles todos los textos se mostrarán en inglés.
+
+# 17/04/2020
+
+1. Se ha modificado el sistema de guardado de mapas permitiéndonos que existan múltiples mapas en el dispositivo.
+	* Ahora al pulsar el botón de guardar en el editor aparecerá una pantalla que nos permitirá ponerle un nombre al mapa, este nombre será único en caso de que ya exista un mapa con ese nombre este se sobrescribirá (En caso de que esto fuera ocurrir se le indicara al usuario con un mensaje de advertencia en color amarillo)
+	* La pantalla también nos permite cancelar el guardado volviendo a la ventana de edición sin realizar el guardado.
+	* Si durante la sesión de edición de mapa ya se ha guardado o cargado un mapa previamente por defecto al abrir el dialogo de guardar aparecerá el nombre de ese mapa, es decir si tú has guardado el mapa con un nombre “a” la próxima vez que abras el dialogo de guardar en esa misma sesión el nombre del mapa por defecto al guardar será “a”.
+	* Para el funcionamiento de esta pantalla se han añadido los siguientes scripts:
+		* TeclaTeclado: Clase que se encarga de gestionar el funcionamiento de las teclas del teclado que se muestra para poner nombre al mapa.
+		* BotonGuardarTeclado: Clase que gestiona el botón de guardado de la pantalla de guardado
+		* MensajeErrorNombreMapa: Clase que se encarga de actualizar el mensaje de error si el nombre dado al mapa no es válido o ya existe.
+2. Se ha modificado el sistema de cargado de mapas en el editor
+	* Ahora al pulsar el botón de cargar en el editor aparecerá una pantalla que nos permitirá seleccionar el mapa que deseamos cargar en el editor la selección del mapa se realiza mediante un dropdown que contiene todos los nombres de los mapas guardados previamente.
+	* La pantalla también nos permite cancelar la acción volviendo a la ventana de edición sin realizar ningún cargado.
+	* Ahora el botón de cargar solo estará habilitado si existe algún mapa guardado.
+	* Para el funcionamiento de esta pantalla se han añadido los siguientes scripts:
+		* PantallaCargar: Clase que se encarga de gestionar el funcionamiento de la pantalla de carga.
+3. Añadido botón de borrar mapa en el edito
+	* Este botón nos permite acceder una ventana en la que podremos seleccionar un mapa guardado y eliminarlo, la selección del mapa se realiza mediante un dropdown que contiene todos los nombres de los mapas guardados previamente.
+	* La pantalla también nos permite cancelar la acción volviendo a la ventana de edición sin borrar ningún mapa.
+	* El botón solo estará habilitado si existe algún mapa guardado.
+	* Para el funcionamiento de esta pantalla se han añadido los siguientes scripts:
+		* PantallaBorrado: Clase que se encarga de gestionar el funcionamiento de la pantalla de borrado.

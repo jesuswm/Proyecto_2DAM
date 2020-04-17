@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class GenerarMapa : MonoBehaviour
 {
+    public static string mapaActualPartida=null;
     /// <summary>
     /// GameObject con el tilemap sin colaider de la escena
     /// </summary>
@@ -86,62 +87,69 @@ public class GenerarMapa : MonoBehaviour
     /// </summary>
     public void generarMapa()
     {
-        tilemapSuelo = terrenoTraspasable.GetComponent<Tilemap>();
-        tilemapMuro = terrenoNoTraspasable.GetComponent<Tilemap>();
-        generarLimitesMapa();
-        List<ObjetoMapa> objetos = CrearArchivo.cargarObjetosMapa();
-        Mapa map = new Mapa(objetos);
-        foreach (TileMapa terreno in map.TerrenoTraspasable)
+        if (mapaActualPartida != null)
         {
-            if (terreno.Traspasable)
+            tilemapSuelo = terrenoTraspasable.GetComponent<Tilemap>();
+            tilemapMuro = terrenoNoTraspasable.GetComponent<Tilemap>();
+            generarLimitesMapa();
+            List<ObjetoMapa> objetos = CrearArchivo.cargarObjetosMapa(mapaActualPartida);
+            Mapa map = new Mapa(objetos);
+            foreach (TileMapa terreno in map.TerrenoTraspasable)
             {
-                tilemapSuelo.SetTile(new Vector3Int(terreno.X, terreno.Y, 0), Tiles.obtenerTile(terreno.Tile));
-            }
-            else
-            {
-                tilemapMuro.SetTile(new Vector3Int(terreno.X, terreno.Y, 0), Tiles.obtenerTile((eTiles)terreno.Tile));
-            }
-        }
-        foreach (JugadorMapa jugador in map.Jugador)
-        {
-            Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(jugador.X, jugador.Y, jugador.Z));
-            vec = new Vector3(vec.x + 0.08f, vec.y + 0.16f, vec.z);
-            Instantiate(Resources.Load<GameObject>("Jugador"), vec, Quaternion.identity).name="Jugador";
-            jugable = true;
-            break;
-        }
-        foreach (ObjetoMapa arbusto in map.Arbusto)
-        {
-            Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(arbusto.X, arbusto.Y, arbusto.Z));
-            vec = new Vector3(vec.x + 0.08f, vec.y + 0.08f, vec.z);
-            Instantiate(Resources.Load<GameObject>("Arbusto"), vec, Quaternion.identity);
-        }
-        if (jugable)
-        {
-            foreach (EnemigoMapa enemigos in map.Enemigo)
-            {
-
-                Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(enemigos.X, enemigos.Y, enemigos.Z));
-                vec = new Vector3(vec.x + 0.08f, vec.y + 0.16f, vec.z);
-                if (Enemigos.obtenerEnemigo(enemigos.TipoEnemigo) != null)
+                if (terreno.Traspasable)
                 {
-                    GameObject enemi=Instantiate(Enemigos.obtenerEnemigo((eEnemigo)enemigos.TipoEnemigo), vec, Quaternion.identity);
-                    enemi.transform.parent = ObjetosEnemigos.transform;
+                    tilemapSuelo.SetTile(new Vector3Int(terreno.X, terreno.Y, 0), Tiles.obtenerTile(terreno.Tile));
+                }
+                else
+                {
+                    tilemapMuro.SetTile(new Vector3Int(terreno.X, terreno.Y, 0), Tiles.obtenerTile((eTiles)terreno.Tile));
                 }
             }
-        }
-        foreach (ObstaculosMapa obstaculo in map.Obstaculos)
-        {
-
-            Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(obstaculo.X, obstaculo.Y, obstaculo.Z));
-            vec = new Vector3(vec.x + 0.16f, vec.y + 0.16f, vec.z);
-            if (Obstaculos.obtenerObstaculo(obstaculo.TipoObstaculo) != null)
+            foreach (JugadorMapa jugador in map.Jugador)
             {
-                Instantiate(Obstaculos.obtenerObstaculo(obstaculo.TipoObstaculo), vec, Quaternion.identity);
+                Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(jugador.X, jugador.Y, jugador.Z));
+                vec = new Vector3(vec.x + 0.08f, vec.y + 0.16f, vec.z);
+                Instantiate(Resources.Load<GameObject>("Jugador"), vec, Quaternion.identity).name = "Jugador";
+                jugable = true;
+                break;
+            }
+            foreach (ObjetoMapa arbusto in map.Arbusto)
+            {
+                Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(arbusto.X, arbusto.Y, arbusto.Z));
+                vec = new Vector3(vec.x + 0.08f, vec.y + 0.08f, vec.z);
+                Instantiate(Resources.Load<GameObject>("Arbusto"), vec, Quaternion.identity);
+            }
+            if (jugable)
+            {
+                foreach (EnemigoMapa enemigos in map.Enemigo)
+                {
+
+                    Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(enemigos.X, enemigos.Y, enemigos.Z));
+                    vec = new Vector3(vec.x + 0.08f, vec.y + 0.16f, vec.z);
+                    if (Enemigos.obtenerEnemigo(enemigos.TipoEnemigo) != null)
+                    {
+                        GameObject enemi = Instantiate(Enemigos.obtenerEnemigo((eEnemigo)enemigos.TipoEnemigo), vec, Quaternion.identity);
+                        enemi.transform.parent = ObjetosEnemigos.transform;
+                    }
+                }
+            }
+            foreach (ObstaculosMapa obstaculo in map.Obstaculos)
+            {
+
+                Vector3 vec = tilemapMuro.CellToWorld(new Vector3Int(obstaculo.X, obstaculo.Y, obstaculo.Z));
+                vec = new Vector3(vec.x + 0.16f, vec.y + 0.16f, vec.z);
+                if (Obstaculos.obtenerObstaculo(obstaculo.TipoObstaculo) != null)
+                {
+                    Instantiate(Obstaculos.obtenerObstaculo(obstaculo.TipoObstaculo), vec, Quaternion.identity);
+                }
+            }
+            Debug.Log("childCount: " + ObjetosEnemigos.transform.childCount);
+            if (ObjetosEnemigos.transform.childCount == 0)
+            {
+                jugable = false;
             }
         }
-        Debug.Log("childCount: "+ObjetosEnemigos.transform.childCount);
-        if (ObjetosEnemigos.transform.childCount == 0)
+        else
         {
             jugable = false;
         }

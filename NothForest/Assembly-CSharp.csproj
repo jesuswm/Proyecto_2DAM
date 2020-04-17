@@ -66,13 +66,17 @@
     <Compile Include="Assets\Scripts\ControlAccelerometer.cs" />
     <Compile Include="Assets\Scripts\DamageJugador.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\BotonAtacarAutoGenerado.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\BotonGuardarTeclado.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\CreadorDeCuadriculas.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\CrearArchivo.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\Estaticas\Enemigos.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\Estaticas\Obstaculos.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\Estaticas\Tiles.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\GenerarMapa.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\MensajeErrorNombreMapa.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\MoverCamara.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\PantallaBorrado.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\PantallaCargar.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\PulsarCuadricula.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\SeleccionDeHerramienta.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\Serializables\ArbustoMapa.cs" />
@@ -82,6 +86,7 @@
     <Compile Include="Assets\Scripts\EditorMapas\Serializables\ObjetoMapa.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\Serializables\ObstaculosMapa.cs" />
     <Compile Include="Assets\Scripts\EditorMapas\Serializables\TileMapa.cs" />
+    <Compile Include="Assets\Scripts\EditorMapas\TeclaTeclado.cs" />
     <Compile Include="Assets\Scripts\Enemigo.cs" />
     <Compile Include="Assets\Scripts\Estadisticas.cs" />
     <Compile Include="Assets\Scripts\Follow.cs" />

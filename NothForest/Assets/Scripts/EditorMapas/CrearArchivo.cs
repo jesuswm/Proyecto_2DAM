@@ -52,12 +52,14 @@ public static class CrearArchivo
         
     }
     /// <summary>
-    /// Función que lee del archivo mapa.dat los datos de un mapa
+    /// Función que lee el archivo .map pasado como parámetro y devuelve los datos del mapa guardado
     /// </summary>
+    /// <param name="nombre">Nombre del archivo .map que queremos cargar</param>
     /// <returns>Devuelve una lista de <see cref="ObjetoMapa"/> que contiene todos los objetos que tiene el mapa</returns>
-    public static List<ObjetoMapa> cargarObjetosMapa()
+
+    public static List<ObjetoMapa> cargarObjetosMapa(string nombre)
     {
-        string patch = Application.persistentDataPath + "/mapa.dat";
+        string patch = Application.persistentDataPath + "/"+ nombre+".map";
         if (File.Exists(patch))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -71,6 +73,21 @@ public static class CrearArchivo
             Debug.Log("No existe el archivo");
             return null;
         }
-
+    }
+    /// <summary>
+    /// Función que elimina el archivo de de un mapa .map 
+    /// </summary>
+    /// <param name="nombre">nombre del mapa que queremos borrar</param>
+    public static void BorrarArchivoMapa(string nombre)
+    {
+        string patch = Application.persistentDataPath + "/" + nombre + ".map";
+        if (File.Exists(patch))
+        {
+            File.Delete(patch);
+        }
+        else
+        {
+            Debug.Log("No existe el archivo confi.dat");
+        }
     }
 }

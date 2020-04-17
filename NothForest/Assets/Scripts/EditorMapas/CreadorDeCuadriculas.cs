@@ -11,7 +11,7 @@ using UnityEngine.UI;
 /// </summary>
 public class CreadorDeCuadriculas : MonoBehaviour
 {
-    
+    public static string mapaActualEditor=null;
     /// <summary>
     /// Numero de celdas que componen una fila del mapa
     /// </summary>
@@ -28,6 +28,9 @@ public class CreadorDeCuadriculas : MonoBehaviour
     /// Lista de celdas del editor
     /// </summary>
     List<GameObject> cuadriculas=new List<GameObject>();
+    GameObject pantallaGuardar;
+    GameObject pantallaCargar;
+    GameObject pantallaBorrado;
     GameObject PanelHerramientas;
     GenerarMapa generadorMapa;
     /// <summary>
@@ -87,10 +90,71 @@ public class CreadorDeCuadriculas : MonoBehaviour
         Debug.Log("MapaGuardado");
     }
     /// <summary>
+    /// Función que guarda el mapa actual del editor en un archivo con el nombre pasado como parametro
+    /// <param name = "nombre" > Nombre con el que se guardara el mapa</param>
+    /// </summary>
+    public void guardarMapa(string nombre)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string patch = Application.persistentDataPath + "/"+nombre+".map";
+        FileStream stream = new FileStream(patch, FileMode.Create);
+        List<ObjetoMapa> objetos = new List<ObjetoMapa>();
+        foreach (GameObject gameObject in cuadriculas)
+        {
+            RectTransform rectTrans = gameObject.GetComponent<RectTransform>();
+            if (gameObject.GetComponent<PulsarCuadricula>().Activo)
+            {
+                rectTrans = gameObject.GetComponent<RectTransform>();
+                objetos.Add(new TileMapa(tilemap.WorldToCell(rectTrans.position).x,
+                    tilemap.WorldToCell(rectTrans.position).y, 0, gameObject.GetComponent<PulsarCuadricula>().Tile, gameObject.GetComponent<PulsarCuadricula>().Traspasable));
+            }
+            switch (gameObject.GetComponent<PulsarCuadricula>().Evento)
+            {
+                case eventosMapa.arbusto:
+                    objetos.Add(new ArbustoMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0));
+                    break;
+                case eventosMapa.jugador:
+                    objetos.Add(new JugadorMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0));
+                    break;
+                case eventosMapa.moco:
+                    objetos.Add(new EnemigoMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0, eEnemigo.Moco));
+                    break;
+                case eventosMapa.tronquito:
+                    objetos.Add(new EnemigoMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0, eEnemigo.Tronquito));
+                    break;
+                case eventosMapa.orco:
+                    objetos.Add(new EnemigoMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0, eEnemigo.Orco));
+                    break;
+                case eventosMapa.arbol:
+                    objetos.Add(new ObstaculosMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0, eObstaculos.Arbol));
+                    break;
+                case eventosMapa.tocon:
+                    objetos.Add(new ObstaculosMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0, eObstaculos.Tocon));
+                    break;
+                case eventosMapa.rocaGrande:
+                    objetos.Add(new ObstaculosMapa(tilemap.WorldToCell(rectTrans.position).x,
+                        tilemap.WorldToCell(rectTrans.position).y, 0, eObstaculos.RocaGrande));
+                    break;
+            }
+        }
+        formatter.Serialize(stream, objetos);
+        stream.Close();
+        Debug.Log("MapaGuardado");
+    }
+    /// <summary>
     /// Función que carga la scena donde se generan loa mapas apartir de un archivo.
     /// </summary>
     public void JugarMapa()
     {
+        GenerarMapa.mapaActualPartida = CreadorDeCuadriculas.mapaActualEditor;
+        CreadorDeCuadriculas.mapaActualEditor = null;
         SceneManager.LoadScene(3);
         //guardarMapa();
         //PanelHerramientas.SetActive(false);
@@ -179,7 +243,7 @@ public class CreadorDeCuadriculas : MonoBehaviour
         }
     }
     /// <summary>
-    /// Función que carga el mapa guardado en el archivo mapa.dat y lo carga en el editor
+    /// Función que busca el <see cref="mapaActualEditor"/> y lo carga en el editor
     /// </summary>
     public void CargarMapaAlEditor()
     {
@@ -187,7 +251,8 @@ public class CreadorDeCuadriculas : MonoBehaviour
         GenerarCuadriculas();
         Toggle tsuelo= GameObject.Find("Hsuelo").GetComponent<Toggle>();
         tsuelo.isOn = true;
-        Mapa mapa = new Mapa(CrearArchivo.cargarObjetosMapa());
+        //Mapa mapa = new Mapa(CrearArchivo.cargarObjetosMapa());
+        Mapa mapa = new Mapa(CrearArchivo.cargarObjetosMapa(mapaActualEditor));
         ObjetoMapa evento=null;
         List<TileMapa> suelos = new List<TileMapa>();
         suelos.AddRange(mapa.TerrenoTraspasable);
@@ -328,14 +393,52 @@ public class CreadorDeCuadriculas : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
+    /// <summary>
+    /// Función que abre o cierra el menú de guardar mapa
+    /// </summary>
+    public void AbrirCerrarMenuGuardar()
+    {
+        pantallaGuardar.SetActive(!pantallaGuardar.activeSelf);
+    }
+    public void AbrirCerrarMenuCargar()
+    {
+        pantallaCargar.SetActive(!pantallaCargar.activeSelf);
+    }
+    public void AbrirCerrarMenuBorrado()
+    {
+        pantallaBorrado.SetActive(!pantallaBorrado.activeSelf);
+    }
+    public void ComprobarSiExistenMapasGuardados()
+    {
+        List<string> nombres = new List<string>();
+        DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath);
+        FileInfo[] info = dir.GetFiles("*.map");
+        if (info.Length > 0)
+        {
+            GameObject.Find("Cargar").GetComponent<Button>().interactable = true;
+            GameObject.Find("BorrarMapas").GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            GameObject.Find("Cargar").GetComponent<Button>().interactable = false;
+            GameObject.Find("BorrarMapas").GetComponent<Button>().interactable = false;
+        }
+    }
     void Start()
     {
+        GenerarMapa.mapaActualPartida = null;
         generadorMapa = GameObject.Find("Grid").GetComponent<GenerarMapa>();
         PanelHerramientas = GameObject.Find("Panel");
+        pantallaGuardar = GameObject.Find("PantallaGuardar");
+        pantallaCargar = GameObject.Find("PantallaCargar");
+        pantallaBorrado = GameObject.Find("PantallaBorrar");
+        pantallaGuardar.SetActive(false);
+        pantallaCargar.SetActive(false);
+        pantallaBorrado.SetActive(false);
+        ComprobarSiExistenMapasGuardados();
         GenerarCuadriculas();
         //rectTrans.localPosition= new Vector3(0, 0, 0);
     }
-
     // Update is called once per frame
     void Update()
     {
