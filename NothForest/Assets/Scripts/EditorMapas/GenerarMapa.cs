@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 /// <summary>
@@ -153,6 +154,12 @@ public class GenerarMapa : MonoBehaviour
         {
             jugable = false;
         }
+    }
+    public void editarMapaActual()
+    {
+        CreadorDeCuadriculas.mapaActualEditor = GenerarMapa.mapaActualPartida;
+        GenerarMapa.mapaActualPartida = null;
+        SceneManager.LoadScene(2);
     }
     void Start()
     {

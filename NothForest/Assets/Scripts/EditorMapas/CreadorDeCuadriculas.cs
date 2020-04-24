@@ -436,7 +436,14 @@ public class CreadorDeCuadriculas : MonoBehaviour
         pantallaCargar.SetActive(false);
         pantallaBorrado.SetActive(false);
         ComprobarSiExistenMapasGuardados();
-        GenerarCuadriculas();
+        if (mapaActualEditor == null)
+        {
+            GenerarCuadriculas();
+        }
+        else
+        {
+            CargarMapaAlEditor();
+        }
         //rectTrans.localPosition= new Vector3(0, 0, 0);
     }
     // Update is called once per frame

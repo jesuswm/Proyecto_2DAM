@@ -17,6 +17,7 @@ public class MoverCamara : MonoBehaviour
     bool zoom=false;
     public bool activo = true;
     GameObject PanelHerramientas;
+    List <GameObject> menus=new List<GameObject>();
     float maxZom = 3.5f;
     float minZom = 0.5f;
     Vector3 posicionInicio;
@@ -25,88 +26,105 @@ public class MoverCamara : MonoBehaviour
     void Start()
     {
         PanelHerramientas = GameObject.Find("Panel");
+        menus.Add(GameObject.Find("PantallaGuardar"));
+        menus.Add(GameObject.Find("PantallaCargar"));
+        menus.Add(GameObject.Find("PantallaBorrar"));
     }
     void Update()
     {
-        if (Application.platform != RuntimePlatform.Android)
+        foreach(GameObject menu in menus)
         {
-            if (!PanelHerramientas.activeSelf || GameObject.Find("TogleHerramientas").GetComponent<SeleccionDeHerramienta>().herramientaActual == eHerramientas.mover)
+            if (menu.activeSelf)
             {
-                if (Input.GetMouseButtonDown(0))
+                activo = false;
+            }
+        }
+        if (activo)
+        {
+            if (Application.platform != RuntimePlatform.Android)
+            {
+                if (!PanelHerramientas.activeSelf || GameObject.Find("TogleHerramientas").GetComponent<SeleccionDeHerramienta>().herramientaActual == eHerramientas.mover)
                 {
-                    posicionInicio = transform.position;
-                    Origen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-                }
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        posicionInicio = transform.position;
+                        Origen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+                    }
 
-                if (Input.GetMouseButton(0))
-                {
-                    Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition) - Origen;
-                    camera_GameObject.transform.position = posicionInicio + -pos * Velocidad;
+                    if (Input.GetMouseButton(0))
+                    {
+                        Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition) - Origen;
+                        camera_GameObject.transform.position = posicionInicio + -pos * Velocidad;
+                    }
+                    if (Input.GetAxis("Mouse ScrollWheel") > 0f && camera_GameObject.GetComponent<Camera>().orthographicSize > minZom)
+                    {
+                        camera_GameObject.GetComponent<Camera>().orthographicSize = camera_GameObject.GetComponent<Camera>().orthographicSize - 0.1f;
+                    }
+                    else if (Input.GetAxis("Mouse ScrollWheel") < 0f && camera_GameObject.GetComponent<Camera>().orthographicSize < maxZom)
+                    {
+                        camera_GameObject.GetComponent<Camera>().orthographicSize = camera_GameObject.GetComponent<Camera>().orthographicSize + 0.1f;
+                    }
                 }
-                if (Input.GetAxis("Mouse ScrollWheel") > 0f && camera_GameObject.GetComponent<Camera>().orthographicSize > minZom) 
+            }
+            else
+            {
+                if (!PanelHerramientas.activeSelf || GameObject.Find("TogleHerramientas").GetComponent<SeleccionDeHerramienta>().herramientaActual == eHerramientas.mover)
                 {
-                    camera_GameObject.GetComponent<Camera>().orthographicSize= camera_GameObject.GetComponent<Camera>().orthographicSize-0.1f;
+                    if (Input.touchCount == 0 && zoom)
+                    {
+                        zoom = false;
+                    }
+
+                    if (Input.touchCount == 1)
+                    {
+                        if (!zoom)
+                        {
+                            if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                            {
+                                Vector2 nuevaPosicion = GetWorldPosition();
+                                Vector2 PositionDifference = nuevaPosicion - puntoInicio;
+                                camera_GameObject.transform.Translate(-PositionDifference);
+                            }
+                            puntoInicio = GetWorldPosition();
+                        }
+                    }
+                    else if (Input.touchCount == 2)
+                    {
+                        if (Input.GetTouch(1).phase == TouchPhase.Moved)
+                        {
+                            zoom = true;
+
+                            finArrastre = GetWorldPositionDedo(1);
+                            Vector2 diferenciaEntrePosiciones = finArrastre - inicioArrastre;
+
+                            if (Vector2.Distance(finArrastre, posicionDedo0) < DistanciaEntreDedos)
+                            {
+                                if (camera_GameObject.GetComponent<Camera>().orthographicSize + diferenciaEntrePosiciones.magnitude <= maxZom)
+                                {
+                                    camera_GameObject.GetComponent<Camera>().orthographicSize += (diferenciaEntrePosiciones.magnitude);
+                                }
+                            }
+
+                            if (Vector2.Distance(finArrastre, posicionDedo0) >= DistanciaEntreDedos)
+                            {
+                                camera_GameObject.GetComponent<Camera>().orthographicSize -= (diferenciaEntrePosiciones.magnitude);
+                            }
+
+                            DistanciaEntreDedos = Vector2.Distance(finArrastre, posicionDedo0);
+                        }
+                        inicioArrastre = GetWorldPositionDedo(1);
+                        posicionDedo0 = GetWorldPositionDedo(0);
+                    }
                 }
-                else if (Input.GetAxis("Mouse ScrollWheel") < 0f && camera_GameObject.GetComponent<Camera>().orthographicSize < maxZom) 
+                else
                 {
-                    camera_GameObject.GetComponent<Camera>().orthographicSize = camera_GameObject.GetComponent<Camera>().orthographicSize + 0.1f;
+                    zoom = false;
                 }
             }
         }
         else
         {
-            if (!PanelHerramientas.activeSelf || GameObject.Find("TogleHerramientas").GetComponent<SeleccionDeHerramienta>().herramientaActual == eHerramientas.mover)
-            {
-                if (Input.touchCount == 0 && zoom)
-                {
-                    zoom = false;
-                }
-
-                if (Input.touchCount == 1)
-                {
-                    if (!zoom)
-                    {
-                        if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                        {
-                            Vector2 nuevaPosicion = GetWorldPosition();
-                            Vector2 PositionDifference = nuevaPosicion - puntoInicio;
-                            camera_GameObject.transform.Translate(-PositionDifference);
-                        }
-                        puntoInicio = GetWorldPosition();
-                    }
-                }
-                else if (Input.touchCount == 2)
-                {
-                    if (Input.GetTouch(1).phase == TouchPhase.Moved)
-                    {
-                        zoom = true;
-
-                        finArrastre = GetWorldPositionDedo(1);
-                        Vector2 diferenciaEntrePosiciones = finArrastre - inicioArrastre;
-
-                        if (Vector2.Distance(finArrastre, posicionDedo0) < DistanciaEntreDedos)
-                        {
-                            if (camera_GameObject.GetComponent<Camera>().orthographicSize + diferenciaEntrePosiciones.magnitude <= maxZom)
-                            {
-                                camera_GameObject.GetComponent<Camera>().orthographicSize += (diferenciaEntrePosiciones.magnitude);
-                            }
-                        }
-
-                        if (Vector2.Distance(finArrastre, posicionDedo0) >= DistanciaEntreDedos)
-                        {
-                            camera_GameObject.GetComponent<Camera>().orthographicSize -= (diferenciaEntrePosiciones.magnitude);
-                        }
-
-                        DistanciaEntreDedos = Vector2.Distance(finArrastre, posicionDedo0);
-                    }
-                    inicioArrastre = GetWorldPositionDedo(1);
-                    posicionDedo0 = GetWorldPositionDedo(0);
-                }
-            }
-            else
-            {
-                zoom = false;
-            }
+            activo = true;
         }
     }
 

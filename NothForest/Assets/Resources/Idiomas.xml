@@ -52,6 +52,13 @@
     <ErrorCargar>El mapa cargado no cumple alguna de las siguientes condiciones por lo cual no es juegable, para poder jugar en este mapa debe editarlo y hacer que cumpla las siguientes especificaciones :</ErrorCargar>
     <CondicionMapa1>1. El mapa debe tener asignado el punto de aparición del jugador</CondicionMapa1>
     <CondicionMapa2>2. El mapa debe tener al menos un enemigo puesto que la condición de victoria de un mapa personalizado es eliminar a todos los enemigos del mismo</CondicionMapa2>
+    <BorrarMapa>Borrar mapas</BorrarMapa>
+    <Cancelar>Cancelar</Cancelar>
+    <MensajeCargar>Seleccione el mapa que desea cargar en el editor</MensajeCargar>
+    <MensajeGuardado>Introduce un nombre para el mapa de un máximo 12 caracteres</MensajeGuardado>
+    <GuardadoNombreNoValido>Nombre no válido</GuardadoNombreNoValido>
+    <GuardadoNombreYaExiste>Ya existe un mapa con ese nombre si se guarda ahora se sobrescribirá</GuardadoNombreYaExiste>
+    <MensajeBorrar>Seleccione el mapa que desea borrar</MensajeBorrar>
   </Idioma>
 	<Idioma>
 		<id>Ingles</id>
@@ -105,5 +112,12 @@
     <ErrorCargar>The loaded map does not meet any of the following conditions, so it is not playable, in order to play on this map you must edit it and make it meet the following specifications:</ErrorCargar>
     <CondicionMapa1>1. The map must have the player's spawn point assigned</CondicionMapa1>
     <CondicionMapa2>2. The map must have at least one enemy since the victory condition of a custom map is to eliminate all the enemies from it</CondicionMapa2>
+    <BorrarMapa>Delete maps</BorrarMapa>
+    <Cancelar>Cancel</Cancelar>
+    <MensajeCargar>Select the map you want to load in the editor</MensajeCargar>
+    <MensajeGuardado>Enter a name for the map of 12 characters maximum</MensajeGuardado>
+    <GuardadoNombreNoValido>Invalid name</GuardadoNombreNoValido>
+    <GuardadoNombreYaExiste>A map with that name already exists if saved now it will be overwritten</GuardadoNombreYaExiste>
+    <MensajeBorrar>Select the map you want to delete</MensajeBorrar>
   </Idioma>
 </Idiomas>

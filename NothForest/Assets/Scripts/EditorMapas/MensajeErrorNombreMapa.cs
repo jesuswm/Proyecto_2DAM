@@ -65,13 +65,15 @@ public class MensajeErrorNombreMapa : MonoBehaviour
         if (cuadroTexto.text.Trim() == "")
         {
             textoError.color = Color.red;
-            textoError.text = "Nombre no válido";
+            //textoError.text = "Nombre no válido";
+            textoError.text = Palabras.getPalabra(palabras.GuardadoNombreNoValido);
             botonGuardar.interactable = false;
         }
         else if (nombresMapas.Contains(cuadroTexto.text))
         {
             textoError.color = Color.yellow;
-            textoError.text = "Ya existe un mapa con ese nombre si se guarda ahora se sobrescribirá";
+            //textoError.text = "Ya existe un mapa con ese nombre si se guarda ahora se sobrescribirá";
+            textoError.text = Palabras.getPalabra(palabras.GuardadoNombreYaExiste);
             botonGuardar.interactable = true;
         }
         else

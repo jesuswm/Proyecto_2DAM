@@ -82,3 +82,12 @@ Proyecto_2DAM
 	* El botón solo estará habilitado si existe algún mapa guardado.
 	* Para el funcionamiento de esta pantalla se han añadido los siguientes scripts:
 		* PantallaBorrado: Clase que se encarga de gestionar el funcionamiento de la pantalla de borrado.
+		
+		# 24/04/2020
+
+1. Se ha agregado a la ventana de error al generar mapa un nuevo botón de “editar” al pulsarlo se abrirá el editor de mapas con el mapa en cuestión listo para ser editado.
+2. Se han arreglado múltiples errores:
+	* Arreglado un error en el teclado mostrado para ponerle un nombre al mapa.
+	* Arreglado un error por el cual si abríamos una de las nuevas pantallas agregadas al editor en la última actualización (cargar mapa, guardar mapa y borrar mapa) mientras la herramienta actual en el editor era MoverCamara se seguía permitiendo mover y hacer zoom cuando no se debería.
+	* Arreglado un error de colisiones al generar el mapa que podía derivar a la colocación del jugador en zonas no traspasables.
+3. Se ha añadido la traducción ha inglés de las nuevas pantallas agregadas en la anterior actualización (cargar mapa, guardar mapa y borrar mapa) de forma que si la configuración del juego está en ingles todos los textos se mostrarán en inglés.
