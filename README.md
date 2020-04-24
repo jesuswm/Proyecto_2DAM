@@ -83,7 +83,7 @@ Proyecto_2DAM
 	* Para el funcionamiento de esta pantalla se han añadido los siguientes scripts:
 		* PantallaBorrado: Clase que se encarga de gestionar el funcionamiento de la pantalla de borrado.
 		
-		# 24/04/2020
+# 24/04/2020
 
 1. Se ha agregado a la ventana de error al generar mapa un nuevo botón de “editar” al pulsarlo se abrirá el editor de mapas con el mapa en cuestión listo para ser editado.
 2. Se han arreglado múltiples errores:
