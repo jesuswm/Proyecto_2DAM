@@ -11,6 +11,9 @@ using UnityEngine.UI;
 /// </summary>
 public class CreadorDeCuadriculas : MonoBehaviour
 {
+    /// <summary>
+    /// Variable estática que especifica el nombre del mapa cargado actualmente en el editor
+    /// </summary>
     public static string mapaActualEditor=null;
     /// <summary>
     /// Numero de celdas que componen una fila del mapa
@@ -156,6 +159,19 @@ public class CreadorDeCuadriculas : MonoBehaviour
         GenerarMapa.mapaActualPartida = CreadorDeCuadriculas.mapaActualEditor;
         CreadorDeCuadriculas.mapaActualEditor = null;
         SceneManager.LoadScene(3);
+        //guardarMapa();
+        //PanelHerramientas.SetActive(false);
+        //generadorMapa.generarMapa();
+        //Destroy(this.transform.gameObject);
+    }
+    /// <summary>
+    /// Función que carga la scena de menu de incio y establece a null el valor de <see cref="mapaActualEditor"/> y el <see cref="GenerarMapa.mapaActualPartida"/>.
+    /// </summary>
+    public void VolverMenuPrincipal()
+    {
+        GenerarMapa.mapaActualPartida = null;
+        CreadorDeCuadriculas.mapaActualEditor = null;
+        SceneManager.LoadScene(0);
         //guardarMapa();
         //PanelHerramientas.SetActive(false);
         //generadorMapa.generarMapa();
@@ -400,14 +416,23 @@ public class CreadorDeCuadriculas : MonoBehaviour
     {
         pantallaGuardar.SetActive(!pantallaGuardar.activeSelf);
     }
+    /// <summary>
+    /// Función que abre o cierra el menú de cargar mapa
+    /// </summary>
     public void AbrirCerrarMenuCargar()
     {
         pantallaCargar.SetActive(!pantallaCargar.activeSelf);
     }
+    /// <summary>
+    /// Función que abre o cierra el menú de borrar mapa
+    /// </summary>
     public void AbrirCerrarMenuBorrado()
     {
         pantallaBorrado.SetActive(!pantallaBorrado.activeSelf);
     }
+    /// <summary>
+    /// Función que comprueba si existen mapas guardados en caso de que no exista desabilita los botones de cargar y borrar el editor 
+    /// </summary>
     public void ComprobarSiExistenMapasGuardados()
     {
         List<string> nombres = new List<string>();

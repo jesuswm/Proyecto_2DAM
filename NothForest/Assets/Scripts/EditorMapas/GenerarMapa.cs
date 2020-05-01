@@ -9,6 +9,9 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class GenerarMapa : MonoBehaviour
 {
+    /// <summary>
+    /// Nombre del mapa que se está cargando actualmente en la escena
+    /// </summary>
     public static string mapaActualPartida=null;
     /// <summary>
     /// GameObject con el tilemap sin colaider de la escena
@@ -155,6 +158,9 @@ public class GenerarMapa : MonoBehaviour
             jugable = false;
         }
     }
+    /// <summary>
+    /// Función que habre la scena del editor de mapa con el mapa especificado en <see cref="mapaActualPartida"/> listo para editar
+    /// </summary>
     public void editarMapaActual()
     {
         CreadorDeCuadriculas.mapaActualEditor = GenerarMapa.mapaActualPartida;

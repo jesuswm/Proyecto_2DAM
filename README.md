@@ -91,3 +91,20 @@ Proyecto_2DAM
 	* Arreglado un error por el cual si abríamos una de las nuevas pantallas agregadas al editor en la última actualización (cargar mapa, guardar mapa y borrar mapa) mientras la herramienta actual en el editor era MoverCamara se seguía permitiendo mover y hacer zoom cuando no se debería.
 	* Arreglado un error de colisiones al generar el mapa que podía derivar a la colocación del jugador en zonas no traspasables.
 3. Se ha añadido la traducción ha inglés de las nuevas pantallas agregadas en la anterior actualización (cargar mapa, guardar mapa y borrar mapa) de forma que si la configuración del juego está en ingles todos los textos se mostrarán en inglés.
+
+# 1/05/2020
+
+1. Rediseñado el menú principal:
+	* Se ha reestructurado la posición de los botones y su tamaño en algunos casos.
+	* Se ha agregado un botón para jugar un mapa personalizado.
+		* El botón solo estará habilitado si existe algún mapa guardado.
+		* Al pulsar el botón se mostrará una pantalla para seleccionar el mapa (Esta pantalla también se ha añadido en esta versión) personalizado que deseamos jugar.
+	* Se ha agregado un botón para acceder al editor.
+2. Modificaciones en la barra de herramientas del editor:
+	* Se ha agregado un botón de volver al menú principal
+	* Se ha aumentado ligeramente el tamaño de la barra de herramientas.
+	* Cambiado el color de la barra de herramientas y se aumentado su opacidad para facilitar su visualización.
+3. Arreglo de errores:
+	* Arreglado un que causaba que en algunos dispositivos la ventana de guardar mapa no se visualizara de forma correcta.
+	* Arreglado un error por el cual en la pantalla de error al cargar mapa los botones se visualizaban de forma incorrecta.
+4. Eliminados los botones provisionales de acceso al editor de mapas y jugar mapa personalizado que se encontraban en el menú de opciones.

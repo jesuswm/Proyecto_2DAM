@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -66,6 +67,10 @@ public class MenuInicio : MonoBehaviour
     /// </summary>
     GameObject menuAyuda;
     /// <summary>
+    /// Objeto que contenga el menú de selección de mapa.
+    /// </summary>
+    GameObject menuSeleccionarMapa;
+    /// <summary>
     /// Estadísticas guardadas actualmente
     /// </summary>
     RegistroEstadisticas estadisticas;
@@ -85,6 +90,24 @@ public class MenuInicio : MonoBehaviour
         menuAyuda = GameObject.Find("MenuAyuda");
         menuAyudaObjetivo = GameObject.Find("AyudaObjetivo");
         menuAyudaControles = GameObject.Find("AyudaControles");
+        menuSeleccionarMapa = GameObject.Find("MenuSeleccionMapa");
+        List<Dropdown.OptionData> listsMapa = new List<Dropdown.OptionData>();
+        DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath);
+        FileInfo[] info = dir.GetFiles("*.map");
+        if (info.Length <= 0)
+        {
+            GameObject.Find("BtJugarCustom").GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            foreach (FileInfo fileInfo in info)
+            {
+                listsMapa.Add(new Dropdown.OptionData(fileInfo.Name.Substring(0, fileInfo.Name.Length - 4)));
+            }
+            GameObject.Find("DropdownMapas").GetComponent<Dropdown>().options = listsMapa;
+            GameObject.Find("DropdownMapas").GetComponent<Dropdown>().value = 0;
+        }
+        menuSeleccionarMapa.SetActive(false);
         menuAyuda.SetActive(false);
         menuAyudaControles.SetActive(false);
         menuAyudaObjetivo.SetActive(false);
@@ -92,6 +115,7 @@ public class MenuInicio : MonoBehaviour
         menuOpciones.SetActive(false);
         menuIdiomas.SetActive(false);
         menuCreditos.SetActive(false);
+        
     }
 
     /// <summary>
@@ -130,6 +154,7 @@ public class MenuInicio : MonoBehaviour
     /// </summary>
     public void VolverMenuPrincipal()
     {
+        menuSeleccionarMapa.SetActive(false);
         menuAyuda.SetActive(false);
         menuAyudaControles.SetActive(false);
         menuAyudaObjetivo.SetActive(false);
@@ -229,6 +254,21 @@ public class MenuInicio : MonoBehaviour
         menuAyudaControles.SetActive(true);
     }
     /// <summary>
+    /// Función que muestra el menú de selección de mapa.
+    /// </summary>
+    public void abrirSeleccionMapa()
+    {
+        menuSeleccionarMapa.SetActive(true);
+        menuAyuda.SetActive(false);
+        menuAyudaControles.SetActive(false);
+        menuAyudaObjetivo.SetActive(false);
+        menuEstadisticas.SetActive(false);
+        menuOpciones.SetActive(false);
+        menuIdiomas.SetActive(false);
+        menuCreditos.SetActive(false);
+        menuInicio.SetActive(false);
+    }
+    /// <summary>
     /// Función que muestra el menú de estadísticas y oculta los demas.
     /// </summary>
     public void actualizarEstadisticas()
@@ -248,10 +288,17 @@ public class MenuInicio : MonoBehaviour
         //Debug.Log("Enemigos" + estadisticas.EnemigosDerrotados);
         //Debug.Log("Tiempo: " + estadisticas.tiempoFormateado());
     }
+    /// <summary>
+    /// Función que carga la escena del mapa personalizado con el mapa seleccionado.
+    /// </summary>
     public void iniciarJuegoCustom()
     {
+        GenerarMapa.mapaActualPartida = GameObject.Find("DropdownMapas").GetComponent<Dropdown>().options[GameObject.Find("DropdownMapas").GetComponent<Dropdown>().value].text;
         SceneManager.LoadScene(3);
     }
+    /// <summary>
+    /// Función que carga la scena del editor.
+    /// </summary>
     public void abrirEditor()
     {
         SceneManager.LoadScene(2);
