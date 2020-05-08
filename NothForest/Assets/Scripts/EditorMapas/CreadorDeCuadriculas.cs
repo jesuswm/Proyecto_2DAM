@@ -31,11 +31,22 @@ public class CreadorDeCuadriculas : MonoBehaviour
     /// Lista de celdas del editor
     /// </summary>
     List<GameObject> cuadriculas=new List<GameObject>();
+    /// <summary>
+    /// GameObject que contiene la pantalla de guardado del editor.
+    /// </summary>
     GameObject pantallaGuardar;
+    /// <summary>
+    /// GameObject que contiene la pantalla de cargar mapa del editor.
+    /// </summary>
     GameObject pantallaCargar;
+    /// <summary>
+    /// GameObject que contiene la pantalla de borrado del editor.
+    /// </summary>
     GameObject pantallaBorrado;
+    /// <summary>
+    /// GameObject que contiene la barra de herramientas del editor.
+    /// </summary>
     GameObject PanelHerramientas;
-    GenerarMapa generadorMapa;
     /// <summary>
     /// Función que guarda el mapa actual del editor en el archivo mapa.dat
     /// </summary>
@@ -449,10 +460,12 @@ public class CreadorDeCuadriculas : MonoBehaviour
             GameObject.Find("BorrarMapas").GetComponent<Button>().interactable = false;
         }
     }
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez.
+    /// </summary>
     void Start()
     {
         GenerarMapa.mapaActualPartida = null;
-        generadorMapa = GameObject.Find("Grid").GetComponent<GenerarMapa>();
         PanelHerramientas = GameObject.Find("Panel");
         pantallaGuardar = GameObject.Find("PantallaGuardar");
         pantallaCargar = GameObject.Find("PantallaCargar");
@@ -470,9 +483,5 @@ public class CreadorDeCuadriculas : MonoBehaviour
             CargarMapaAlEditor();
         }
         //rectTrans.localPosition= new Vector3(0, 0, 0);
-    }
-    // Update is called once per frame
-    void Update()
-    {
     }
 }

@@ -20,6 +20,9 @@ public class PantallaCargar : MonoBehaviour
     /// dropdownMapas donde se mostraran los mapas existentes
     /// </summary>
     public Dropdown dropdownMapas;
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase cambia al estado habilitado.
+    /// </summary>
     void OnEnable()
     {
         List<Dropdown.OptionData> listsMapa = new List<Dropdown.OptionData>();
@@ -32,7 +35,9 @@ public class PantallaCargar : MonoBehaviour
         dropdownMapas.options = listsMapa;
         dropdownMapas.value = 0;
     }
-    // Start is called before the first frame update
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez.
+    /// </summary>
     void Start()
     {
         if (creadorDeCuadriculas == null)
@@ -58,11 +63,5 @@ public class PantallaCargar : MonoBehaviour
         CreadorDeCuadriculas.mapaActualEditor = dropdownMapas.options[dropdownMapas.value].text;
         creadorDeCuadriculas.CargarMapaAlEditor();
         creadorDeCuadriculas.AbrirCerrarMenuCargar();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

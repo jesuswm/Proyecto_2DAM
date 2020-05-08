@@ -17,7 +17,10 @@ public enum eventosMapa
 public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     IPointerUpHandler,IPointerExitHandler, IPointerEnterHandler
 {
-    static bool pulsado=false;
+    /// <summary>
+    /// Booleana que indica si puede seguir usando la herramienta arrastrando en dedo o se debe pulsar una a una las cuadriculas
+    /// </summary>
+    public static bool pulsado=false;
     /// <summary>
     /// Lista de tiles que son traspasables por el jugador
     /// </summary>
@@ -91,7 +94,9 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
     /// </summary>
     Color colorNormal;
 
-
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez.
+    /// </summary>
     void Start()
     {
         cuadriculas= GameObject.Find("Celdas").GetComponent<CreadorDeCuadriculas>();
@@ -189,6 +194,9 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
         Traspasable = traspasable;
         activo = true;
     }
+    /// <summary>
+    /// Función que se llama en cuanto el elemento es pulsado.
+    /// </summary>
     public void OnPointerDown(PointerEventData eventData)
     {
         pulsar();
@@ -263,52 +271,68 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
         switch (Evento)
         {
             case eventosMapa.ninguno:
+                imagenEvento.sortingOrder = 1;
                 imagenEvento.sprite = null;
                 break;
             case eventosMapa.jugador:
+                imagenEvento.sortingOrder = 2;
                 imagenEvento.transform.localPosition = posicionInicialImagen;
                 imagenEvento.sprite = Resources.Load<Sprite>("PersonajeImg");
                 break;
             case eventosMapa.moco:
+                imagenEvento.sortingOrder = 2;
                 imagenEvento.transform.localPosition = posicionInicialImagen;
                 imagenEvento.sprite = Resources.Load<Sprite>("MocoImg");
                 break;
             case eventosMapa.tronquito:
+                imagenEvento.sortingOrder = 2;
                 imagenEvento.transform.localPosition = posicionInicialImagen;
                 imagenEvento.sprite = Resources.Load<Sprite>("TronquitoImg");
                 break;
             case eventosMapa.orco:
+                imagenEvento.sortingOrder = 2;
                 imagenEvento.transform.localPosition = posicionInicialImagen;
                 imagenEvento.sprite = Resources.Load<Sprite>("OrcoImg");
                 break;
             case eventosMapa.arbusto:
+                imagenEvento.sortingOrder = 1;
                 imagenEvento.transform.localPosition= new Vector3(posicionInicialImagen.x, posicionInicialImagen.y / 2, posicionInicialImagen.z);
                 imagenEvento.sprite = Resources.Load<Sprite>("ArbustoImg");
                 break;
             case eventosMapa.arbol:
+                imagenEvento.sortingOrder = 1;
                 imagenEvento.transform.localPosition = new Vector3(posicionInicialImagen.x*2, posicionInicialImagen.y, posicionInicialImagen.z);
                 imagenEvento.sprite = Resources.Load<Sprite>("ArbolImg");
                 break;
             case eventosMapa.tocon:
+                imagenEvento.sortingOrder = 1;
                 imagenEvento.transform.localPosition = new Vector3(posicionInicialImagen.x * 2, posicionInicialImagen.y, posicionInicialImagen.z);
                 imagenEvento.sprite = Resources.Load<Sprite>("ToconImg");
                 break;
             case eventosMapa.rocaGrande:
+                imagenEvento.sortingOrder = 1;
                 imagenEvento.transform.localPosition = new Vector3(posicionInicialImagen.x * 2, posicionInicialImagen.y, posicionInicialImagen.z);
                 imagenEvento.sprite = Resources.Load<Sprite>("RocaGrandeImg");
                 break;
         }
     }
+    /// <summary>
+    /// Función que se llama en cuanto se deja de pulsar.
+    /// </summary>
     public void OnPointerUp(PointerEventData eventData)
     {
         pulsado = false;
     }
-    
+    /// <summary>
+    /// Función que se llama en cuanto la pulsación se desplaza fuera de la celda.
+    /// </summary>
     public void OnPointerExit(PointerEventData eventData)
     {
         
     }
-    
+    /// <summary>
+    /// Función que se llama en cuanto la pulsación entra en la celda.
+    /// </summary>
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (pulsado)
@@ -316,7 +340,9 @@ public class PulsarCuadricula : MonoBehaviour, IPointerDownHandler,
             pulsar();
         }
     }
-    
+    /// <summary>
+    /// Función que se llama cada frame mientras que el elemento que posee esta clase esta habilitado.
+    /// </summary>
     void Update()
     {
         if(imagenEvento.sprite==null && Evento != eventosMapa.ninguno)

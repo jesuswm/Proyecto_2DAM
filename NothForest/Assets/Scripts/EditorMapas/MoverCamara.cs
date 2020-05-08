@@ -7,21 +7,65 @@ using UnityEngine.UI;
 /// </summary>
 public class MoverCamara : MonoBehaviour
 {
+    /// <summary>
+    /// GameObject que contiene la camara
+    /// </summary>
     public GameObject camera_GameObject;
-
+    /// <summary>
+    /// Primer punto donde pulsamos
+    /// </summary>
     Vector2 puntoInicio;
+    /// <summary>
+    /// Posición segundo dedo
+    /// </summary>
     Vector2 inicioArrastre;
+    /// <summary>
+    /// Posicion en la que termina el arrastre el segundo dedo
+    /// </summary>
     Vector2 finArrastre;
+    /// <summary>
+    /// Posición del primer dedo
+    /// </summary>
     Vector2 posicionDedo0;
+    /// <summary>
+    /// Distancia entre el dedo cero y uno para calcular el zoom
+    /// </summary>
     float DistanciaEntreDedos;
-    bool zoom=false;
+    /// <summary>
+    /// Booleana que indica si se está haciendo zoom
+    /// </summary>
+    bool zoom =false;
+    /// <summary>
+    /// Booleana que indica si se las funciones de zoom y desplazamiento pueden ser usadas
+    /// </summary>
     public bool activo = true;
+    /// <summary>
+    /// GameObject que contiene el panel de herramientas del editor
+    /// </summary>
     GameObject PanelHerramientas;
+    /// <summary>
+    /// Lista de las dicersas pantallas que se usan en el editor
+    /// </summary>
     List <GameObject> menus=new List<GameObject>();
+    /// <summary>
+    /// El máximo zoom que se puede realizar la cámara
+    /// </summary>
     float maxZom = 3.5f;
+    /// <summary>
+    /// El mínimo zoom que se puede realizar la cámara
+    /// </summary>
     float minZom = 0.5f;
+    /// <summary>
+    /// Posición inicial
+    /// </summary>
     Vector3 posicionInicio;
+    /// <summary>
+    /// Posición de origen
+    /// </summary>
     Vector3 Origen;
+    /// <summary>
+    /// Velocidad de desplazamiento
+    /// </summary>
     float Velocidad=1f;
     void Start()
     {
@@ -30,6 +74,9 @@ public class MoverCamara : MonoBehaviour
         menus.Add(GameObject.Find("PantallaCargar"));
         menus.Add(GameObject.Find("PantallaBorrar"));
     }
+    /// <summary>
+    /// Función que se llama cada frame mientras que el elemento que posee esta clase esta habilitado.
+    /// </summary>
     void Update()
     {
         foreach(GameObject menu in menus)
@@ -127,12 +174,19 @@ public class MoverCamara : MonoBehaviour
             activo = true;
         }
     }
-
+    /// <summary>
+    /// Función que devuelve la posición de la cámara en relación al mundo
+    /// </summary>
+    /// <returns>La posición de la cámara en relación al mundo</returns>
     Vector2 GetWorldPosition()
     {
         return camera_GameObject.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
     }
-
+    /// <summary>
+    /// Función que devuelve la posicion de un dedo en relación al mundo
+    /// </summary>
+    /// <param name="dedo">Indice del dedo del que queremos saber la posición</param>
+    /// <returns>La posición del dedo en relación al mundo</returns>
     Vector2 GetWorldPositionDedo(int dedo)
     {
         return camera_GameObject.GetComponent<Camera>().ScreenToWorldPoint(Input.GetTouch(dedo).position);

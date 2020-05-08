@@ -167,6 +167,9 @@ public class GenerarMapa : MonoBehaviour
         GenerarMapa.mapaActualPartida = null;
         SceneManager.LoadScene(2);
     }
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez.
+    /// </summary>
     void Start()
     {
         if (!jugable)
@@ -182,6 +185,9 @@ public class GenerarMapa : MonoBehaviour
             pantallaError.SetActive(false);
         }
     }
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez se ejecuta antes que la funcion start.
+    /// </summary>
     void Awake()
     {
         if (auto)
@@ -189,7 +195,9 @@ public class GenerarMapa : MonoBehaviour
             generarMapa();
         }
     }
-
+    /// <summary>
+    /// Función que se llama cada frame mientras que el elemento que posee esta clase esta habilitado.
+    /// </summary>
     void Update()
     {
         if (jugable)

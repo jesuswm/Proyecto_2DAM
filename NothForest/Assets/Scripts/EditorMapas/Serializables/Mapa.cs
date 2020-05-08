@@ -8,11 +8,11 @@ using UnityEngine;
 public class Mapa 
 {
     /// <summary>
-    /// Lista de objetos <see cref="TileMapa"/> con la propiedad <see cref="TileMapa.traspasable"/ true>
+    /// Lista de objetos <see cref="TileMapa"/> con la propiedad <see cref="TileMapa.traspasable"/>
     /// </summary>
     List<TileMapa> terrenoTraspasable=new List<TileMapa>();
     /// <summary>
-    /// Lista de objetos <see cref="TileMapa"/> con la propiedad <see cref="TileMapa.traspasable"/ false>
+    /// Lista de objetos <see cref="TileMapa"/> con la propiedad <see cref="TileMapa.traspasable"/>
     /// </summary>
     List<TileMapa> terrenoNoTraspasable = new List<TileMapa>();
     /// <summary>

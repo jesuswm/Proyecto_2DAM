@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+/// <summary>
+/// Clase que asigna la función del botón de guardado del teclado
+/// </summary>
 public class BotonGuardarTeclado : MonoBehaviour
 {
     /// <summary>
@@ -17,6 +20,9 @@ public class BotonGuardarTeclado : MonoBehaviour
     /// Boton de guardado
     /// </summary>
     private Button buttonGuardar;
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez.
+    /// </summary>
     void Start()
     {
         if (creadorDeCuadriculas == null)
@@ -33,11 +39,5 @@ public class BotonGuardarTeclado : MonoBehaviour
             creadorDeCuadriculas.ComprobarSiExistenMapasGuardados();
             creadorDeCuadriculas.AbrirCerrarMenuGuardar();
         });
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -1441,3 +1441,4 @@ D:\Proyecto\Proyecto 2DAM\Proyecto_2DAM\NothForest\Temp\bin\Debug\UnityEngine.XR
 D:\Proyecto\Proyecto 2DAM\Proyecto_2DAM\NothForest\Temp\bin\Debug\nunit.framework.xml
 D:\Proyecto\Proyecto 2DAM\Proyecto_2DAM\NothForest\Temp\bin\Debug\UnityEngine.ClusterInputModule.xml
 D:\Proyecto\Proyecto 2DAM\Proyecto_2DAM\NothForest\obj\Debug\Assembly-CSharp.csproj.CopyComplete
+D:\Proyecto\Proyecto 2DAM\Proyecto_2DAM\NothForest\Temp\bin\Debug\Assembly-CSharp.xml

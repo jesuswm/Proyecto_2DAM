@@ -20,7 +20,9 @@ public class PantallaBorrado : MonoBehaviour
     /// dropdownMapas donde se mostraran los mapas existentes
     /// </summary>
     public Dropdown dropdownMapas;
-    // Start is called before the first frame update
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase cambia al estado habilitado.
+    /// </summary>
     void OnEnable()
     {
         List<Dropdown.OptionData> listsMapa = new List<Dropdown.OptionData>();
@@ -33,6 +35,9 @@ public class PantallaBorrado : MonoBehaviour
         dropdownMapas.options = listsMapa;
         dropdownMapas.value = 0;
     }
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez.
+    /// </summary>
     void Start()
     {
         if (creadorDeCuadriculas == null)
@@ -61,10 +66,5 @@ public class PantallaBorrado : MonoBehaviour
         CrearArchivo.BorrarArchivoMapa(dropdownMapas.options[dropdownMapas.value].text);
         creadorDeCuadriculas.ComprobarSiExistenMapasGuardados();
         creadorDeCuadriculas.AbrirCerrarMenuBorrado();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

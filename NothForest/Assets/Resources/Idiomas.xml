@@ -49,9 +49,9 @@
     <CargarMapa>Cargar</CargarMapa>
     <EditarMapa>Editor de mapas</EditarMapa>
     <JugarMapa>Jugar mapa personalizado</JugarMapa>
-    <ErrorCargar>El mapa cargado no cumple alguna de las siguientes condiciones por lo cual no es juegable, para poder jugar en este mapa debe editarlo y hacer que cumpla las siguientes especificaciones :</ErrorCargar>
+    <ErrorCargar>El mapa cargado no cumple alguna de las siguientes condiciones por lo cual no es jugable, para poder jugar en este mapa debe editarlo y hacer que cumpla las siguientes especificaciones:</ErrorCargar>
     <CondicionMapa1>1. El mapa debe tener asignado el punto de aparición del jugador</CondicionMapa1>
-    <CondicionMapa2>2. El mapa debe tener al menos un enemigo puesto que la condición de victoria de un mapa personalizado es eliminar a todos los enemigos del mismo</CondicionMapa2>
+    <CondicionMapa2>2. El mapa debe tener al menos un enemigo, puesto que la condición de victoria de un mapa personalizado es eliminar a todos los enemigos del mismo</CondicionMapa2>
     <BorrarMapa>Borrar mapas</BorrarMapa>
     <Cancelar>Cancelar</Cancelar>
     <MensajeCargar>Seleccione el mapa que desea cargar en el editor</MensajeCargar>
@@ -60,6 +60,7 @@
     <GuardadoNombreYaExiste>Ya existe un mapa con ese nombre si se guarda ahora se sobrescribirá</GuardadoNombreYaExiste>
     <MensajeBorrar>Seleccione el mapa que desea borrar</MensajeBorrar>
     <pincel>Pincel</pincel>
+    <MensajeJugar>Seleccione el mapa en el que quiera jugar</MensajeJugar>
   </Idioma>
 	<Idioma>
 		<id>Ingles</id>
@@ -121,5 +122,6 @@
     <GuardadoNombreYaExiste>A map with that name already exists if saved now it will be overwritten</GuardadoNombreYaExiste>
     <MensajeBorrar>Select the map you want to delete</MensajeBorrar>
     <pincel>Brush</pincel>
+    <MensajeJugar>Select the map you want to play on</MensajeJugar>
   </Idioma>
 </Idiomas>

@@ -23,6 +23,9 @@ public class TeclaTeclado : MonoBehaviour
     /// Máximo número de caracteres que puede tener el cuadro de texto.
     /// </summary>
     private int maxCaracteres=12;
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez.
+    /// </summary>
     void Start()
     {
         miTexto = transform.GetChild(0).gameObject.GetComponent<Text>();

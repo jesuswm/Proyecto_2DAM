@@ -108,3 +108,14 @@ Proyecto_2DAM
 	* Arreglado un que causaba que en algunos dispositivos la ventana de guardar mapa no se visualizara de forma correcta.
 	* Arreglado un error por el cual en la pantalla de error al cargar mapa los botones se visualizaban de forma incorrecta.
 4. Eliminados los botones provisionales de acceso al editor de mapas y jugar mapa personalizado que se encontraban en el menú de opciones.
+
+# 8/05/2020
+
+1. Rediseñadas las pantallas del editor y derivadas para que su temática sea más acorde con el estilo del resto de interfaces de la aplicación
+2. Limpieza de código:
+	* Se ha eliminado código obsoleto.
+	* Se ha corregido documentación obsoleta y agregado documentación faltante en algunos casos.
+3. Arreglo de errores:
+	* Arreglado un error que causaba que si realizábamos un cambio de herramienta mientras seguíamos pulsando una casilla del editor la herramienta en cuestión podía tener un comportamiento anómalo.
+	* Arreglado un error visual por el cual en algunos casos en el editor al situar un evento en la casilla inferior de un obstáculo la imagen del evento se mostraría por debajo de la del obstáculo, aunque luego jugar en el mapa se visualizara de forma correcta.
+	* Se han solucionado algunos errores de traducción.

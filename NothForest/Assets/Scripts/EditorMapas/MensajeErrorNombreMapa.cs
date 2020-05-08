@@ -39,11 +39,17 @@ public class MensajeErrorNombreMapa : MonoBehaviour
         }
         return nombres;
     }
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase cambia al estado habilitado.
+    /// </summary>
     void OnEnable()
     {
         nombresMapas = obtenerNombresMapas();
         cuadroTexto.text = CreadorDeCuadriculas.mapaActualEditor;
     }
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez.
+    /// </summary>
     void Start()
     {
         nombresMapas = obtenerNombresMapas();
@@ -59,7 +65,9 @@ public class MensajeErrorNombreMapa : MonoBehaviour
         textoError = GetComponent<Text>();
         textoError.text = null;
     }
-
+    /// <summary>
+    /// Función que se llama cada frame mientras que el elemento que posee esta clase esta habilitado.
+    /// </summary>
     void Update()
     {
         if (cuadroTexto.text.Trim() == "")

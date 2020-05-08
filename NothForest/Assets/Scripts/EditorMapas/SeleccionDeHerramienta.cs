@@ -67,7 +67,9 @@ public class SeleccionDeHerramienta : MonoBehaviour
     /// Lista de pinceles de la herramienta obstaculos
     /// </summary>
     List<Dropdown.OptionData> listsObstaculos = new List<Dropdown.OptionData>();
-    // Start is called before the first frame update
+    /// <summary>
+    /// Función que se llama en cuanto el elemento que posee esta clase esté habilitade por primera vez.
+    /// </summary>
     void Start()
     {
         pincelActual = new int[Enum.GetNames(typeof(eHerramientas)).Length];
@@ -156,6 +158,7 @@ public class SeleccionDeHerramienta : MonoBehaviour
                     break;
             }
             herramientaActual = herramienta;
+            PulsarCuadricula.pulsado = false;
         }
 
     }
